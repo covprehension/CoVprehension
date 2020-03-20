@@ -1,4 +1,3 @@
-
 globals
 [
   population-size
@@ -283,7 +282,6 @@ end
 to-report nb_R
   report count citizens with [epidemic-state = 3 ] ;/ population-size * 100
 end
-
 @#$#@#$#@
 GRAPHICS-WINDOW
 20
@@ -376,9 +374,9 @@ SLIDER
 proba_transmission
 proba_transmission
 0
+100
+62.0
 1
-0.23
-0.01
 1
 %
 HORIZONTAL
