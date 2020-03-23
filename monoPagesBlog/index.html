@@ -11,7 +11,7 @@
   <title>CoVprendre - Comprendre le Corona Virus</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
   <script src="https://kit.fontawesome.com/10a5e49cde.js" crossorigin="anonymous"></script>
@@ -19,7 +19,7 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
   <!-- Custom styles for this template -->
-  <link href="css/custom.min.css" rel="stylesheet">
+  <link href="../css/custom.min.css" rel="stylesheet">
 
 </head>
 
@@ -35,12 +35,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="simulations.html">Simulations</a>
-          </li>     
-          <li class="nav-item">
-            <a class="nav-link" href="questions.html">Vous avez des questions ?</a>
-          </li>                
           <li class="nav-item">
             <a class="nav-link" href="about.html">À Propos</a>
           </li>
@@ -70,34 +64,15 @@
       <div class="col-md-10 mx-auto">
         <!-- V1 -->
         <div id="Q1" class="post-preview">
-          <a href="#"  onclick="loadView(1, this); return false;">
+          <a href="#"  onclick="single_loadView(1, this); return false;">
             <h2 class="post-title">
               Question 1 : Cette épidémie semble se répandre comme une traînée de poudre. Pourquoi ?
-            </h2>
-            <h3 class="post-subtitle"><i class="fas fa-plus-circle" aria-hidden="true"></i>
-              La propagation du virus à l’origine de cette épidémie est en effet très rapide. La forte contagiosité du virus en est responsable bien sûr, mais nous avons également notre part de responsabilité. Démonstration !
-              <br/>
-              Commençons par simplifier le problème, de manière à n’en conserver que son moteur principal : d’un côté des gens qui vivent leur vie et, ce faisant, entrent en interaction physique les uns avec les autres et d’un autre côté un virus introduit par une personne (son hôte). A partir du moment où une personne infectée par le virus est contagieuse, elle pourra le transmettre à d’autres personnes saines avec qui elle entrera en contact. Nous venons de formuler ici les bases d’un modèle très simple, que l’on peut ensuite simuler.
+            </h2><i class="fas fa-plus-circle" aria-hidden="true"></i>
+            <h3 class="post-subtitle">
+              La propagation du virus à l’origine de cette épidémie est en effet très rapide. La forte contagiosité du virus en est responsable bien sûr, mais nous avons également notre part de responsabilité. Démonstration !<br/>
             </h3>
           </a>
           <div class="iframeContainer"></div>
-          <a href="#"  onclick="loadView(2, this); return false;">
-            <h3 class="post-subtitle"><i class="fas fa-plus-circle" aria-hidden="true"></i>
-              Dans ce cas le plus simple, on voit que la vitesse de propagation du virus dans la population présente est directement liée au nombre de personnes infectées et que cette dynamique fonctionne comme une boule de neige une fois le nombre de personnes infectées suffisamment important : plus ce nombre augmentera au cours de l’épidémie et plus le nombre de personnes infectées à chaque nouveau pas de temps sera important. C’est la phase d’accélération de l’épidémie, celle que l’on qualifie de croissance exponentielle.
-              <br/>
-              Une fois le nombre de personnes susceptibles d'être infectées devient trop faible, la propagation du virus ralenti rapidement et l’épidémie fini par s’éteindre d’elle-même.
-              <br/>
-              Naturellement, cette vitesse de propagation va dépendre des caractéristiques du virus, mais aussi de la fréquence des contacts entre les gens. Si on reproduit la même simulation avec dix fois plus de monde, on s’aperçoit immédiatement que la dynamique de l’épidémie est beaucoup plus rapide.
-            </h3>
-          </a>
-          <div class="iframeContainer"></div>
-
-
-          <a href="#"  onclick="">
-          <h3 class="post-subtitle">
-         Au final, plus nous entrons en contact les uns avec les autres et plus nous favorisons la propagation du virus. C’est aussi simple que ça !
-          </h3>
-         </a>
           <p class="post-meta">Basé sur <a href="#">cette super étude</a></p>
         </div>
 
@@ -208,11 +183,11 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="js/custom.js"></script>
+  <script src="../js/custom.js"></script>
 
 </body>
 
