@@ -55,7 +55,7 @@ var pJS = function(tag_id, params){
         }
       },
       size: {
-        value: 20,
+        value: 5,
         random: false,
         anim: {
           enable: false,
@@ -84,6 +84,10 @@ var pJS = function(tag_id, params){
           rotateX: 3000,
           rotateY: 3000
         }
+      },
+      simus_options: {
+        walking_angle: 50,
+        speed: 3
       },
       array: []
     },
@@ -407,10 +411,10 @@ var pJS = function(tag_id, params){
 
   };
 
-  pJS.fn.particle.prototype.setColor = function() {
+  pJS.fn.particle.prototype.setColor = function(col) {
     my_color = {};
-    my_color.value = "#0000FF";
-    my_color.rgb = hexToRgb("#0000FF");
+    my_color.value = col;
+    my_color.rgb = hexToRgb(col);
     this.color = my_color;
   }
 
@@ -521,34 +525,109 @@ var pJS = function(tag_id, params){
     }
     one_p = pJS.particles.array[0];
     one_p.infectious_state = 2;
-    one_p.setColor("0000FF");    
+    one_p.setColor("D73229");    
     /* init a random infected */
     one_p = pJS.particles.array[getRandomInt(pJS.particles.number.value)];
     one_p.infectious_state = 2;
-    one_p.setColor("0000FF");
+    one_p.setColor("D73229");
   };
 
+  pJS.fn.move_randomly_citizens = function() {
+    for(var i = 0; i < pJS.particles.array.length; i++){
+      /* the particle */
+      var p = pJS.particles.array[i];
+      p.heading = p.heading + getRandomInt(pJS.particles.simus_options.walking_angle) - getRandomInt(pJS.particles.simus_options.walking_angle);
+      p.avoid_walls();
+      p.fd(pJS.particles.simus_options.speed);
+    }
+  }
+
+//to spread_virus
+//  ask citizens
+//  [
+//    let c count other citizens in-radius transmission-distance
+//    set  nb-contacts nb-contacts + c
+//
+//  ]
+//   ask citizens with [epidemic-state = 0]
+//  [
+//    if any? other citizens in-radius transmission-distance with [epidemic-state = 1 or epidemic-state = 2]
+//    [
+//
+//      let target one-of other citizens in-radius transmission-distance with [epidemic-state = 1 or epidemic-state = 2]
+//      if random-float 1 < probability-transmission
+//      [
+//      if [epidemic-state] of target = 1 or ([epidemic-state] of target = 2 and random-float 1 < Proba-transmission-unreported-infected)
+//     [ ask target [set nb-other-infected nb-other-infected + 1]
+//      ifelse SIMULATION = "Simulation 3c : L’arbre qui cache la forêt"
+//      [ifelse random 100 > %Unreported-infections
+//      [set epidemic-state 1]
+//      [set epidemic-state 2]
+//      ]
+//      [set epidemic-state 1]
+//
+//    ]
+//
+//    set infection-date ticks
+//  ]
+//    ]
+//  ]
+//  show_epidemic_state
+//
+//end
+  pJS.fn.spread_virus = function() {
+
+  }
+
+  pJS.fn.particle.prototype.fd = function(sp) {
+    this.x = this.x + sp*cosDegre(this.heading);
+    this.y = this.y + sp*sinDegre(this.heading);
+  }
+
+//to avoid_walls
+//  let v 1
+// if SIMULATION = "Simulation 3c : L’arbre qui cache la forêt" [set v 6]
+//  if abs [pxcor] of patch-ahead v = max-pxcor
+//    [ set heading (- heading) ]
+//  if abs [pycor] of patch-ahead v = max-pycor
+//    [ set heading (180 - heading) ]
+//end
+  pJS.fn.particle.prototype.avoid_walls = function() {
+    v = 10;
+    if((this.x + this.radius +v > pJS.canvas.w) || (this.x - this.radius - v < 0)) {
+      this.heading = - this.heading;
+    }
+    if((this.y + this.radius + v > pJS.canvas.h) || (this.y - this.radius - v < 0)) {
+      this.heading = 180 - this.heading;
+    }
+  }
+
   pJS.fn.particlesUpdate = function(){
+
+//to move_randomly_citizens
+//  ask citizens
+//  [
+//   set heading heading + random walking-angle - random walking-angle
+//    avoid_walls
+//   fd speed
+//  ]
+//end
+
+
+
+    pJS.fn.move_randomly_citizens()
 
     for(var i = 0; i < pJS.particles.array.length; i++){
 
       /* the particle */
       var p = pJS.particles.array[i];
 
-      // var d = ( dx = pJS.interactivity.mouse.click_pos_x - p.x ) * dx + ( dy = pJS.interactivity.mouse.click_pos_y - p.y ) * dy;
-      // var f = -BANG_SIZE / d;
-      // if ( d < BANG_SIZE ) {
-      //     var t = Math.atan2( dy, dx );
-      //     p.vx = f * Math.cos(t);
-      //     p.vy = f * Math.sin(t);
-      // }
-
       /* move the particle */
-      if(pJS.particles.move.enable){
-        var ms = pJS.particles.move.speed/2;
-        p.x += p.vx * ms;
-        p.y += p.vy * ms;
-      }
+  //    if(pJS.particles.move.enable){
+  //      var ms = pJS.particles.move.speed/2;
+  //      p.x += p.vx * ms;
+  //      p.y += p.vy * ms;
+  //    }
 
      /* interaction auto between particles */
 //      if(pJS.particles.line_linked.enable || pJS.particles.move.attract.enable){
@@ -560,40 +639,18 @@ var pJS = function(tag_id, params){
           }
         }
 
-      /* change opacity status */
-      if(pJS.particles.opacity.anim.enable) {
-        if(p.opacity_status == true) {
-          if(p.opacity >= pJS.particles.opacity.value) p.opacity_status = false;
-          p.opacity += p.vo;
-        }else {
-          if(p.opacity <= pJS.particles.opacity.anim.opacity_min) p.opacity_status = true;
-          p.opacity -= p.vo;
-        }
-        if(p.opacity < 0) p.opacity = 0;
-      }
-
-      /* change size */
-      if(pJS.particles.size.anim.enable){
-        if(p.size_status == true){
-          if(p.radius >= pJS.particles.size.value) p.size_status = false;
-          p.radius += p.vs;
-        }else{
-          if(p.radius <= pJS.particles.size.anim.size_min) p.size_status = true;
-          p.radius -= p.vs;
-        }
-        if(p.radius < 0) p.radius = 0;
-      }
+ 
 
       /* change particle position if it is out of canvas */
-      if(pJS.particles.move.out_mode == 'bounce'){
-        var new_pos = {
-          x_left: p.radius,
-          x_right:  pJS.canvas.w,
-          y_top: p.radius,
-          y_bottom: pJS.canvas.h
-        }
-      }else{
-        var new_pos = {
+//      if(pJS.particles.move.out_mode == 'bounce'){
+//        var new_pos = {
+//          x_left: p.radius,
+//          x_right:  pJS.canvas.w,
+//          y_top: p.radius,
+//          y_bottom: pJS.canvas.h
+//        }
+//      }else{
+/*        var new_pos = {
           x_left: -p.radius,
           x_right: pJS.canvas.w + p.radius,
           y_top: -p.radius,
@@ -617,53 +674,17 @@ var pJS = function(tag_id, params){
         p.y = new_pos.y_bottom;
         p.x = Math.random() * pJS.canvas.w;
       }
+*/
 
       /* out of canvas modes */
-      switch(pJS.particles.move.out_mode){
-        case 'bounce':
-          if (p.x + p.radius > pJS.canvas.w) p.vx = -p.vx;
-          else if (p.x - p.radius < 0) p.vx = -p.vx;
-          if (p.y + p.radius > pJS.canvas.h) p.vy = -p.vy;
-          else if (p.y - p.radius < 0) p.vy = -p.vy;
-        break;
-      }
-
-      /* events */
-      if(isInArray('grab', pJS.interactivity.events.onhover.mode)){
-        pJS.fn.modes.grabParticle(p);
-      }
-
-      if(isInArray('bubble', pJS.interactivity.events.onhover.mode) || isInArray('bubble', pJS.interactivity.events.onclick.mode)){
-        pJS.fn.modes.bubbleParticle(p);
-      }
-
-      if(isInArray('repulse', pJS.interactivity.events.onhover.mode) || isInArray('repulse', pJS.interactivity.events.onclick.mode)){
-        pJS.fn.modes.repulseParticle(p);
-      }
-
-      /* interaction auto between particles */
-//      if(pJS.particles.line_linked.enable || pJS.particles.move.attract.enable){
-//        for(var j = i + 1; j < pJS.particles.array.length; j++){
-//          var p2 = pJS.particles.array[j];
-//
-//          /* link particles */
-//          if(pJS.particles.line_linked.enable){
-//            pJS.fn.interact.linkParticles(p,p2);
-//          }
-//
-//          /* attract particles */
-//          if(pJS.particles.move.attract.enable){
-//            pJS.fn.interact.attractParticles(p,p2);
-//          }
-//
-//          /* bounce particles */
-//          if(pJS.particles.move.bounce){
-//            pJS.fn.interact.bounceParticles(p,p2);
-//          }
-
-//        }
+//      switch(pJS.particles.move.out_mode){
+//        case 'bounce':
+//          if (p.x + p.radius > pJS.canvas.w) p.vx = -p.vx;
+//          else if (p.x - p.radius < 0) p.vx = -p.vx;
+//          if (p.y + p.radius > pJS.canvas.h) p.vy = -p.vy;
+//          else if (p.y - p.radius < 0) p.vy = -p.vy;
+//        break;
 //      }
-
 
     }
 
@@ -708,35 +729,6 @@ var pJS = function(tag_id, params){
 
   /* ---------- pJS functions - particles interaction ------------ */
 
-  pJS.fn.interact.linkParticles = function(p1, p2){
-
-    var dx = p1.x - p2.x,
-        dy = p1.y - p2.y,
-        dist = Math.sqrt(dx*dx + dy*dy);
-
-    /* draw a line between p1 and p2 if the distance between them is under the config distance */
-    if(dist <= pJS.particles.line_linked.distance){
-
-      var opacity_line = pJS.particles.line_linked.opacity - (dist / (1/pJS.particles.line_linked.opacity)) / pJS.particles.line_linked.distance;
-
-      if(opacity_line > 0){        
-        
-        /* style */
-        var color_line = pJS.particles.line_linked.color_rgb_line;
-        pJS.canvas.ctx.strokeStyle = 'rgba('+color_line.r+','+color_line.g+','+color_line.b+','+opacity_line+')';
-        pJS.canvas.ctx.lineWidth = pJS.particles.line_linked.width;
-        //pJS.canvas.ctx.lineCap = 'round'; /* performance issue */
-        
-        /* path */
-        pJS.canvas.ctx.beginPath();
-        pJS.canvas.ctx.moveTo(p1.x, p1.y);
-        pJS.canvas.ctx.lineTo(p2.x, p2.y);
-        pJS.canvas.ctx.stroke();
-        pJS.canvas.ctx.closePath();
-      }
-    }
-  };
-
   pJS.fn.interact.infection = function(p1, p2){
     var dx = p1.x - p2.x,
         dy = p1.y - p2.y,
@@ -745,51 +737,9 @@ var pJS = function(tag_id, params){
     /* draw a line between p1 and p2 if the distance between them is under the config distance */
     if(dist <= pJS.particles.line_linked.distance){
       p2.infectious_state = 2;
-      p2.setColor("0000FF");
+      p2.setColor("D73229");
     }
   };
-
-
-  pJS.fn.interact.attractParticles  = function(p1, p2){
-
-    /* condensed particles */
-    var dx = p1.x - p2.x,
-        dy = p1.y - p2.y,
-        dist = Math.sqrt(dx*dx + dy*dy);
-
-    if(dist <= pJS.particles.line_linked.distance){
-
-      var ax = dx/(pJS.particles.move.attract.rotateX*1000),
-          ay = dy/(pJS.particles.move.attract.rotateY*1000);
-
-      p1.vx -= ax;
-      p1.vy -= ay;
-
-      p2.vx += ax;
-      p2.vy += ay;
-
-    }
-    
-
-  }
-
-
-  pJS.fn.interact.bounceParticles = function(p1, p2){
-
-    var dx = p1.x - p2.x,
-        dy = p1.y - p2.y,
-        dist = Math.sqrt(dx*dx + dy*dy),
-        dist_p = p1.radius+p2.radius;
-
-    if(dist <= dist_p){
-      p1.vx = -p1.vx;
-      p1.vy = -p1.vy;
-
-      p2.vx = -p2.vx;
-      p2.vy = -p2.vy;
-    }
-
-  }
 
 
   /* ---------- pJS functions - modes events ------------ */
