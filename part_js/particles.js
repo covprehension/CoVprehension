@@ -688,6 +688,9 @@ var pJS = function(tag_id, params){
 
     }
 
+    chart.data.labels.push('2');
+    chart.data.datasets.data.push(5);
+
   };
 
   pJS.fn.particlesDraw = function(){
