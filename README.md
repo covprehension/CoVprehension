@@ -1,8 +1,8 @@
-# [CoVprendre](https://roiarthurb.github.io/CoVprendre/) (Name should change)
+# [CoVprehension](https://covprehension.org)
 
 French informative website about the corona virus.
 
-This repository holds the Jekyll sources of the CoVprendre website!
+This repository holds the Jekyll sources of the CoVprehension website!
 
 > The following section will be in french, sorry 🤷
 
@@ -62,7 +62,7 @@ $ tree
 
 ### Créer un nouvel article
 
-1. Aller dans le sous-dossier [`_posts`](https://github.com/RoiArthurB/CoVprendre/tree/master/_posts)
+1. Aller dans le sous-dossier [`_posts`](https://github.com/RoiArthurB/CoVprehension/tree/master/_posts)
 2. Créer un nouveau fichier au format suivant : `AAAA-MM-JJ-mots-clefs.md`
 3. **Copier-coller** puis **Compléter** l'en-tête suivante :
 ```
@@ -89,7 +89,7 @@ subtitle: "Le sous-titre de l'article. eg/ blablabla. Démonstration !"
 
 ### Configuration globale du site
 
-Toute la configuration globale du site se trouve dans le fichier [`_config.yml`](https://github.com/RoiArthurB/CoVprendre/blob/master/_config.yml) qui a la structure suivante :
+Toute la configuration globale du site se trouve dans le fichier [`_config.yml`](https://github.com/RoiArthurB/CoVprehension/blob/master/_config.yml) qui a la structure suivante :
  - `baseurl` ⚠️ ne pas changer ⚠️
  - `url` ⚠️ ne pas changer ⚠️
  - `title` 
@@ -107,15 +107,15 @@ Toute la configuration globale du site se trouve dans le fichier [`_config.yml`]
 
 ### Local installation & Setup
 
-1. Clone the repo `git clone git@github.com:RoiArthurB/CoVprendre.git`
-2. Move in the folder `cd CoVprendre`
+1. Clone the repo `git clone git@github.com:RoiArthurB/CoVprehension.git`
+2. Move in the folder `cd CoVprehension`
 3. Install plugins: `bundle install`
 4. Build your site: `bundle exec jekyll serve`
-5. Connect to your running instance [http://127.0.0.1:4000/CoVprendre/](http://127.0.0.1:4000/CoVprendre/)
+5. Connect to your running instance [http://127.0.0.1:4000/CoVprehension/](http://127.0.0.1:4000/CoVprehension/)
 
 ## Bugs and Issues
 
-Have a bug or an issue with this template? [Open a new issue](https://github.com/RoiArthurB/CoVprendre/issues/new) here on GitHub!
+Have a bug or an issue with this template? [Open a new issue](https://github.com/RoiArthurB/CoVprehension/issues/new) here on GitHub!
 
 ## Made with
 
@@ -134,4 +134,4 @@ Have a bug or an issue with this template? [Open a new issue](https://github.com
 
 ## Copyright and License
 
-This website is released under the [MIT](https://github.com/RoiArthurB/CoVprendre/blob/gh-pages/LICENSE) license.
+This website is released under the [MIT](https://github.com/RoiArthurB/CoVprehension/blob/gh-pages/LICENSE) license.
