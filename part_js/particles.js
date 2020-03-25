@@ -653,7 +653,7 @@ var pJS = function(tag_id, params){
 
     if((next_x > pJS.canvas.w) || (next_x < 0)) {
 //    if((this.x + this.radius +v > pJS.canvas.w) || (this.x - this.radius - v < 0)) {      
-      this.heading = (- this.heading) % 360;
+      this.heading = (180 - this.heading) % 360;
   //    this.x = pJS.canvas.w  /2;
   //    this.y = pJS.canvas.h / 2;
    //   this.setColor("0000FF");
@@ -661,8 +661,8 @@ var pJS = function(tag_id, params){
     if((next_y > pJS.canvas.h) || (next_y < 0)) {    
   //  if((this.y + this.radius + v > pJS.canvas.h) || (this.y - this.radius - v < 0)) {
      // this.heading = ( this.heading) % 360;
-      this.heading = (180 - this.heading) % 360;
-
+      this.heading = (360 - this.heading) % 360;
+//180 - 
      // this.setColor("FF00FF");
     //  this.x = pJS.canvas.w  /2;
     //  this.y = pJS.canvas.h / 2;
