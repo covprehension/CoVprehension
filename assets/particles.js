@@ -20,7 +20,8 @@ var pJS = function(tag_id, params){
       | DOM
    */
   var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');
-  var chart_el = document.getElementById('myChart').getContext('2d');
+  var chart_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el-chart').getContext('2d');
+//  var chart_el = document.getElementById('myChart').getContext('2d');
 
   /*
       +============
@@ -1153,6 +1154,7 @@ window.particlesJS = function(tag_id, params){
   /* pJS elements */
   var pJS_tag = document.getElementById(tag_id),
       pJS_canvas_class = 'particles-js-canvas-el',
+      pJS_canvas_chart_class = 'particles-js-canvas-el-chart',
       exist_canvas = pJS_tag.getElementsByClassName(pJS_canvas_class);
 
   /* remove canvas if exists into the pJS target tag */
@@ -1166,12 +1168,17 @@ window.particlesJS = function(tag_id, params){
   var canvas_el = document.createElement('canvas');
   canvas_el.className = pJS_canvas_class;
 
+  var chart_el = document.createElement('canvas');
+  chart_el.className = pJS_canvas_chart_class;
+
+
   /* set size canvas */
   canvas_el.style.width = "100%";
   canvas_el.style.height = "100%";
 
   /* append canvas */
   var canvas = document.getElementById(tag_id).appendChild(canvas_el);
+  var canvas = document.getElementById(tag_id).appendChild(chart_el);
 
   /* launch particle.js */
   if(canvas != null){
