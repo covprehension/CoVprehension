@@ -19,7 +19,10 @@ jobs:
         run: |
           docker run \
           -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-          jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build --future"
+          jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && /srv/jekyll/bin/cibuild"
+        env:
+          NOKOGIRI_USE_SYSTEM_LIBRARIES: true
+          #jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build --future"
 
       - name: Upload for GitHub Pages
         uses: crazy-max/ghaction-github-pages@v1.3.0
@@ -29,7 +32,7 @@ jobs:
           # Git branch where assets will be deployed
           #target_branch: # optional, default is gh-pages
           # Create incremental commit instead of doing push force
-          keep_history: true
+          keep_history: false
           # Allow an empty commit to be created
           allow_empty_commit: false
           # Build directory to deploy
@@ -41,4 +44,7 @@ jobs:
           # Commit message
           #commit_message: # optional
           # Write the given domain name to the CNAME file
-          #fqdn: # optional
+          #fqdn: # optional  
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
