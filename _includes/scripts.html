@@ -9,6 +9,19 @@
 <script src="{{"/assets/particles.js" | relative_url }}"></script>
 <script src="{{"/assets/app.js" | relative_url }}"></script>
 
+{% assign t = page.title | split: " " %}
+{% assign simuPath = '/simulations/js/' | append: t[1] | append: "/" %}
+{% assign questions = site.static_files | where_exp:"item", "item.path contains simuPath" %}
+
+{% if questions.size > 0 %}
+  <!-- JS Simulations -->
+
+  {% for item in questions %}
+    <script src="{{item.path | relative_url }}"></script>
+  {% endfor %}
+
+{% endif%}
+
 <!-- CUSTOM -->
 <script src="{{"/assets/scripts.js" | relative_url }}"></script>
 
