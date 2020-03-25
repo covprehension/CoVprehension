@@ -1,0 +1,44 @@
+name: Jekyll site CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build the site in the jekyll/builder container
+        run: |
+          docker run \
+          -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
+          jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && /srv/jekyll/bin/cibuild"
+
+      - name: Upload for GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v1.3.0
+        with:
+          # GitHub repository where assets will be deployed (default current)
+          #repo: # optional
+          # Git branch where assets will be deployed
+          #target_branch: # optional, default is gh-pages
+          # Create incremental commit instead of doing push force
+          keep_history: true
+          # Allow an empty commit to be created
+          allow_empty_commit: false
+          # Build directory to deploy
+          build_dir: _site
+          # Commit author's name
+          committer_name: Github Actions
+          # Commit author's email
+          committer_email: actions@github.com
+          # Commit message
+          #commit_message: # optional
+          # Write the given domain name to the CNAME file
+          #fqdn: # optional
