@@ -53,8 +53,6 @@ canvas {
 /* ---- particles.js container ---- */
 
 #particles-js{
-  width: 50%;
-  height: 50%;
   background-color: #FFFFFF;
   background-image: url('');
   background-size: cover;
