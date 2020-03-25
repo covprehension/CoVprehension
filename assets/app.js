@@ -58,7 +58,7 @@ particlesJS('particles-js',
           "size_min": 0.1,
           "sync": false
         }
-      },
+      }
     },
     "retina_detect": true,
     "config_demo": {

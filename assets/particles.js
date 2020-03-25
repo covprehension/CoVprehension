@@ -9,12 +9,18 @@
 
 var pJS = function(tag_id, params){
 
+  /*
+      +============
+      | DOM
+   */
   var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');
-  
+  var chart_el = document.getElementById('myChart').getContext('2d');
 
-
-  var ctx = document.getElementById('myChart').getContext('2d');
-  var chart_obj = new Chart(ctx, {
+  /*
+      +============
+      | Charts.js
+   */
+  var chart_obj = new Chart(chart_el, {
       // The type of chart we want to create
       type: 'line',
 
@@ -381,9 +387,6 @@ var pJS = function(tag_id, params){
         }
       }
     }
-
-    
-
   };
 
   pJS.fn.particle.prototype.setColor = function(col) {
@@ -504,6 +507,11 @@ var pJS = function(tag_id, params){
   };
 
 
+
+  /*
+      +============
+      | NetLogo
+   */
 //to move_randomly_citizens
 //  ask citizens
 //  [
@@ -730,6 +738,10 @@ function addData(chart, label, data) {
         dataset.data.push(data);
     });
     chart.update();
+
+    if (data == pJS.particles.number.value){
+      pJS.fn.vendors.draw = () => {}
+    }
 }
 
   pJS.fn.particlesDraw = function(){

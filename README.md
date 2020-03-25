@@ -126,8 +126,8 @@ Have a bug or an issue with this template? [Open a new issue](https://github.com
 * Front-end
   * Bootstrap / jQuery
     * Theme from [Start Bootstrap](https://startbootstrap.com/)
-  * Particle.js
-  * Charts.js
+  * [Particle.js](https://vincentgarreau.com/particles.js/)
+  * [Charts.js](https://www.chartjs.org/)
 
 * Simulations
   * NetLogo
