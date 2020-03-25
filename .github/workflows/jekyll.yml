@@ -39,7 +39,7 @@ jobs:
           # Git branch where assets will be deployed
           #target_branch: # optional, default is gh-pages
           # Create incremental commit instead of doing push force
-          keep_history: false
+          keep_history: true
           # Allow an empty commit to be created
           allow_empty_commit: false
           # Build directory to deploy
