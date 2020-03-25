@@ -47,6 +47,7 @@ var pJS = function(tag_id, params){
     simulation: {
       tick: 0,
       walking_angle: 50,
+      transmission_distance: 10,
       speed: 3
     },
     particles: {
@@ -95,66 +96,7 @@ var pJS = function(tag_id, params){
           sync: false
         }
       },
-      line_linked: {
-        enable: true,
-        distance: 10,
-        color: '#fff',
-        opacity: 1,
-        width: 1
-      },
-      move: {
-        enable: true,
-        speed: 2,
-        direction: 'heading',
-        random: false,
-        straight: true,
-        out_mode: 'out',
-        bounce: true,
-        attract: {
-          enable: false,
-          rotateX: 3000,
-          rotateY: 3000
-        }
-      },
       array: []
-    },
-    interactivity: {
-      detect_on: 'canvas',
-      events: {
-        onhover: {
-          enable: true,
-          mode: 'grab'
-        },
-        onclick: {
-          enable: true,
-          mode: 'push'
-        },
-        resize: true
-      },
-      modes: {
-        grab:{
-          distance: 100,
-          line_linked:{
-            opacity: 1
-          }
-        },
-        bubble:{
-          distance: 200,
-          size: 80,
-          duration: 0.4
-        },
-        repulse:{
-          distance: 200,
-          duration: 0.4
-        },
-        push:{
-          particles_nb: 4
-        },
-        remove:{
-          particles_nb: 2
-        }
-      },
-      mouse:{}
     },
     retina_detect: false,
     fn: {
@@ -176,13 +118,6 @@ var pJS = function(tag_id, params){
   pJS.tmp.obj = {
     size_value: pJS.particles.size.value,
     size_anim_speed: pJS.particles.size.anim.speed,
-    move_speed: pJS.particles.move.speed,
-    line_linked_distance: pJS.particles.line_linked.distance,
-    line_linked_width: pJS.particles.line_linked.width,
-    mode_grab_distance: pJS.interactivity.modes.grab.distance,
-    mode_bubble_distance: pJS.interactivity.modes.bubble.distance,
-    mode_bubble_size: pJS.interactivity.modes.bubble.size,
-    mode_repulse_distance: pJS.interactivity.modes.repulse.distance
   };
 
 
@@ -202,13 +137,13 @@ var pJS = function(tag_id, params){
 
     pJS.particles.size.value = pJS.tmp.obj.size_value * pJS.canvas.pxratio;
     pJS.particles.size.anim.speed = pJS.tmp.obj.size_anim_speed * pJS.canvas.pxratio;
-    pJS.particles.move.speed = pJS.tmp.obj.move_speed * pJS.canvas.pxratio;
-    pJS.particles.line_linked.distance = pJS.tmp.obj.line_linked_distance * pJS.canvas.pxratio;
-    pJS.interactivity.modes.grab.distance = pJS.tmp.obj.mode_grab_distance * pJS.canvas.pxratio;
-    pJS.interactivity.modes.bubble.distance = pJS.tmp.obj.mode_bubble_distance * pJS.canvas.pxratio;
-    pJS.particles.line_linked.width = pJS.tmp.obj.line_linked_width * pJS.canvas.pxratio;
-    pJS.interactivity.modes.bubble.size = pJS.tmp.obj.mode_bubble_size * pJS.canvas.pxratio;
-    pJS.interactivity.modes.repulse.distance = pJS.tmp.obj.mode_repulse_distance * pJS.canvas.pxratio;
+//    pJS.particles.move.speed = pJS.tmp.obj.move_speed * pJS.canvas.pxratio;
+//    pJS.particles.line_linked.distance = pJS.tmp.obj.line_linked_distance * pJS.canvas.pxratio;
+//    pJS.interactivity.modes.grab.distance = pJS.tmp.obj.mode_grab_distance * pJS.canvas.pxratio;
+//    pJS.interactivity.modes.bubble.distance = pJS.tmp.obj.mode_bubble_distance * pJS.canvas.pxratio;
+//    pJS.particles.line_linked.width = pJS.tmp.obj.line_linked_width * pJS.canvas.pxratio;
+//    pJS.interactivity.modes.bubble.size = pJS.tmp.obj.mode_bubble_size * pJS.canvas.pxratio;
+//    pJS.interactivity.modes.repulse.distance = pJS.tmp.obj.mode_repulse_distance * pJS.canvas.pxratio;
 
   };
 
@@ -225,14 +160,13 @@ var pJS = function(tag_id, params){
     pJS.canvas.el.width = pJS.canvas.w;
     pJS.canvas.el.height = pJS.canvas.h;
 
-    if(pJS && pJS.interactivity.events.resize){
+/*    if(pJS && pJS.interactivity.events.resize){
 
       window.addEventListener('resize', function(){
 
           pJS.canvas.w = pJS.canvas.el.offsetWidth;
           pJS.canvas.h = pJS.canvas.el.offsetHeight;
 
-          /* resize canvas */
           if(pJS.tmp.retina){
             pJS.canvas.w *= pJS.canvas.pxratio;
             pJS.canvas.h *= pJS.canvas.pxratio;
@@ -241,7 +175,6 @@ var pJS = function(tag_id, params){
           pJS.canvas.el.width = pJS.canvas.w;
           pJS.canvas.el.height = pJS.canvas.h;
 
-          /* repaint canvas on anim disabled */
           if(!pJS.particles.move.enable){
             pJS.fn.particlesEmpty();
             pJS.fn.particlesCreate();
@@ -249,12 +182,13 @@ var pJS = function(tag_id, params){
             pJS.fn.vendors.densityAutoParticles();
           }
 
-        /* density particles enabled */
+        // density particles enabled 
         pJS.fn.vendors.densityAutoParticles();
 
       });
 
     }
+    */
   };
 
 
@@ -300,9 +234,9 @@ var pJS = function(tag_id, params){
     else if(this.y < this.radius*2) this.y = this.y + this.radius;
 
     /* check position - avoid overlap */
-    if(pJS.particles.move.bounce){
-      pJS.fn.vendors.checkOverlap(this, position);
-    }
+//    if(pJS.particles.move.bounce){
+//      pJS.fn.vendors.checkOverlap(this, position);
+//    }
 
     /* color */
     this.color = {};
@@ -352,7 +286,7 @@ var pJS = function(tag_id, params){
     }
 
     /* animation - velocity for speed */
-    var velbase = {}
+/*    var velbase = {}
     switch(pJS.particles.move.direction){
       case 'top':
         velbase = { x:0, y:-1 };
@@ -385,8 +319,8 @@ var pJS = function(tag_id, params){
         velbase = { x:0, y:0 };
       break;
     }
-
-    if(pJS.particles.move.straight){
+*/
+/*    if(pJS.particles.move.straight){
       this.vx = velbase.x;
       this.vy = velbase.y;
       if(pJS.particles.move.random){
@@ -397,7 +331,7 @@ var pJS = function(tag_id, params){
       this.vx = velbase.x + Math.random()-0.5;
       this.vy = velbase.y + Math.random()-0.5;
     }
-
+*/
     // var theta = 2.0 * Math.PI * Math.random();
     // this.vx = Math.cos(theta);
     // this.vy = Math.sin(theta);
@@ -804,7 +738,7 @@ function addData(chart, label, data) {
         dist = Math.sqrt(dx*dx + dy*dy);
 
     /* draw a line between p1 and p2 if the distance between them is under the config distance */
-    if(dist <= pJS.particles.line_linked.distance){
+    if(dist <= pJS.simulation.transmission_distance){
       p2.infectious_state = 2;
       p2.setColor("D73229");
     }
@@ -986,9 +920,9 @@ function addData(chart, label, data) {
 
   /* ---------- pJS functions - vendors ------------ */
 
-  pJS.fn.vendors.eventsListeners = function(){
+/*  pJS.fn.vendors.eventsListeners = function(){
 
-    /* events target element */
+    // events target element 
     if(pJS.interactivity.detect_on == 'window'){
       pJS.interactivity.el = window;
     }else{
@@ -996,10 +930,10 @@ function addData(chart, label, data) {
     }
 
 
-    /* detect mouse pos - on hover / click event */
+    // detect mouse pos - on hover / click event 
     if(pJS.interactivity.events.onhover.enable || pJS.interactivity.events.onclick.enable){
 
-      /* el on mousemove */
+      // el on mousemove 
       pJS.interactivity.el.addEventListener('mousemove', function(e){
 
         if(pJS.interactivity.el == window){
@@ -1023,7 +957,7 @@ function addData(chart, label, data) {
 
       });
 
-      /* el on onmouseleave */
+      // el on onmouseleave
       pJS.interactivity.el.addEventListener('mouseleave', function(e){
 
         pJS.interactivity.mouse.pos_x = null;
@@ -1034,7 +968,7 @@ function addData(chart, label, data) {
 
     }
 
-    /* on click event */
+    // on click event
     if(pJS.interactivity.events.onclick.enable){
 
       pJS.interactivity.el.addEventListener('click', function(){
@@ -1081,12 +1015,10 @@ function addData(chart, label, data) {
 
         }
 
-      });
-        
+      });      
     }
-
-
   };
+  */
 
   pJS.fn.vendors.densityAutoParticles = function(){
 
@@ -1265,8 +1197,9 @@ function addData(chart, label, data) {
 
     }else{
       pJS.fn.particlesDraw();
-      if(!pJS.particles.move.enable) cancelRequestAnimFrame(pJS.fn.drawAnimFrame);
-      else pJS.fn.drawAnimFrame = requestAnimFrame(pJS.fn.vendors.draw);
+//      if(!pJS.particles.move.enable) cancelRequestAnimFrame(pJS.fn.drawAnimFrame);
+//      else pJS.fn.drawAnimFrame = requestAnimFrame(pJS.fn.vendors.draw);
+      pJS.fn.drawAnimFrame = requestAnimFrame(pJS.fn.vendors.draw);
     }
 
   };
@@ -1308,7 +1241,7 @@ function addData(chart, label, data) {
     pJS.fn.vendors.densityAutoParticles();
 
     /* particles.line_linked - convert hex colors to rgb */
-    pJS.particles.line_linked.color_rgb_line = hexToRgb(pJS.particles.line_linked.color);
+    //pJS.particles.line_linked.color_rgb_line = hexToRgb(pJS.particles.line_linked.color);
 
   };
 
@@ -1330,7 +1263,7 @@ function addData(chart, label, data) {
   /* ---------- pJS - start ------------ */
 
 
-  pJS.fn.vendors.eventsListeners();
+//  pJS.fn.vendors.eventsListeners();
 
   pJS.fn.vendors.start();
   

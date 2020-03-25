@@ -59,19 +59,6 @@ particlesJS('particles-js',
           "sync": false
         }
       },
-      "move": {
-        "enable": true,
-        "speed": 6,
-        "direction": "heading",
-        "random": false,
-        "straight": true,
-        "out_mode": "out",
-        "attract": {
-          "enable": false,
-          "rotateX": 600,
-          "rotateY": 1200
-        }
-      }
     },
     "retina_detect": true,
     "config_demo": {
