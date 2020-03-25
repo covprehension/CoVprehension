@@ -47,7 +47,8 @@ var pJS = function(tag_id, params){
     simulation: {
       tick: 0,
       walking_angle: 50,
-      transmission_distance: 10,
+      transmission_distance: 40,
+      probability_transmission: 0.3,
       speed: 3
     },
     particles: {
@@ -204,6 +205,22 @@ var pJS = function(tag_id, params){
   /* --------- pJS functions - particles ----------- */
 
   pJS.fn.particle = function(color, opacity, position){
+    // Attributes of particles 
+    // radius
+    // color
+    // opacity
+    // x
+    // y
+    // heading
+    // epidemic_state
+    // nb_contacts
+
+    /* infectious state */
+    /* 0 = sain     */
+    /* 2 = infecté  */
+    this.epidemic_state = 0;
+
+    this.nb_contacts = 0;
 
     /* size */
     this.radius = (pJS.particles.size.random ? Math.random() : 1) * pJS.particles.size.value;
@@ -222,10 +239,7 @@ var pJS = function(tag_id, params){
     /* heading */
     this.heading = getRandomInt(360);
 
-    /* infectious state */
-    /* 0 = sain     */
-    /* 2 = infecté  */
-    this.infectious_state = 0;
+
 
     /* check position  - into the canvas */
     if(this.x > pJS.canvas.w - this.radius*2) this.x = this.x - this.radius;
@@ -484,13 +498,9 @@ var pJS = function(tag_id, params){
     for(var i = 0; i < pJS.particles.number.value; i++) {
       pJS.particles.array.push(new pJS.fn.particle(pJS.particles.color, pJS.particles.opacity.value));
     }
-    one_p = pJS.particles.array[0];
-    one_p.infectious_state = 2;
-    one_p.setColor("D73229");    
     /* init a random infected */
     one_p = pJS.particles.array[getRandomInt(pJS.particles.number.value)];
-    one_p.infectious_state = 2;
-    one_p.setColor("D73229");
+    one_p.setEpidemicState(2);
   };
 
 
@@ -558,7 +568,23 @@ var pJS = function(tag_id, params){
 //
 //end
   pJS.fn.netlogo.spread_virus = function() {
+    for(var i = 0; i < pJS.particles.array.length; i++){
+      /* the particle */
+      var p = pJS.particles.array[i];
 
+      citizen_in_radius = pJS.particles.array.filter(p2 => (distance(p,p2) <= pJS.simulation.transmission_distance) );
+      this.nb_contacts = this.nb_contacts + citizen_in_radius.length;
+
+      if(p.epidemic_state == 0){
+        infectious_neighbours = citizen_in_radius.filter(p => (p.epidemic_state == 1) || (p.epidemic_state == 2));
+        if(infectious_neighbours.length != 0) {
+          target = infectious_neighbours[getRandomInt(infectious_neighbours.length)];
+          if(Math.random(1.0) < pJS.simulation.probability_transmission) {
+            p.setEpidemicState(2);
+          }
+        }
+      }
+    }
   }
 
   pJS.fn.particle.prototype.fd = function(sp) {
@@ -569,6 +595,11 @@ var pJS = function(tag_id, params){
 
 //    console.log(this.toString() + '  ' + this.x , + " - " + this.y + " - " + this.heading);
 
+  }
+
+  pJS.fn.particle.prototype.setEpidemicState = function(new_state) {
+    this.setColor("FF00FF");
+    this.epidemic_state = new_state;
   }
 
 //to avoid_walls
@@ -586,48 +617,56 @@ var pJS = function(tag_id, params){
     next_y = this.y + v*pJS.simulation.speed*sinDegre(this.heading);
 
     if((next_x > pJS.canvas.w) || (next_x < 0)) {
-//    if((this.x + this.radius +v > pJS.canvas.w) || (this.x - this.radius - v < 0)) {      
       this.heading = (180 - this.heading) % 360;
-  //    this.x = pJS.canvas.w  /2;
-  //    this.y = pJS.canvas.h / 2;
-   //   this.setColor("0000FF");
     }
     if((next_y > pJS.canvas.h) || (next_y < 0)) {    
-  //  if((this.y + this.radius + v > pJS.canvas.h) || (this.y - this.radius - v < 0)) {
-     // this.heading = ( this.heading) % 360;
       this.heading = (360 - this.heading) % 360;
-//180 - 
-     // this.setColor("FF00FF");
-    //  this.x = pJS.canvas.w  /2;
-    //  this.y = pJS.canvas.h / 2;
     }
   }
 
+//to go
+//  if nb_S = 0 [show_asymptotic_cases stop]
+//  update_previous_epidemic_counts
+//  ifelse
+//  SIMULATION = "Simulation 2a : Gardons nos distances !"
+//  or
+//  SIMULATION = "Simulation 2b : Bain de foule"
+//  or
+//  SIMULATION = "Simulation 2c : Le maillon faible"
+//  [move_distanciation_citizens]
+//
+//  [ifelse
+//  SIMULATION = "Simulation 3a : Courage, fuyons !"
+//  or
+//  SIMULATION = "Simulation 3b : Un malade sur la piste de danse"
+//  or
+//  SIMULATION = "Simulation 3c : L’arbre qui cache la forêt"
+//  [avoid_infected]
+//    [move_randomly_citizens]]
+//  spread_virus
+//  update_current_epidemic_counts
+//  tick
+//end
+
+
   pJS.fn.particlesUpdate = function(){
     pJS.simulation.tick++;
-    pJS.fn.netlogo.move_randomly_citizens()
+    pJS.fn.netlogo.move_randomly_citizens();
+    pJS.fn.netlogo.spread_virus();
 
     for(var i = 0; i < pJS.particles.array.length; i++){
 
       /* the particle */
       var p = pJS.particles.array[i];
 
-      /* move the particle */
-  //    if(pJS.particles.move.enable){
-  //      var ms = pJS.particles.move.speed/2;
-  //      p.x += p.vx * ms;
-  //      p.y += p.vy * ms;
-  //    }
-
      /* interaction auto between particles */
-//      if(pJS.particles.line_linked.enable || pJS.particles.move.attract.enable){
-        for(var j = i + 1; j < pJS.particles.array.length; j++){
-          var p2 = pJS.particles.array[j];
+  //      for(var j = i + 1; j < pJS.particles.array.length; j++){
+  //        var p2 = pJS.particles.array[j];
 
-          if(p.infectious_state == 2){
-            pJS.fn.interact.infection(p,p2);
-          }
-        }
+ //         if(p.epidemic_state == 2){
+ //           pJS.fn.interact.infection(p,p2);
+ //         }
+ //       }
 
  
 
@@ -681,7 +720,7 @@ var pJS = function(tag_id, params){
   //  pJS.chart.el.data.labels.push(pJS.simulation.tick);
   //  pJS.chart.el.data.datasets.data.push(5);
 
-    addData(pJS.chart.el, pJS.simulation.tick, pJS.particles.array.filter(x => x.infectious_state == 2).length);
+    addData(pJS.chart.el, pJS.simulation.tick, pJS.particles.array.filter(x => x.epidemic_state == 2).length);
 
   };
 
@@ -732,17 +771,17 @@ function addData(chart, label, data) {
 
   /* ---------- pJS functions - particles interaction ------------ */
 
-  pJS.fn.interact.infection = function(p1, p2){
-    var dx = p1.x - p2.x,
-        dy = p1.y - p2.y,
-        dist = Math.sqrt(dx*dx + dy*dy);
-
+//  pJS.fn.interact.infection = function(p1, p2){
+//    var dx = p1.x - p2.x,
+//        dy = p1.y - p2.y,
+//        dist = Math.sqrt(dx*dx + dy*dy);
+//
     /* draw a line between p1 and p2 if the distance between them is under the config distance */
-    if(dist <= pJS.simulation.transmission_distance){
-      p2.infectious_state = 2;
-      p2.setColor("D73229");
-    }
-  };
+//    if(dist <= pJS.simulation.transmission_distance){
+//      p2.epidemic_state = 2;
+//      p2.setColor("D73229");
+//    }
+//  };
 
 
   /* ---------- pJS functions - modes events ------------ */
@@ -1339,6 +1378,12 @@ function cosDegre(angle) {
 
 function sinDegre(angle) {
   return Math.sin(angle*2*Math.PI/360);
+}
+
+function distance(p1,p2) {
+  var dx = p1.x - p2.x,
+        dy = p1.y - p2.y;
+  return Math.sqrt(dx*dx + dy*dy);
 }
 
 /* ---------- particles.js functions - start ------------ */
