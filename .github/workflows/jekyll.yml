@@ -14,17 +14,24 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        
+      - name: Setup Ruby for use with actions
+        uses: actions/setup-ruby@v1.0.0
+        with:
+          # Version range or exact version of a Ruby version to use.
+          version: 2.4.1
 
-      - name: Build the site in the jekyll/builder container
-        run: |
-          docker run \
-          -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-          jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && /srv/jekyll/bin/cibuild"
+      - name: Install jenkyll plugins
+        run: bundle install
         env:
           NOKOGIRI_USE_SYSTEM_LIBRARIES: true
-          #jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build --future"
 
-      - name: Upload for GitHub Pages
+      - name: Build the site 
+        run: bundle exec jekyll build
+        env:
+          NOKOGIRI_USE_SYSTEM_LIBRARIES: true
+
+      - name: Upload to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v1.3.0
         with:
           # GitHub repository where assets will be deployed (default current)
