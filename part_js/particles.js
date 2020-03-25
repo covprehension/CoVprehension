@@ -10,6 +10,29 @@
 var pJS = function(tag_id, params){
 
   var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');
+  
+
+
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var chart_obj = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'line',
+
+      // The data for our dataset
+      data: {
+          labels: ['0'],
+          datasets: [{
+              label: 'My First dataset',
+              fill: false,
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: [0]
+          }]
+      },
+
+    // Configuration options go here
+    options: {}
+  });
 
   /* particles.js variables with default values */
   this.pJS = {
@@ -17,6 +40,14 @@ var pJS = function(tag_id, params){
       el: canvas_el,
       w: canvas_el.offsetWidth,
       h: canvas_el.offsetHeight
+    },
+    chart: {
+      el: chart_obj
+    },
+    simulation: {
+      tick: 0,
+      walking_angle: 50,
+      speed: 3
     },
     particles: {
       number: {
@@ -85,10 +116,6 @@ var pJS = function(tag_id, params){
           rotateY: 3000
         }
       },
-      simus_options: {
-        walking_angle: 50,
-        speed: 3
-      },
       array: []
     },
     interactivity: {
@@ -133,7 +160,8 @@ var pJS = function(tag_id, params){
     fn: {
       interact: {},
       modes: {},
-      vendors:{}
+      vendors:{},
+      netlogo:{},
     },
     tmp: {}
   };
@@ -227,7 +255,6 @@ var pJS = function(tag_id, params){
       });
 
     }
-
   };
 
 
@@ -532,13 +559,34 @@ var pJS = function(tag_id, params){
     one_p.setColor("D73229");
   };
 
-  pJS.fn.move_randomly_citizens = function() {
+
+//to move_randomly_citizens
+//  ask citizens
+//  [
+//   set heading heading + random walking-angle - random walking-angle
+//    avoid_walls
+//   fd speed
+//  ]
+//end
+
+  pJS.fn.netlogo.move_randomly_citizens = function() {
     for(var i = 0; i < pJS.particles.array.length; i++){
       /* the particle */
       var p = pJS.particles.array[i];
-      p.heading = p.heading + getRandomInt(pJS.particles.simus_options.walking_angle) - getRandomInt(pJS.particles.simus_options.walking_angle);
+//     console.log('  ' + p.x , + " - " + p.y + " - " + p.heading);      
+      p.heading = (p.heading + getRandomInt(pJS.simulation.walking_angle) - getRandomInt(pJS.simulation.walking_angle)) % 360;
+//     console.log('  ' + p.x , + " - " + p.y + " - " + p.heading);
       p.avoid_walls();
-      p.fd(pJS.particles.simus_options.speed);
+//     console.log('  ' + p.x , + " - " + p.y + " - " + p.heading);      
+  //    console.log(pJS.simulation.tick +'  ' + p.x + " - " + p.y + " - " + p.heading);
+      p.fd(pJS.simulation.speed);
+  //    console.log(pJS.simulation.tick +'  ' + p.x + " - " + p.y + " - " + p.heading);
+
+//     console.log('  ' + p.x , + " - " + p.y + " - " + p.heading);
+       //       console.log('  ' + p.x , + " - " + p.y + " - " + p.heading);
+
+//     console.log("============================================================");
+
     }
   }
 
@@ -575,13 +623,18 @@ var pJS = function(tag_id, params){
 //  show_epidemic_state
 //
 //end
-  pJS.fn.spread_virus = function() {
+  pJS.fn.netlogo.spread_virus = function() {
 
   }
 
   pJS.fn.particle.prototype.fd = function(sp) {
+//    console.log(this.toString() + '  ' + this.x , + " - " + this.y + " - " + this.heading);
+
     this.x = this.x + sp*cosDegre(this.heading);
     this.y = this.y + sp*sinDegre(this.heading);
+
+//    console.log(this.toString() + '  ' + this.x , + " - " + this.y + " - " + this.heading);
+
   }
 
 //to avoid_walls
@@ -594,28 +647,31 @@ var pJS = function(tag_id, params){
 //end
   pJS.fn.particle.prototype.avoid_walls = function() {
     v = 10;
-    if((this.x + this.radius +v > pJS.canvas.w) || (this.x - this.radius - v < 0)) {
-      this.heading = - this.heading;
+
+    next_x = this.x + v*pJS.simulation.speed*cosDegre(this.heading);
+    next_y = this.y + v*pJS.simulation.speed*sinDegre(this.heading);
+
+    if((next_x > pJS.canvas.w) || (next_x < 0)) {
+//    if((this.x + this.radius +v > pJS.canvas.w) || (this.x - this.radius - v < 0)) {      
+      this.heading = (- this.heading) % 360;
+  //    this.x = pJS.canvas.w  /2;
+  //    this.y = pJS.canvas.h / 2;
+   //   this.setColor("0000FF");
     }
-    if((this.y + this.radius + v > pJS.canvas.h) || (this.y - this.radius - v < 0)) {
-      this.heading = 180 - this.heading;
+    if((next_y > pJS.canvas.h) || (next_y < 0)) {    
+  //  if((this.y + this.radius + v > pJS.canvas.h) || (this.y - this.radius - v < 0)) {
+     // this.heading = ( this.heading) % 360;
+      this.heading = (180 - this.heading) % 360;
+
+     // this.setColor("FF00FF");
+    //  this.x = pJS.canvas.w  /2;
+    //  this.y = pJS.canvas.h / 2;
     }
   }
 
   pJS.fn.particlesUpdate = function(){
-
-//to move_randomly_citizens
-//  ask citizens
-//  [
-//   set heading heading + random walking-angle - random walking-angle
-//    avoid_walls
-//   fd speed
-//  ]
-//end
-
-
-
-    pJS.fn.move_randomly_citizens()
+    pJS.simulation.tick++;
+    pJS.fn.netlogo.move_randomly_citizens()
 
     for(var i = 0; i < pJS.particles.array.length; i++){
 
@@ -688,10 +744,20 @@ var pJS = function(tag_id, params){
 
     }
 
-  //  chart.data.labels.push('2');
-  //  chart.data.datasets.data.push(5);
+  //  pJS.chart.el.data.labels.push(pJS.simulation.tick);
+  //  pJS.chart.el.data.datasets.data.push(5);
+
+    addData(pJS.chart.el, pJS.simulation.tick, pJS.particles.array.filter(x => x.infectious_state == 2).length);
 
   };
+
+function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
+}
 
   pJS.fn.particlesDraw = function(){
 
@@ -916,142 +982,6 @@ var pJS = function(tag_id, params){
     }
 
   };
-
-
-  pJS.fn.modes.repulseParticle = function(p){
-
-    if(pJS.interactivity.events.onhover.enable && isInArray('repulse', pJS.interactivity.events.onhover.mode) && pJS.interactivity.status == 'mousemove') {
-
-      var dx_mouse = p.x - pJS.interactivity.mouse.pos_x,
-          dy_mouse = p.y - pJS.interactivity.mouse.pos_y,
-          dist_mouse = Math.sqrt(dx_mouse*dx_mouse + dy_mouse*dy_mouse);
-
-      var normVec = {x: dx_mouse/dist_mouse, y: dy_mouse/dist_mouse},
-          repulseRadius = pJS.interactivity.modes.repulse.distance,
-          velocity = 100,
-          repulseFactor = clamp((1/repulseRadius)*(-1*Math.pow(dist_mouse/repulseRadius,2)+1)*repulseRadius*velocity, 0, 50);
-      
-      var pos = {
-        x: p.x + normVec.x * repulseFactor,
-        y: p.y + normVec.y * repulseFactor
-      }
-
-      if(pJS.particles.move.out_mode == 'bounce'){
-        if(pos.x - p.radius > 0 && pos.x + p.radius < pJS.canvas.w) p.x = pos.x;
-        if(pos.y - p.radius > 0 && pos.y + p.radius < pJS.canvas.h) p.y = pos.y;
-      }else{
-        p.x = pos.x;
-        p.y = pos.y;
-      }
-    
-    }
-
-
-    else if(pJS.interactivity.events.onclick.enable && isInArray('repulse', pJS.interactivity.events.onclick.mode)) {
-
-      if(!pJS.tmp.repulse_finish){
-        pJS.tmp.repulse_count++;
-        if(pJS.tmp.repulse_count == pJS.particles.array.length){
-          pJS.tmp.repulse_finish = true;
-        }
-      }
-
-      if(pJS.tmp.repulse_clicking){
-
-        var repulseRadius = Math.pow(pJS.interactivity.modes.repulse.distance/6, 3);
-
-        var dx = pJS.interactivity.mouse.click_pos_x - p.x,
-            dy = pJS.interactivity.mouse.click_pos_y - p.y,
-            d = dx*dx + dy*dy;
-
-        var force = -repulseRadius / d * 1;
-
-        function process(){
-
-          var f = Math.atan2(dy,dx);
-          p.vx = force * Math.cos(f);
-          p.vy = force * Math.sin(f);
-
-          if(pJS.particles.move.out_mode == 'bounce'){
-            var pos = {
-              x: p.x + p.vx,
-              y: p.y + p.vy
-            }
-            if (pos.x + p.radius > pJS.canvas.w) p.vx = -p.vx;
-            else if (pos.x - p.radius < 0) p.vx = -p.vx;
-            if (pos.y + p.radius > pJS.canvas.h) p.vy = -p.vy;
-            else if (pos.y - p.radius < 0) p.vy = -p.vy;
-          }
-
-        }
-
-        // default
-        if(d <= repulseRadius){
-          process();
-        }
-
-        // bang - slow motion mode
-        // if(!pJS.tmp.repulse_finish){
-        //   if(d <= repulseRadius){
-        //     process();
-        //   }
-        // }else{
-        //   process();
-        // }
-        
-
-      }else{
-
-        if(pJS.tmp.repulse_clicking == false){
-
-          p.vx = p.vx_i;
-          p.vy = p.vy_i;
-        
-        }
-
-      }
-
-    }
-
-  }
-
-
-  pJS.fn.modes.grabParticle = function(p){
-
-    if(pJS.interactivity.events.onhover.enable && pJS.interactivity.status == 'mousemove'){
-
-      var dx_mouse = p.x - pJS.interactivity.mouse.pos_x,
-          dy_mouse = p.y - pJS.interactivity.mouse.pos_y,
-          dist_mouse = Math.sqrt(dx_mouse*dx_mouse + dy_mouse*dy_mouse);
-
-      /* draw a line between the cursor and the particle if the distance between them is under the config distance */
-      if(dist_mouse <= pJS.interactivity.modes.grab.distance){
-
-        var opacity_line = pJS.interactivity.modes.grab.line_linked.opacity - (dist_mouse / (1/pJS.interactivity.modes.grab.line_linked.opacity)) / pJS.interactivity.modes.grab.distance;
-
-        if(opacity_line > 0){
-
-          /* style */
-          var color_line = pJS.particles.line_linked.color_rgb_line;
-          pJS.canvas.ctx.strokeStyle = 'rgba('+color_line.r+','+color_line.g+','+color_line.b+','+opacity_line+')';
-          pJS.canvas.ctx.lineWidth = pJS.particles.line_linked.width;
-          //pJS.canvas.ctx.lineCap = 'round'; /* performance issue */
-          
-          /* path */
-          pJS.canvas.ctx.beginPath();
-          pJS.canvas.ctx.moveTo(p.x, p.y);
-          pJS.canvas.ctx.lineTo(pJS.interactivity.mouse.pos_x, pJS.interactivity.mouse.pos_y);
-          pJS.canvas.ctx.stroke();
-          pJS.canvas.ctx.closePath();
-
-        }
-
-      }
-
-    }
-
-  };
-
 
 
   /* ---------- pJS functions - vendors ------------ */
