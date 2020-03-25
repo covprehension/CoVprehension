@@ -17,6 +17,7 @@
 	float: right;
 	font-size: 36px;
 }
-.post-preview > a > .post-subtitle {
-	padding-right: 40px;
+.align-container {
+	display: flex; 
+	align-items: center;
 }
