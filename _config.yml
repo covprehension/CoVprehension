@@ -1,7 +1,7 @@
 title:              CoVprehension
-email:              your-email@example.com
-description:        Comprendre l'épidémie actuelle de COVID-19
-author:             Des scientifiques
+email:              covprehension@gmail.com
+description:        Comprendre l'épidémie actuelle de COVID-19 <p> Une question, un modèle </p>
+author:             Le [collectif](https://covprehension.org/about) CoVprehension
 baseurl:            "/"
 url:                "https://covprehension.org"
 
