@@ -13,6 +13,10 @@
 /* v2.0.0
 /* ----------------------------------------------- */
 
+var LABEL_SIMULATION_1A = "Simulation 1a";
+var LABEL_SIMULATION_1B = "Simulation 1b";
+var LABEL_SIMULATION_2A = "Simulation 2a";
+
 var pJS = function(tag_id, params){
 
   /*
@@ -71,8 +75,11 @@ var pJS = function(tag_id, params){
       walking_angle: 50,
       transmission_distance: 40,
       probability_transmission: 0.3,
+      probability_transmission_unreported_infected: 1.0,
+      rate_unreported_infections: 50,
       speed: 3,
-      number_particles: 1000
+      number_particles: 1000,
+      scenario: ''
     },
     particles: {
       number: {
@@ -225,6 +232,7 @@ var pJS = function(tag_id, params){
     this.epidemic_state = 0;
 
     this.nb_contacts = 0;
+    this.nb_other_infected = 0;
 
     /* size */
     this.radius = (pJS.particles.size.random ? Math.random() : 1) * pJS.particles.size.value;
@@ -464,73 +472,91 @@ var pJS = function(tag_id, params){
       +============
       | NetLogo
    */
-//to move_randomly_citizens
-//  ask citizens
-//  [
-//   set heading heading + random walking-angle - random walking-angle
-//    avoid_walls
-//   fd speed
-//  ]
-//end
+   /// 250320
+/*to move_randomly_citizens
+  ask citizens
+  [
+   set heading heading + random walking-angle - random walking-angle
+    avoid_walls
+    fd speed
+    if epidemic-state = 0
+    [spread_virus]
+  ]
+end
+*/
 
   pJS.fn.netlogo.move_randomly_citizens = function() {
     for(var i = 0; i < pJS.particles.array.length; i++){
-      /* the particle */
       var p = pJS.particles.array[i];
+
       p.heading = (p.heading + getRandomInt(pJS.simulation.walking_angle) - getRandomInt(pJS.simulation.walking_angle)) % 360;
       p.avoid_walls();
       p.fd(pJS.simulation.speed);
+
+      if(p.epidemic_state == 0) {
+        p.spread_virus();
+      }
     }
   }
 
+  pJS.fn.netlogo.avoid_infected = function() {
+    throw "pJS.fn.netlogo.avoid_infected  not implemented";
+  }
+
+  pJS.fn.netlogo.move_distanciation_citizens = function() {
+    throw "pJS.fn.netlogo.move_distanciation_citizens  not implemented";
+  }
+
 //to spread_virus
-//  ask citizens
-//  [
-//    let c count other citizens in-radius transmission-distance
-//    set  nb-contacts nb-contacts + c
-//
-//  ]
-//   ask citizens with [epidemic-state = 0]
-//  [
-//    if any? other citizens in-radius transmission-distance with [epidemic-state = 1 or epidemic-state = 2]
-//    [
-//
-//      let target one-of other citizens in-radius transmission-distance with [epidemic-state = 1 or epidemic-state = 2]
-//      if random-float 1 < probability-transmission
-//      [
-//      if [epidemic-state] of target = 1 or ([epidemic-state] of target = 2 and random-float 1 < Proba-transmission-unreported-infected)
-//     [ ask target [set nb-other-infected nb-other-infected + 1]
-//      ifelse SIMULATION = "Simulation 3c : L’arbre qui cache la forêt"
-//      [ifelse random 100 > %Unreported-infections
-//      [set epidemic-state 1]
-//      [set epidemic-state 2]
-//      ]
-//      [set epidemic-state 1]
-//
-//    ]
-//
-//    set infection-date ticks
-//  ]
-//    ]
-//  ]
-//  show_epidemic_state
-//
-//end
-  pJS.fn.netlogo.spread_virus = function() {
-    for(var i = 0; i < pJS.particles.array.length; i++){
-      /* the particle */
-      var p = pJS.particles.array[i];
+   /// 250320
+/*
+to spread_virus
 
-      citizen_in_radius = pJS.particles.array.filter(p2 => (distance(p,p2) <= pJS.simulation.transmission_distance) );
-      this.nb_contacts = this.nb_contacts + citizen_in_radius.length;
+    if any? other citizens in-radius transmission-distance with [epidemic-state = 1 or epidemic-state = 2]
+    [
 
-      if(p.epidemic_state == 0){
-        infectious_neighbours = citizen_in_radius.filter(p => (p.epidemic_state == 1) || (p.epidemic_state == 2));
-        if(infectious_neighbours.length != 0) {
-          target = infectious_neighbours[getRandomInt(infectious_neighbours.length)];
-          if(Math.random(1.0) < pJS.simulation.probability_transmission) {
-            p.setEpidemicState(2);
+      let target one-of other citizens in-radius transmission-distance with [epidemic-state = 1 or epidemic-state = 2]
+      if random-float 1 < probability-transmission
+      [
+      if [epidemic-state] of target = 1 or ([epidemic-state] of target = 2 and random-float 1 < Proba-transmission-unreported-infected)
+     [ ask target [set nb-other-infected nb-other-infected + 1]
+      ifelse SIMULATION = "Simulation 3c : L’arbre qui cache la forêt"
+      [ifelse random 100 > %Unreported-infections
+      [set epidemic-state 1]
+      [set epidemic-state 2]
+      ]
+      [set epidemic-state 1]
+
+    ]
+show_epidemic_state
+    set infection-date ticks
+  ]
+    ]
+end
+*/
+
+  pJS.fn.particle.prototype.spread_virus = function() {
+    var infectious_neighbours = pJS.particles.array
+                            .filter(p2 => (distance(this,p2) <= pJS.simulation.transmission_distance) )
+                            .filter(p3 => (p3.epidemic_state == 1) || (p3.epidemic_state == 2));
+
+    if(infectious_neighbours.length != 0) {
+      target = infectious_neighbours[getRandomInt(infectious_neighbours.length)];
+      if(Math.random(1.0) < pJS.simulation.probability_transmission) {
+        if( (target.epidemic_state == 1) || ( (target.epidemic_state == 2) && (Math.random(1.0) < pJS.simulation.probability_transmission_unreported_infected)) ) {
+          target.nb_other_infected = target.nb_other_infecteds + 1;
+
+          if(pJS.simulation.scenario == "Simulation 3c") {
+
+            if(Math.random(100.0) < pJS.simulation.rate_unreported_infections) {
+              this.setEpidemicState(1);
+            } else {
+              this.setEpidemicState(2);
+            }
+          } else {
+            this.setEpidemicState(1);
           }
+
         }
       }
     }
@@ -594,15 +620,22 @@ var pJS = function(tag_id, params){
 
 
   pJS.fn.particlesUpdate = function(){
-    pJS.simulation.tick++;
-    pJS.fn.netlogo.move_randomly_citizens();
-    pJS.fn.netlogo.spread_virus();
+    if( (pJS.simulation.scenario == "Simulation 2a") || (pJS.simulation.scenario == "Simulation 2b") || (pJS.simulation.scenario == "Simulation 2c") ) {
+      pJS.fn.netlogo.move_distanciation_citizens();
+    } else {
+      if( (pJS.simulation.scenario == "Simulation 3a") || (pJS.simulation.scenario == "Simulation 3b") || (pJS.simulation.scenario == "Simulation 3c") ) {
+        pJS.fn.netlogo.avoid_infected();
+      } else {
+        pJS.fn.netlogo.move_randomly_citizens();
+      }
+    }
 
+    pJS.simulation.tick++;
 
     // TODO : à mettre dans le draw ???
     var dataMap = new Map();
     dataMap.set('S', pJS.particles.array.filter(x => x.epidemic_state == 0).length);
-    dataMap.set('I', pJS.particles.array.filter(x => x.epidemic_state == 2).length);
+    dataMap.set('I', pJS.particles.array.filter(x => (x.epidemic_state == 1) || (x.epidemic_state == 2)).length);
     addData(pJS.chart.el, pJS.simulation.tick, dataMap);
 
   };
