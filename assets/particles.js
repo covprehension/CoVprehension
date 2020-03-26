@@ -72,6 +72,7 @@ var pJS = function(tag_id, params){
     },
     simulation: {
       tick: 0,
+      nb_infected_initialisation: 1,
       walking_angle: 50,
       transmission_distance: 40,
       probability_transmission: 0.3,
@@ -452,26 +453,91 @@ var pJS = function(tag_id, params){
   };
 
 
-  pJS.fn.particlesCreate = function(){
-    for(var i = 0; i < pJS.simulation.number_particles; i++) {
-      pJS.particles.array.push(new pJS.fn.particle(pJS.particles.color, pJS.particles.opacity.value));
-    }
-    /* init a random infected */
-    one_p = pJS.particles.array[getRandomInt(pJS.simulation.number_particles)];
-    one_p.setEpidemicState(2);
-
-    var dataMap = new Map();
-    dataMap.set('S', pJS.simulation.number_particles);
-    dataMap.set('I', 1);
-    addData(pJS.chart.el, pJS.simulation.tick, dataMap);
-  };
-
-
 
   /*
       +============
       | NetLogo
    */
+   pJS.fn.netlogo.setup = function() {
+     pJS.fn.netlogo.setup_globals();
+
+    for(var i = 0; i < pJS.simulation.number_particles; i++) {
+       pJS.particles.array.push(new pJS.fn.particle(pJS.particles.color, pJS.particles.opacity.value));
+     }
+
+     /* init a random infected */
+     pJS.fn.netlogo.set_infected_initialisation();
+
+     //   if SIMULATION = "Simulation 2c : Le maillon faible"
+     //  [set_respect_rules]
+
+     var dataMap = new Map();
+     dataMap.set('S', pJS.simulation.number_particles);
+     dataMap.set('I', 1);
+     addData(pJS.chart.el, pJS.simulation.tick, dataMap);
+
+   }
+
+   // 250320
+ // to set_infected_initialisation
+ //  ask n-of nb-infected-initialisation citizens
+ // [
+ //   set epidemic-state 1
+ //    show_epidemic_state
+ //  ]
+ //  if SIMULATION = "Simulation 3c : L’arbre qui cache la forêt"
+ //  [ask one-of citizens with[epidemic-state = 0]
+ //    [set epidemic-state 2 show_epidemic_state]]
+ // end
+   pJS.fn.netlogo.set_infected_initialisation = function() {
+     var n_particles = pJS.fn.netlogo.n_of(pJS.simulation.nb_infected_initialisation, pJS.particles.array);
+     for(var i = 0; i < n_particles.length; i++) {
+       var p = n_particles[i];
+       p.setEpidemicState(1);
+     }
+     if(pJS.simulation.scenario == "Simulation 3c") {
+       var one_particle = pJS.fn.netlogo.one_of(pJS.particles.array.filter(p => p.epidemic_state == 0));
+       one_particle.setEpidemicState(2)
+     }
+   }
+
+   pJS.fn.netlogo.setup_globals = function() {
+     if( (pJS.simulation.scenario == "Simulation 1a") || (pJS.simulation.scenario == "Simulation 2b") || (pJS.simulation.scenario == "Simulation 3c") ) {
+       pJS.simulation.number_particles = 650;
+     } else {
+       if( (pJS.simulation.scenario == "Simulation 3b") ) {
+         pJS.simulation.number_particles = 1000;
+       } else {
+         pJS.simulation.number_particles = 100;
+       }
+     }
+
+     if( pJS.simulation.scenario == "Simulation 3c") {
+       pJS.simulation.walking_angle = 50
+     } else {
+       pJS.simulation.walking_angle = 50
+     }
+
+
+     if (pJS.simulation.scenario == "Simulation 3c") {
+       pJS.simulation.rate_unreported_infections = 50;
+       pJS.simulation.probability_transmission_unreported_infected = 1;
+       pJS.simulation.wall = 50;
+     }
+
+  //   pJS.simulation.probability_transmission = 1;
+  //   pJS.simulation.transmission_distance =
+  // set probability-transmission 1
+  // set transmission-distance 1
+  // set nb-infected-initialisation 1
+  // set distanciation-distance 3
+  // set %Respect_Distanciation 90
+  // set infected-avoidance-distance 5
+  // set speed 0.5
+  // set transparency 145
+   }
+
+
    /// 250320
 /*to move_randomly_citizens
   ask citizens
@@ -541,7 +607,7 @@ end
                             .filter(p3 => (p3.epidemic_state == 1) || (p3.epidemic_state == 2));
 
     if(infectious_neighbours.length != 0) {
-      target = infectious_neighbours[getRandomInt(infectious_neighbours.length)];
+      target = pJS.fn.netlogo.one_of(infectious_neighbours); //[getRandomInt(infectious_neighbours.length)];
       if(Math.random(1.0) < pJS.simulation.probability_transmission) {
         if( (target.epidemic_state == 1) || ( (target.epidemic_state == 2) && (Math.random(1.0) < pJS.simulation.probability_transmission_unreported_infected)) ) {
           target.nb_other_infected = target.nb_other_infecteds + 1;
@@ -556,7 +622,6 @@ end
           } else {
             this.setEpidemicState(1);
           }
-
         }
       }
     }
@@ -571,6 +636,45 @@ end
     this.setColor("FF00FF");
     this.epidemic_state = new_state;
   }
+
+  pJS.fn.netlogo.one_of = function(arr) {
+    return arr[getRandomInt(arr.length)];
+  }
+
+  pJS.fn.netlogo.n_of = function(n, array) {
+    var returned_array = array.concat();
+    pJS.fn.netlogo.shuffle(returned_array);
+    return returned_array.splice(0,n);
+  }
+
+  // From https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+  pJS.fn.netlogo.shuffle = function(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+
+  //Used like so
+/*  var arr = [2, 11, 37, 42];
+  var arrSple = arr.concat();
+  console.log(arr);
+  console.log(arrSple);
+  console.log(pJS.fn.netlogo.n_of(3,arr));
+  console.log(arr);*/
+
 
 //to avoid_walls
 //  let v 1
@@ -1076,7 +1180,7 @@ function addData(chart, label, data) {
     pJS.fn.canvasInit();
     pJS.fn.canvasSize();
     pJS.fn.canvasPaint();
-    pJS.fn.particlesCreate();
+    pJS.fn.netlogo.setup();
     pJS.fn.vendors.densityAutoParticles();
 
   };
@@ -1102,8 +1206,6 @@ function addData(chart, label, data) {
 //  pJS.fn.vendors.eventsListeners();
 
   pJS.fn.vendors.start();
-
-
 
 };
 
