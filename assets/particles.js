@@ -457,15 +457,34 @@ var pJS = function(tag_id, params){
 		/* init a random infected */
 		pJS.fn.netlogo.set_infected_initialisation();
 
-   // if SIMULATION = "Simulation 2c : Le maillon faible"
-   // [set_respect_rules]
+		if(pJS.simulation.scenario == "Simulation 2c") {
+			pJS.fn.netlogo.set_respect_rules();
+		}
 
-   var dataMap = new Map();
-   dataMap.set('S', pJS.simulation.number_particles);
-   dataMap.set('I', 1);
-   addData(pJS.chart.el, pJS.simulation.tick, dataMap);
+		var dataMap = new Map();
+		dataMap.set('S', pJS.simulation.number_particles);
+		dataMap.set('I', 1);
+		addData(pJS.chart.el, pJS.simulation.tick, dataMap);
+	}
 
- }
+//to set_respect_rules
+//  if SIMULATIONS = "Simulation 2c : Le maillon faible"
+//
+//  [
+//    ask citizens with [epidemic-state = 1] [set respect-rules? 1 set shape "square" set size 1.5]
+//  ask n-of ((population-size - round (%Respect_Distanciation * population-size / 100)) - nb-infected-initialisation) citizens with [epidemic-state = 0]
+//    [set respect-rules? 1 set shape "square" set size 1.5]
+//  ]
+//end
+	pJS.fn.netlogo.set_respect_rules = function() {
+		if(pJS.simulation.scenario == "Simulation 2c") {
+			var infected_particles = pJS.particles.array.filter(p => p.epidemic_state == 1)
+			for(var i = 0; i < infected_particles.length ; i++) {
+				infected_particles[i].respect_rules = false;
+			}
+		}
+	}
+
 
 	// 250320
 	// to set_infected_initialisation
@@ -596,25 +615,18 @@ end
 				var other_close_particles = p.other(particule_at_distanciation_dist);
 
 				if( any(other_close_particles ) ) {
-					//let target min-one-of other citizens in-radius distanciation-distance [distance myself]
-					var array_distance = other_close_particles.map( p2 => distance(p,p2));
-			//		var min_distance = array_distance.min();
-					var min_distance = Math.min(...array_distance);
-					var index_min = array_distance.indexOf(min_distance);
-					var target = other_close_particles[index_min];
-					// face target
-				//	console.log("Array  " + array_distance);
-				//	console.log("Min dist : " + min_distance);
-				//	console.log(index_min);
-				//	console.log(other_close_particles);
-				//	console.log(target);
-
+					var min_distance = Infinity;
+					var target;
+					for(var k = 0; k < other_close_particles.length; k++) {
+						var dist = distance(p,other_close_particles[k]);
+						if(dist < min_distance) {
+							min_distance = dist;
+							target = other_close_particles[k];
+						}
+					}
 					p.face(target);
-					// rt 180
 					p.rt(180);
-					// avoid_walls
 					p.avoid_walls();
-					// fd speed
 					p.fd(pJS.simulation.speed);
 				} else {
 					p.heading = (p.heading + getRandomInt(pJS.simulation.walking_angle) - getRandomInt(pJS.simulation.walking_angle)) % 360;
@@ -694,7 +706,7 @@ end
 	}
 
 	pJS.fn.particle.prototype.face = function(p) {
-		this.heading = Math.atan2(p.x - this.x, p.y - this.y) * 360 / (2*Math.PI);
+		this.heading = Math.atan2(p.y - this.y, p.x - this.x) * 360 / (2*Math.PI);
 	}
 
 	pJS.fn.particle.prototype.rt = function(angle) {
