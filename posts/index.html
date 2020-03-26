@@ -15,13 +15,9 @@ background: '/img/bg-post.jpg'
     <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
     {% endif %}
   </a>
-  <p class="post-meta">Posted by
-    {% if post.author %}
-    {{ post.author }}
-    {% else %}
-    {{ site.author }}
-    {% endif %}
-    on {{ post.date | date: '%B %d, %Y' }} &middot; {% include read_time.html content=post.content %}
+  <p class="post-meta">Posté {% if post.author %}par {{ post.author }}{% endif %}
+    {% comment %} --======  FRENCH DATE FORMATING  ======-- {% endcomment %}
+    le {{ post.date | date: "%-d" }} {% assign m = post.date | date: "%-m" | minus: 1 %}{{ site.data.fr.months[m] }} {{ post.date | date: "%Y" }} &middot; {% include read_time.html content=post.content %}            
   </p>
 </article>
 
