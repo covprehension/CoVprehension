@@ -34,13 +34,22 @@ var pJS = function(tag_id, params){
       // The data for our dataset
       data: {
           labels: ['0'],
-          datasets: [{
-              label: 'My First dataset',
+          datasets: [
+            {
+              label: 'S',
+              fill: false,
+              backgroundColor: 'rgb(0, 255, 0)',
+              borderColor: 'rgb(0, 255, 0)',
+              data: []
+            },
+            {
+              label: 'I',
               fill: false,
               backgroundColor: 'rgb(255, 99, 132)',
               borderColor: 'rgb(255, 99, 132)',
-              data: [0]
-          }]
+              data: []
+            }
+          ]
       },
 
     // Configuration options go here
@@ -442,6 +451,11 @@ var pJS = function(tag_id, params){
     /* init a random infected */
     one_p = pJS.particles.array[getRandomInt(pJS.simulation.number_particles)];
     one_p.setEpidemicState(2);
+
+    var dataMap = new Map();
+    dataMap.set('S', pJS.simulation.number_particles);
+    dataMap.set('I', 1);
+    addData(pJS.chart.el, pJS.simulation.tick, dataMap);
   };
 
 
@@ -584,8 +598,12 @@ var pJS = function(tag_id, params){
     pJS.fn.netlogo.move_randomly_citizens();
     pJS.fn.netlogo.spread_virus();
 
+
     // TODO : à mettre dans le draw ???
-    addData(pJS.chart.el, pJS.simulation.tick, pJS.particles.array.filter(x => x.epidemic_state == 2).length);
+    var dataMap = new Map();
+    dataMap.set('S', pJS.particles.array.filter(x => x.epidemic_state == 0).length);
+    dataMap.set('I', pJS.particles.array.filter(x => x.epidemic_state == 2).length);
+    addData(pJS.chart.el, pJS.simulation.tick, dataMap);
 
   };
 
@@ -594,11 +612,11 @@ var pJS = function(tag_id, params){
 function addData(chart, label, data) {
     chart.data.labels.push(label);
     chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
+      dataset.data.push(data.get(dataset.label));
     });
     chart.update();
 
-    if (data == pJS.simulation.number_particles){
+    if (data.get('I') == pJS.simulation.number_particles){
       pJS.fn.vendors.draw = () => {}
     }
 }
@@ -1168,13 +1186,12 @@ window.particlesJS = function(tag_id, params){
   var canvas_el = document.createElement('canvas');
   canvas_el.className = pJS_canvas_class;
 
-  var chart_el = document.createElement('canvas');
-  chart_el.className = pJS_canvas_chart_class;
-
-
   /* set size canvas */
   canvas_el.style.width = "100%";
   canvas_el.style.height = "100%";
+
+  var chart_el = document.createElement('canvas');
+  chart_el.className = pJS_canvas_chart_class;
 
   /* append canvas */
   var canvas = document.getElementById(tag_id).appendChild(canvas_el);
