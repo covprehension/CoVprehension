@@ -74,11 +74,12 @@ var pJS = function(tag_id, params){
 			nb_infected_initialisation: 1,
 			walking_angle: 50,
 			transmission_distance: 40,
+			distanciation_distance: 25,
 			probability_transmission: 0.3,
 			probability_transmission_unreported_infected: 1.0,
 			rate_unreported_infections: 50,
 			speed: 3,
-			number_particles: 1000,
+			number_particles: 0,
 			scenario: '',
 			isPlay: true
 		},
@@ -220,11 +221,14 @@ var pJS = function(tag_id, params){
 		// heading
 		// epidemic_state
 		// nb_contacts
+		// respect_rules
 
 		/* infectious state */
 		/* 0 = sain     */
 		/* 2 = infecté  */
 		this.epidemic_state = 0;
+
+		this.respect_rules = true;
 
 		this.nb_contacts = 0;
 		this.nb_other_infected = 0;
@@ -487,7 +491,9 @@ var pJS = function(tag_id, params){
 	}
 
 	pJS.fn.netlogo.setup_globals = function() {
-	 	if( (pJS.simulation.scenario == "Simulation 1a") || (pJS.simulation.scenario == "Simulation 2b") || (pJS.simulation.scenario == "Simulation 3c") ) {
+	 	if( (pJS.simulation.scenario == "Simulation 1b")
+	 		|| (pJS.simulation.scenario == "Simulation 2b")
+	 		|| (pJS.simulation.scenario == "Simulation 3c") ) {
 	 		pJS.simulation.number_particles = 650;
 	 	} else {
 	 		if( (pJS.simulation.scenario == "Simulation 3b") ) {
@@ -497,7 +503,7 @@ var pJS = function(tag_id, params){
 	 		}
 	 	}
 
-	 	if( pJS.simulation.scenario == "Simulation 3c") {
+	 	if( pJS.simulation.scenario == "Simulation 3b") {
 	 		pJS.simulation.walking_angle = 50
 	 	} else {
 	 		pJS.simulation.walking_angle = 50
@@ -553,8 +559,78 @@ var pJS = function(tag_id, params){
 		throw "pJS.fn.netlogo.avoid_infected  not implemented";
 	}
 
+/*to move_distanciation_citizens
+  ask citizens
+  [
+    ifelse respect-rules? = 0
+  [ifelse any? other citizens in-radius distanciation-distance
+  [
+    let target min-one-of other citizens
+    in-radius distanciation-distance
+    [distance myself]
+    face target
+    rt 180
+       avoid_walls
+    fd speed
+    ]
+      [set heading heading + random walking-angle - random walking-angle
+      avoid_walls
+   fd speed
+    ]]
+
+    [set heading heading + random walking-angle - random walking-angle
+      avoid_walls
+   fd speed
+    ]
+    if epidemic-state = 0
+    [spread_virus]
+  ]
+end
+*/
 	pJS.fn.netlogo.move_distanciation_citizens = function() {
-		throw "pJS.fn.netlogo.move_distanciation_citizens  not implemented";
+		for(var i = 0; i < pJS.particles.array.length; i++){
+			var p = pJS.particles.array[i];
+			if(p.respect_rules) {
+			// ifelse any? other citizens in-radius distanciation-distance
+				var particule_at_distanciation_dist = p.in_radius(pJS.particles.array, pJS.simulation.distanciation_distance);
+				var other_close_particles = p.other(particule_at_distanciation_dist);
+
+				if( any(other_close_particles ) ) {
+					//let target min-one-of other citizens in-radius distanciation-distance [distance myself]
+					var array_distance = other_close_particles.map( p2 => distance(p,p2));
+			//		var min_distance = array_distance.min();
+					var min_distance = Math.min(...array_distance);
+					var index_min = array_distance.indexOf(min_distance);
+					var target = other_close_particles[index_min];
+					// face target
+				//	console.log("Array  " + array_distance);
+				//	console.log("Min dist : " + min_distance);
+				//	console.log(index_min);
+				//	console.log(other_close_particles);
+				//	console.log(target);
+
+					p.face(target);
+					// rt 180
+					p.rt(180);
+					// avoid_walls
+					p.avoid_walls();
+					// fd speed
+					p.fd(pJS.simulation.speed);
+				} else {
+					p.heading = (p.heading + getRandomInt(pJS.simulation.walking_angle) - getRandomInt(pJS.simulation.walking_angle)) % 360;
+					p.avoid_walls();
+					p.fd(pJS.simulation.speed);
+				}
+			} else {
+				p.heading = (p.heading + getRandomInt(pJS.simulation.walking_angle) - getRandomInt(pJS.simulation.walking_angle)) % 360;
+				p.avoid_walls();
+				p.fd(pJS.simulation.speed);
+			}
+
+			if(p.epidemic_state == 0) {
+				p.spread_virus();
+			}
+		}
 	}
 
 	//to spread_virus
@@ -617,40 +693,58 @@ var pJS = function(tag_id, params){
 		this.y = this.y + sp*sinDegre(this.heading);
 	}
 
+	pJS.fn.particle.prototype.face = function(p) {
+		this.heading = Math.atan2(p.x - this.x, p.y - this.y) * 360 / (2*Math.PI);
+	}
+
+	pJS.fn.particle.prototype.rt = function(angle) {
+		this.heading = (this.heading - angle) % 360;
+	}
+
 	pJS.fn.particle.prototype.setEpidemicState = function(new_state) {
 		this.setColor("FF00FF");
 		this.epidemic_state = new_state;
 	}
 
-  pJS.fn.netlogo.one_of = function(arr) {
-    return arr[getRandomInt(arr.length)];
-  }
+	pJS.fn.netlogo.one_of = function(arr) {
+		return arr[getRandomInt(arr.length)];
+	}
 
-  pJS.fn.netlogo.n_of = function(n, array) {
-    var returned_array = array.concat();
-    pJS.fn.netlogo.shuffle(returned_array);
-    return returned_array.splice(0,n);
-  }
+	pJS.fn.netlogo.n_of = function(n, array) {
+		var returned_array = array.concat();
+		pJS.fn.netlogo.shuffle(returned_array);
+		return returned_array.splice(0,n);
+	}
 
-  // From https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-  pJS.fn.netlogo.shuffle = function(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+	// other citizens in-radius distanciation-distance
+	pJS.fn.particle.prototype.other = function(array) {
+		return array.filter(item => item !== this)
+	}
 
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
+	// TODO / TO TEST
 
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
+	pJS.fn.particle.prototype.in_radius = function(array, dist) {
+		return array.filter(p => distance(this,p) <= dist);
+	}
 
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
+	// From https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+	pJS.fn.netlogo.shuffle = function(array) {
+		var currentIndex = array.length, temporaryValue, randomIndex;
 
-    return array;
-  }
+		// While there remain elements to shuffle...
+		while (0 !== currentIndex) {
+
+			// Pick a remaining element...
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex -= 1;
+
+			// And swap it with the current element.
+			temporaryValue = array[currentIndex];
+			array[currentIndex] = array[randomIndex];
+			array[randomIndex] = temporaryValue;
+		}
+		return array;
+	}
 
   //Used like so
 	/*  var arr = [2, 11, 37, 42];
@@ -708,10 +802,14 @@ var pJS = function(tag_id, params){
 
 
 	pJS.fn.particlesUpdate = function(){
-		if( (pJS.simulation.scenario == "Simulation 2a") || (pJS.simulation.scenario == "Simulation 2b") || (pJS.simulation.scenario == "Simulation 2c") ) {
+		if( (pJS.simulation.scenario == "Simulation 2a")
+				|| (pJS.simulation.scenario == "Simulation 2b")
+				|| (pJS.simulation.scenario == "Simulation 2c") ) {
 			pJS.fn.netlogo.move_distanciation_citizens();
 		} else {
-			if( (pJS.simulation.scenario == "Simulation 3a") || (pJS.simulation.scenario == "Simulation 3b") || (pJS.simulation.scenario == "Simulation 3c") ) {
+			if( (pJS.simulation.scenario == "Simulation 3a")
+					|| (pJS.simulation.scenario == "Simulation 3b")
+					|| (pJS.simulation.scenario == "Simulation 3c") ) {
 				pJS.fn.netlogo.avoid_infected();
 			} else {
 				pJS.fn.netlogo.move_randomly_citizens();
@@ -745,7 +843,7 @@ var pJS = function(tag_id, params){
 	| CUSTOM Function
 	*/
 	pJS.fn.custom.pause = function() {
-		if (pJS.isPlay != false){ 
+		if (pJS.isPlay != false){
 			pJS.isPlay = false;
 
 			pJS._tempFn = pJS.fn.vendors.draw;
@@ -1249,6 +1347,10 @@ function distance(p1,p2) {
 	var dx = p1.x - p2.x,
 	dy = p1.y - p2.y;
 	return Math.sqrt(dx*dx + dy*dy);
+}
+
+function any(array) {
+	return array.length > 0;
 }
 
 /* ---------- particles.js functions - start ------------ */
