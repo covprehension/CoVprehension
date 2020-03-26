@@ -25,10 +25,11 @@ layout: default
 
   <div class="container">
     <div class="row">
+      {% assign posts=site.posts | where:"hidden", false %}
 
       <aside class="col d-none d-md-block mx-auto">
         <ul>
-          {% for post in site.posts reversed %}
+          {% for post in posts reversed  %}
 
             {% assign title = post.title | split: ":" %}
             <li><a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">Q{{title[0] | split: " " | last }} : {{ title[1] }}</a></li>
@@ -42,7 +43,7 @@ layout: default
         {{ content }}
 
         <!-- Home Post List -->
-        {% for post in site.posts reversed limit : 5 %}
+        {% for post in posts reversed limit : 5 %}
 
         <article class="post-preview">
           <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
