@@ -1,15 +1,16 @@
 title:              CoVprehension
 email:              covprehension@gmail.com
-description:        Comprendre l'épidémie actuelle de COVID-19 <p> Une question, un modèle </p>
+description:        Comprendre l'épidémie actuelle de COVID-19<br>Une question, un modèle
 author:             Le collectif CoVprehension
 baseurl:            "/"
 url:                "https://covprehension.org"
 
 # Social Profiles
-twitter_username:   \#
-github_username:    \#
-facebook_username:  \#
-linkedin_username:  \#
+twitter_username:   
+github_username:    RoiArthurB/CoVprehension
+facebook_username:  
+linkedin_username:  
+rss_link:           https://covprehension.org/feed.xml
 
 ## Add your google-analytics ID here to activate google analytics
 #google_analytics:   UA-XXXXXXXXX-X # out your google-analytics code
