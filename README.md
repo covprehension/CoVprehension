@@ -83,6 +83,9 @@ subtitle: "Le sous-titre de l'article. eg/ blablabla. Démonstration !"
 # Choisir un auteur
 # Par défaut "Des scientifiques"
 #author: "Jean Jean"
+
+# Pour ne pas afficher la question dans le flux global
+hidden: false
 ---
 ```
 4. Remplir le contenu de l'article en écrivant un article au format [HTML](https://www.w3schools.com/html/) ou au format [MarkDown](https://www.markdownguide.org/).

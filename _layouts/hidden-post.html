@@ -1,0 +1,50 @@
+---
+layout: default
+---
+
+<!-- Page Header -->
+{% if page.background %}
+<header class="masthead" style="background-image: url('{{ page.background | prepend: site.baseurl | replace: '//', '/' }}')">
+{% else %}
+<header class="masthead"  style="background-image: url('{{ '/img/bg-index.jpg' | prepend: site.baseurl | replace: '//', '/' }}')">
+{% endif %}
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>{{ page.title }}</h1>
+          {% if page.subtitle %}
+          <h2 class="subheading">{{ page.subtitle }}</h2>
+          {% endif %}
+          <span class="meta">Posté {% if page.author %}par 
+            <a href="#">{{ page.author }}{% endif %}</a>
+            {% comment %} --======  FRENCH DATE FORMATING  ======-- {% endcomment %}
+            le {% if page.postDate %}{{ page.postDate | date: "%-d" }} {% assign m = page.postDate | date: "%-m" | minus: 1 %}{{ site.data.fr.months[m] }} {{ page.postDate | date: "%Y" }}
+            {% else %}{{ page.date | date: "%-d" }} {% assign m = page.date | date: "%-m" | minus: 1 %}{{ site.data.fr.months[m] }} {{ page.date | date: "%Y" }}{% endif %} &middot; {% include read_time.html
+            content=page.content %}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+      {{ content }}
+
+      <hr>
+
+      <div class="clearfix">
+
+        <input class="btn btn-primary float-left" action="action" onclick="window.history.go(-1); return false;" type="button" value='&larr; Retourner à la Question' />
+
+      </div>
+
+    </div>
+  </div>
+</div>
