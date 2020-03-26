@@ -19,3 +19,24 @@ particlesJS('particles-js-Q1B',
     "scenario": "Simulation 1b"
   }
 });
+
+for (var i = pJSDom.length - 1; i >= 0; i--) {
+  pJSDom[i].pJS.fn.custom.pause();
+}
+
+function elementInView(elem){
+  return (($(window).scrollTop() + $(window).height()) > $(elem).offset().top + (3 * $(elem).height()/4))
+          && ( $(window).scrollTop() < $(elem).offset().top + $(elem).height()/2 ) ;
+};
+
+$(window).scroll(function(){
+
+  for (var i = pJSDom.length - 1; i >= 0; i--) {
+    if (elementInView($(pJSDom[i].pJS.canvas.el))) {
+      pJSDom[i].pJS.fn.custom.play();
+    } else {
+      pJSDom[i].pJS.fn.custom.pause();
+    }
+  }
+
+});
