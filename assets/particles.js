@@ -164,7 +164,7 @@ var pJS = function(tag_id, with_chart, params){
 				}
 			},
 			opacity: {
-				value: 1,
+				value: 0.6,
 				random: false,
 				anim: {
 					enable: false,
