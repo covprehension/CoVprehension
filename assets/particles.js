@@ -551,7 +551,7 @@ end
 			avoid_walls
 			fd speed
 			if epidemic-state = 0
-			[spread_virus]
+			[get_virus]
 		]
 	end
 	*/
@@ -565,7 +565,7 @@ end
 			p.fd(pJS.simulation.speed);
 
 			if(p.epidemic_state == 0) {
-				p.spread_virus();
+				p.get_virus();
 			}
 		}
 	}
@@ -598,7 +598,7 @@ end
    fd speed
     ]
     if epidemic-state = 0
-    [spread_virus]
+    [get_virus]
   ]
 end
 */
@@ -636,15 +636,15 @@ end
 			}
 
 			if(p.epidemic_state == 0) {
-				p.spread_virus();
+				p.get_virus();
 			}
 		}
 	}
 
-	//to spread_virus
+	//to get_virus
 		 /// 250320
 	/*
-	to spread_virus
+	to get_virus
 
 			if any? other citizens in-radius transmission-distance with [epidemic-state = 1 or epidemic-state = 2]
 			[
@@ -669,30 +669,31 @@ end
 	end
 	*/
 
-	pJS.fn.particle.prototype.spread_virus = function() {
+	pJS.fn.particle.prototype.get_virus = function() {
 		var infectious_neighbours = pJS.particles.array
-		.filter(p2 => (distance(this,p2) <= pJS.simulation.transmission_distance) )
-		.filter(p3 => (p3.epidemic_state == 1) || (p3.epidemic_state == 2));
+										.filter(p2 => (distance(this,p2) <= pJS.simulation.transmission_distance) )
+										.filter(p3 => (p3.epidemic_state == 1) || (p3.epidemic_state == 2));
 
-		if(infectious_neighbours.length != 0) {
-			target = pJS.fn.netlogo.one_of(infectious_neighbours); //[getRandomInt(infectious_neighbours.length)];
-			if(Math.random(1.0) < pJS.simulation.probability_transmission) {
-				if( (target.epidemic_state == 1) || ( (target.epidemic_state == 2) && (Math.random(1.0) < pJS.simulation.probability_transmission_unreported_infected)) ) {
-					target.nb_other_infected = target.nb_other_infecteds + 1;
+		if( infectious_neighbours.length != 0) {
+			target = pJS.fn.netlogo.one_of(infectious_neighbours);
+//			if() {
+			if(   ((target.epidemic_state == 1) && (Math.random(1.0) < pJS.simulation.probability_transmission))
+				||((target.epidemic_state == 2) && (Math.random(1.0) < pJS.simulation.probability_transmission_unreported_infected)) ) {
+				target.nb_other_infected = target.nb_other_infecteds + 1;
 
-					if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
+				if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
 
-						if(Math.random(100.0) < pJS.simulation.rate_unreported_infections) {
-							this.setEpidemicState(1);
-						} else {
-							this.setEpidemicState(2);
-						}
-					} else {
+					if(Math.random(100.0) > pJS.simulation.rate_unreported_infections) {
 						this.setEpidemicState(1);
+					} else {
+						this.setEpidemicState(2);
 					}
-
+				} else {
+					this.setEpidemicState(1);
 				}
+
 			}
+//			}
 		}
 	}
 
@@ -809,7 +810,7 @@ end
 	//  SIMULATION = "Simulation 3c : L’arbre qui cache la forêt"
 	//  [avoid_infected]
 	//    [move_randomly_citizens]]
-	//  spread_virus
+	//  get_virus
 	//  update_current_epidemic_counts
 	//  tick
 	//end
