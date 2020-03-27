@@ -18,7 +18,7 @@ layout: default
           <h2 class="subheading">{{ page.subtitle }}</h2>
           {% endif %}
           <span class="meta">Posté {% if page.author %}par 
-            <a href="#">{{ page.author }}{% endif %}</a>
+            <i>{{ page.author }}{% endif %}</i>
             {% comment %} --======  FRENCH DATE FORMATING  ======-- {% endcomment %}
             le {% if page.postDate %}{{ page.postDate | date: "%-d" }} {% assign m = page.postDate | date: "%-m" | minus: 1 %}{{ site.data.fr.months[m] }} {{ page.postDate | date: "%Y" }}
             {% else %}{{ page.date | date: "%-d" }} {% assign m = page.date | date: "%-m" | minus: 1 %}{{ site.data.fr.months[m] }} {{ page.date | date: "%Y" }}{% endif %} &middot; {% include read_time.html

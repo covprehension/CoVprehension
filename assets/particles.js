@@ -38,7 +38,7 @@ var pJS = function(tag_id, params){
 	| DOM
 	*/
 	var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');
-	var chart_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el-chart').getContext('2d');
+	var chart_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el-chart');
 
 	var nb_quarantine = 0;
 
@@ -46,7 +46,7 @@ var pJS = function(tag_id, params){
 	+============
 	| Charts.js
 	*/
-	var chart_obj = new Chart(chart_el, {
+	var chart_obj = new Chart(chart_el.getContext('2d'), {
 		// The type of chart we want to create
 		type: 'line',
 
@@ -871,7 +871,7 @@ var pJS = function(tag_id, params){
 		});
 		chart.update();
 
-		if (data.get(LABEL_DATA_IA) == pJS.simulation.number_particles){
+		if (data.get(LABEL_DATA_IA) == pJS.simulation.number_particles || data.get(LABEL_DATA_S) == 0){
 			pJS.fn.vendors.draw = () => {}
 		}
 	}
@@ -1030,7 +1030,8 @@ var pJS = function(tag_id, params){
 	pJS.fn.vendors.destroypJS = function(){
 		cancelAnimationFrame(pJS.fn.drawAnimFrame);
 		canvas_el.remove();
-		pJSDom = null;
+		chart_el.remove();
+		pJSDom.splice( pJSDom.indexOf(pJS), 1);
 	};
 
 	pJS.fn.vendors.drawShape = function(c, startX, startY, sideLength, sideCountNumerator, sideCountDenominator){
