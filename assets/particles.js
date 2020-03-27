@@ -22,10 +22,10 @@ var LABEL_SIMULATION_3A = "Simulation 3a";
 var LABEL_SIMULATION_3B = "Simulation 3b";
 var LABEL_SIMULATION_3C = "Simulation 3c";
 
-var LABEL_DATA_S  = "S";
-var LABEL_DATA_IA = "Ia";
-var LABEL_DATA_IB = "Ib";
-var LABEL_DATA_IC = "Ic";
+var LABEL_DATA_S  = "Sains";
+var LABEL_DATA_IA = "Infectés";
+var LABEL_DATA_IB = "Infectés non identifiés";
+var LABEL_DATA_IC = "Infectés resquilleurs";
 
 var COLOR_S 					= "#2CD13B";
 var COLOR_INFECTED 				= "#D63239";
@@ -74,7 +74,24 @@ var pJS = function(tag_id, params){
 		},
 
 		// Configuration options go here
-		options: {}
+		options: {
+			scales: {
+				yAxes: [{
+					scaleLabel: {
+						display: true,
+						fontSize: 18,
+						labelString: "Nombre de cas"
+					}
+				}],
+				xAxes: [{
+					scaleLabel: {
+						display: true,
+						fontSize: 18,
+						labelString: "Temps"
+					}
+				}]
+			}
+		}
 	});
 
 
