@@ -79,6 +79,9 @@ var pJS = function(tag_id, with_chart, params){
 			options: {
 				scales: {
 					yAxes: [{
+						gridLines: {
+							drawOnChartArea: false
+						},
 						scaleLabel: {
 							display: true,
 							fontSize: 18,
@@ -86,6 +89,9 @@ var pJS = function(tag_id, with_chart, params){
 						}
 					}],
 					xAxes: [{
+						gridLines: {
+							drawOnChartArea: false
+						},
 						scaleLabel: {
 							display: true,
 							fontSize: 18,
@@ -158,7 +164,7 @@ var pJS = function(tag_id, with_chart, params){
 				}
 			},
 			opacity: {
-				value: 1,
+				value: 0.6,
 				random: false,
 				anim: {
 					enable: false,
