@@ -7,9 +7,17 @@
 p {
   text-align: justify;
 }
-img {
+img,
+img.full-size {
 	width: 100%
 }
+img.half-size {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 .container{
 	max-width: 90vw;
 }
