@@ -20,6 +20,9 @@ background: '/img/bg-ressources.jpg'
 - [INSERM EPIcx lab CoVID-19](https://www.epicx-lab.com/covid-19.html)
 > Le site COVID-19 de l'équipe INSERM Epidemics in complex environments dirigée par Vittoria Colizza.
 
+- [Institut des Systèmes Complexes de Paris-Ile de France](https://iscpif.fr/projects/coronavirus-related-projects/)
+> Le site COVID-19 de l'ISC-PIF, avec deux exemples de cartographie des connaissances interactives.
+
 - [La fiche COVID19 de l'Institut Pasteur](https://www.pasteur.fr/fr/centre-medical/fiches-maladies/coronavirus-wuhan)
 > Une référence à consulter sans modération.
 
@@ -28,3 +31,7 @@ background: '/img/bg-ressources.jpg'
 
 - [Le site du Conseil Scientifique COVID-19](https://solidarites-sante.gouv.fr/actualites/presse/dossiers-de-presse/article/covid-19-conseil-scientifique-covid-19)
 > Pour suivre les avis émis par le Conseil Scientifique COVID-19.
+
+- [Sciences2](https://www.lemonde.fr/blog/huet/)
+> Le blog scientifique de Sylvestre Huet, du journal Le Monde, avec plusieurs articles sur le COVID-19.
+
