@@ -17,7 +17,7 @@ description: Nous vous proposons un outils de modélisation avec des scénarios 
 
 <!-- Page Header -->
 {% if page.background %}
-<header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1567427018141-0584cfcbf1b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9')">
+<header class="masthead" style="background-image: url('{{ '/img/bg-simulator.jpg' | prepend: site.baseurl | replace: '//', '/' }}')">
   {% else %}
   <header class="masthead">
     {% endif %}
