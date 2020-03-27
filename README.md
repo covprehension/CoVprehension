@@ -42,6 +42,9 @@ $ tree
 │   └── <IGNORE ME, I'm a trap 🙊>
 │
 ├── _sass
+│   ├── js
+│   │   └── <JS simulation in sub-dir>
+│   │
 │   └── styles.scss
 │
 ├── simulations
@@ -52,6 +55,8 @@ $ tree
 ├── about.html
 ├── contact.html
 ├── index.html
+├── ressources.md
+├── simulateur.html <Don't touch me>
 │
 └── <others...>
 
