@@ -169,16 +169,6 @@ var pJS = function(tag_id, with_chart, params){
 					sync: false
 				}
 			},
-			size: {
-				value: 5,
-				random: false,
-				anim: {
-					enable: false,
-					speed: 20,
-					size_min: 0,
-					sync: false
-				}
-			},
 			array: []
 		},
 		retina_detect: false,
@@ -277,14 +267,16 @@ var pJS = function(tag_id, with_chart, params){
 		this.nb_other_infected = 0;
 
 		/* size */
-		this.radius = (pJS.particles.size.random ? Math.random() : 1) * pJS.particles.size.value;
-		if(pJS.particles.size.anim.enable){
-			this.size_status = false;
-			this.vs = pJS.particles.size.anim.speed / 100;
-			if(!pJS.particles.size.anim.sync){
-				this.vs = this.vs * Math.random();
-			}
-		}
+		this.radius = pJS.canvas.w * 7.5 / 800;
+
+		//this.radius = (pJS.particles.size.random ? Math.random() : 1) * pJS.particles.size.value;
+		//if(pJS.particles.size.anim.enable){
+		//	this.size_status = false;
+		//	this.vs = pJS.particles.size.anim.speed / 100;
+		//	if(!pJS.particles.size.anim.sync){
+		//		this.vs = this.vs * Math.random();
+		//	}
+		//}
 
 		/* position */
 		this.x = position ? position.x : Math.random() * pJS.canvas.w;
