@@ -954,10 +954,10 @@ end
 		dataMap.set(LABEL_DATA_S, pJS.fn.netlogo.nb_S() );
 		dataMap.set(LABEL_DATA_IA, pJS.fn.netlogo.nb_Ir());
 
-		if(pJS.simulation.scenario != LABEL_SIMULATION_2C) {
+		if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
 			// Simulation 2C : S + Ia + Ic
 			dataMap.set(LABEL_DATA_IC, pJS.fn.netlogo.nb_Ifr());
-		} else if(pJS.simulation.scenario != LABEL_SIMULATION_3C) {
+		} else if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
 			// Simulation 3C : S + Ia + Ib
 			dataMap.set(LABEL_DATA_IB, pJS.fn.netlogo.nb_Inr());
 		}
