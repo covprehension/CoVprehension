@@ -69,22 +69,6 @@ var pJS = function(tag_id, params){
 				borderColor: COLOR_INFECTED,
 				radius: 1,
 				data: []
-			},
-			{
-				label: LABEL_DATA_IB,
-				fill: false,
-				backgroundColor: COLOR_INFECTED_NO_SYMPTOM,
-				borderColor: COLOR_INFECTED_NO_SYMPTOM,
-				radius: 1,
-				data: []
-			},
-			{
-				label: LABEL_DATA_IC,
-				fill: false,
-				backgroundColor: COLOR_INFECTED_FREE_RIDER,
-				borderColor: COLOR_INFECTED_FREE_RIDER,
-				radius: 1,
-				data: []
 			}
 			]
 		},
@@ -483,11 +467,31 @@ var pJS = function(tag_id, params){
 
 		if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
 			// Simulation 2C : S + Ia + Ic
-//			pJS.chart.el.data.datasets = pJS.chart.el.data.datasets.filter(e => e.label != LABEL_DATA_IB);
+
+			var datasetIC = {
+				label: LABEL_DATA_IC,
+				fill: false,
+				backgroundColor: COLOR_INFECTED_FREE_RIDER,
+				borderColor: COLOR_INFECTED_FREE_RIDER,
+				radius: 1,
+				data: []
+			};
+			pJS.chart.el.data.datasets.push(datasetIC);
+
 			dataMap.set(LABEL_DATA_IC, pJS.fn.netlogo.nb_Ifr());
 		} else if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
 			// Simulation 3C : S + Ia + Ib
-			pJS.chart.el.data.datasets = pJS.chart.el.data.datasets.filter(e => e.label != LABEL_DATA_IC);
+
+			var datasetIB = {
+						label: LABEL_DATA_IB,
+						fill: false,
+						backgroundColor: COLOR_INFECTED_NO_SYMPTOM,
+						borderColor: COLOR_INFECTED_NO_SYMPTOM,
+						radius: 1,
+						data: []
+					};
+			pJS.chart.el.data.datasets.push(datasetIB);
+
 			dataMap.set(LABEL_DATA_IB, pJS.fn.netlogo.nb_Inr());
 		} else {
 			pJS.chart.el.data.datasets = pJS.chart.el.data.datasets.filter(e => (e.label != LABEL_DATA_IB) && (e.label != LABEL_DATA_IC));
