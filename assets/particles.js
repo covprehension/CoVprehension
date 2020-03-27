@@ -24,8 +24,10 @@ var LABEL_SIMULATION_3C = "Simulation 3c";
 
 var LABEL_DATA_S  = "Sains";
 var LABEL_DATA_IA = "Infectés";
+var LABEL_DATA_IAbis = "Infectés respectant la distanciation";
 var LABEL_DATA_IB = "Infectés non identifiés";
-var LABEL_DATA_IC = "Infectés resquilleurs";
+var LABEL_DATA_IC = "Infectés ne respectant pas la distanciation";
+
 
 var COLOR_S 					= "#2CD13B";
 var COLOR_INFECTED 				= "#D63239";
@@ -63,16 +65,7 @@ var pJS = function(tag_id, with_chart, params){
 					borderColor: COLOR_S,
 					radius: 1,
 					data: []
-				},
-				{
-					label: LABEL_DATA_IA,
-					fill: false,
-					backgroundColor: COLOR_INFECTED,
-					borderColor: COLOR_INFECTED,
-					radius: 1,
-					data: []
-				}
-				]
+				}]
 			},
 
 			// Configuration options go here
@@ -490,10 +483,9 @@ var pJS = function(tag_id, with_chart, params){
 		if(with_chart) {
 			var dataMap = new Map();
 			dataMap.set(LABEL_DATA_S, pJS.fn.netlogo.nb_S() );
-			dataMap.set(LABEL_DATA_IA, pJS.fn.netlogo.nb_Ir() );
 
 			if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
-				// Simulation 2C : S + Ia + Ic
+				// Simulation 2C : S + Iabis + Ic
 
 				var datasetIC = {
 					label: LABEL_DATA_IC,
@@ -505,23 +497,46 @@ var pJS = function(tag_id, with_chart, params){
 				};
 				pJS.chart.el.data.datasets.push(datasetIC);
 
+				var datasetIAbis = {
+					label: LABEL_DATA_IAbis,
+					fill: false,
+					backgroundColor: COLOR_INFECTED,
+					borderColor: COLOR_INFECTED,
+					radius: 1,
+					data: []
+				}
+				pJS.chart.el.data.datasets.push(datasetIAbis);
+
 				dataMap.set(LABEL_DATA_IC, pJS.fn.netlogo.nb_Ifr());
-			} else if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
+				dataMap.set(LABEL_DATA_IAbis, pJS.fn.netlogo.nb_Ir() );
+			} else {
+				var datasetIA = {
+					label: LABEL_DATA_IA,
+					fill: false,
+					backgroundColor: COLOR_INFECTED,
+					borderColor: COLOR_INFECTED,
+					radius: 1,
+					data: []
+				};
+				pJS.chart.el.data.datasets.push(datasetIA);
+
+				dataMap.set(LABEL_DATA_IA, pJS.fn.netlogo.nb_Ir() );
+
+				if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
 				// Simulation 3C : S + Ia + Ib
 
-				var datasetIB = {
-							label: LABEL_DATA_IB,
-							fill: false,
-							backgroundColor: COLOR_INFECTED_NO_SYMPTOM,
-							borderColor: COLOR_INFECTED_NO_SYMPTOM,
-							radius: 1,
-							data: []
-						};
-				pJS.chart.el.data.datasets.push(datasetIB);
+					var datasetIB = {
+						label: LABEL_DATA_IB,
+						fill: false,
+						backgroundColor: COLOR_INFECTED_NO_SYMPTOM,
+						borderColor: COLOR_INFECTED_NO_SYMPTOM,
+						radius: 1,
+						data: []
+					};
+					pJS.chart.el.data.datasets.push(datasetIB);
 
-				dataMap.set(LABEL_DATA_IB, pJS.fn.netlogo.nb_Inr());
-			} else {
-				pJS.chart.el.data.datasets = pJS.chart.el.data.datasets.filter(e => (e.label != LABEL_DATA_IB) && (e.label != LABEL_DATA_IC));
+					dataMap.set(LABEL_DATA_IB, pJS.fn.netlogo.nb_Inr());
+				}
 			}
 
 			addData(pJS.chart.el, pJS.simulation.tick, dataMap);
@@ -606,14 +621,17 @@ var pJS = function(tag_id, with_chart, params){
 			var dataMap = new Map();
 			// all scenario : S + Ia
 			dataMap.set(LABEL_DATA_S, pJS.fn.netlogo.nb_S() );
-			dataMap.set(LABEL_DATA_IA, pJS.fn.netlogo.nb_Ir());
 
 			if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
-				// Simulation 2C : S + Ia + Ic
+				// Simulation 2C : S + Iabis + Ic
 				dataMap.set(LABEL_DATA_IC, pJS.fn.netlogo.nb_Ifr());
-			} else if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
+				dataMap.set(LABEL_DATA_IAbis, pJS.fn.netlogo.nb_Ir());
+			} else {
+				dataMap.set(LABEL_DATA_IA, pJS.fn.netlogo.nb_Ir());
+				if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
 				// Simulation 3C : S + Ia + Ib
-				dataMap.set(LABEL_DATA_IB, pJS.fn.netlogo.nb_Inr());
+					dataMap.set(LABEL_DATA_IB, pJS.fn.netlogo.nb_Inr());
+				}
 			}
 			addData(pJS.chart.el, pJS.simulation.tick, dataMap);
 		}
