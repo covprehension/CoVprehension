@@ -34,12 +34,13 @@ var COLOR_INFECTED_FREE_RIDER 	= '#8C8C8C';
 
 var pJS = function(tag_id, params){
 	/*
-		+============
-		| DOM
-		*/
-		var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');
-		var chart_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el-chart').getContext('2d');
-	// var chart_el = document.getElementById('myChart').getContext('2d');
+	+============
+	| DOM
+	*/
+	var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');
+	var chart_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el-chart').getContext('2d');
+
+	var nb_quarantine = 0;
 
 	/*
 	+============
@@ -91,6 +92,7 @@ var pJS = function(tag_id, params){
 		// Configuration options go here
 		options: {}
 	});
+
 
 	/* particles.js variables with default values */
 	this.pJS = {
@@ -654,9 +656,16 @@ end
 	pJS.fn.particle.prototype.quarantine_infected = function() {
 		if(!this.quarantined) {
 			this.shape = "square";
-		// 	move-to min-one-of patches with  [not any? citizens-here] [pxcor]
-		// set size 1
-			this.quarantine = true;
+
+			var dx = Math.floor(nb_quarantine / (Math.floor(pJS.canvas.h / (3 * this.radius) )));
+			var dy = nb_quarantine % (Math.floor(pJS.canvas.h / (3 * this.radius) ));
+
+			this.x = 2*this.radius + (this.radius + 10) * dx;
+			this.y = 2*this.radius + (this.radius + 10) * dy;
+
+			// set size 1
+			this.quarantined = true;
+			nb_quarantine = nb_quarantine + 1;
 		}
 	}
 
@@ -791,7 +800,7 @@ end
 
 				if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
 
-					if(Math.random(100.0) > pJS.simulation.rate_unreported_infections) {
+					if(Math.random() * 100 > pJS.simulation.rate_unreported_infections) {
 						this.setEpidemicState(1);
 					} else {
 						this.setEpidemicState(2);
@@ -1409,8 +1418,8 @@ window.particlesJS = function(tag_id, params){
 	canvas_el.className = pJS_canvas_class;
 
 	/* set size canvas */
-	canvas_el.style.width = "100%";
-	canvas_el.style.height = "100%";
+	//canvas_el.style.width = "100%";
+	//canvas_el.style.height = "100%";
 
 	var chart_el = document.createElement('canvas');
 	chart_el.className = pJS_canvas_chart_class;
