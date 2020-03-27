@@ -85,6 +85,9 @@ var pJS = function(tag_id, with_chart, params){
 						gridLines: {
 							drawOnChartArea: false
 						},
+						ticks: {
+							maxTicksLimit: 10
+						},
 						scaleLabel: {
 							display: true,
 							fontSize: 18,
