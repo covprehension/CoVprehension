@@ -873,6 +873,7 @@ var pJS = function(tag_id, params){
 
 		if (data.get(LABEL_DATA_IA) == pJS.simulation.number_particles || data.get(LABEL_DATA_S) == 0){
 			pJS.fn.vendors.draw = () => {}
+			restartButton(tag_id, params);
 		}
 	}
 
