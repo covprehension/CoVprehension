@@ -16,6 +16,21 @@
 var LABEL_SIMULATION_1A = "Simulation 1a";
 var LABEL_SIMULATION_1B = "Simulation 1b";
 var LABEL_SIMULATION_2A = "Simulation 2a";
+var LABEL_SIMULATION_2B = "Simulation 2b";
+var LABEL_SIMULATION_2C = "Simulation 2c";
+var LABEL_SIMULATION_3A = "Simulation 3a";
+var LABEL_SIMULATION_3B = "Simulation 3b";
+var LABEL_SIMULATION_3C = "Simulation 3c";
+
+var LABEL_DATA_S  = "S";
+var LABEL_DATA_IA = "Ia";
+var LABEL_DATA_IB = "Ib";
+var LABEL_DATA_IC = "Ic";
+
+var COLOR_S 					= "#2CD13B";
+var COLOR_INFECTED 				= "#D63239";
+var COLOR_INFECTED_NO_SYMPTOM 	= '#2D8DBE';
+var COLOR_INFECTED_FREE_RIDER 	= '#8C8C8C';
 
 var pJS = function(tag_id, params){
 	/*
@@ -39,17 +54,35 @@ var pJS = function(tag_id, params){
 			labels: ['0'],
 			datasets: [
 			{
-				label: 'S',
+				label: LABEL_DATA_S,
 				fill: false,
-				backgroundColor: 'rgb(0, 255, 0)',
-				borderColor: 'rgb(0, 255, 0)',
+				backgroundColor: COLOR_S,
+				borderColor: COLOR_S,
+				radius: 1,
 				data: []
 			},
 			{
-				label: 'I',
+				label: LABEL_DATA_IA,
 				fill: false,
-				backgroundColor: 'rgb(255, 99, 132)',
-				borderColor: 'rgb(255, 99, 132)',
+				backgroundColor: COLOR_INFECTED,
+				borderColor: COLOR_INFECTED,
+				radius: 1,
+				data: []
+			},
+			{
+				label: LABEL_DATA_IB,
+				fill: false,
+				backgroundColor: COLOR_INFECTED_NO_SYMPTOM,
+				borderColor: COLOR_INFECTED_NO_SYMPTOM,
+				radius: 1,
+				data: []
+			},
+			{
+				label: LABEL_DATA_IC,
+				fill: false,
+				backgroundColor: COLOR_INFECTED_FREE_RIDER,
+				borderColor: COLOR_INFECTED_FREE_RIDER,
+				radius: 1,
 				data: []
 			}
 			]
@@ -90,9 +123,6 @@ var pJS = function(tag_id, params){
 					enable: false,
 					value_area: 800
 				}
-			},
-			color: {
-				value: '#59B03C'
 			},
 			size: {
 				value: 5,
@@ -226,7 +256,7 @@ var pJS = function(tag_id, params){
 		/* infectious state */
 		/* 0 = sain     */
 		/* 2 = infecté  */
-		this.epidemic_state = 0;
+		this.setEpidemicState(0);
 
 		this.respect_rules = true;
 
@@ -255,48 +285,6 @@ var pJS = function(tag_id, params){
 		else if(this.x < this.radius*2) this.x = this.x + this.radius;
 		if(this.y > pJS.canvas.h - this.radius*2) this.y = this.y - this.radius;
 		else if(this.y < this.radius*2) this.y = this.y + this.radius;
-
-		/* check position - avoid overlap */
-		// if(pJS.particles.move.bounce){
-		//   pJS.fn.vendors.checkOverlap(this, position);
-		// }
-
-		/* color */
-		this.color = {};
-		if(typeof(color.value) == 'object'){
-
-			if(color.value instanceof Array){
-				var color_selected = color.value[Math.floor(Math.random() * pJS.particles.color.value.length)];
-				this.color.rgb = hexToRgb(color_selected);
-			}else{
-				if(color.value.r != undefined && color.value.g != undefined && color.value.b != undefined){
-					this.color.rgb = {
-						r: color.value.r,
-						g: color.value.g,
-						b: color.value.b
-					}
-				}
-				if(color.value.h != undefined && color.value.s != undefined && color.value.l != undefined){
-					this.color.hsl = {
-						h: color.value.h,
-						s: color.value.s,
-						l: color.value.l
-					}
-				}
-			}
-
-		}
-		else if(color.value == 'random'){
-			this.color.rgb = {
-				r: (Math.floor(Math.random() * (255 - 0 + 1)) + 0),
-				g: (Math.floor(Math.random() * (255 - 0 + 1)) + 0),
-				b: (Math.floor(Math.random() * (255 - 0 + 1)) + 0)
-			}
-		}
-		else if(typeof(color.value) == 'string'){
-			this.color = color;
-			this.color.rgb = hexToRgb(this.color.value);
-		}
 
 		/* opacity */
 		this.opacity = (pJS.particles.opacity.random ? Math.random() : 1) * pJS.particles.opacity.value;
@@ -457,15 +445,30 @@ var pJS = function(tag_id, params){
 		/* init a random infected */
 		pJS.fn.netlogo.set_infected_initialisation();
 
-		if(pJS.simulation.scenario == "Simulation 2c") {
+		if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
 			pJS.fn.netlogo.set_respect_rules();
 		}
 
+		// Initialize the chart
 		var dataMap = new Map();
-		dataMap.set('S', pJS.simulation.number_particles);
-		dataMap.set('I', 1);
+		dataMap.set(LABEL_DATA_S, pJS.fn.netlogo.nb_S() );
+		dataMap.set(LABEL_DATA_IA, pJS.fn.netlogo.nb_Ir() );
+
+		if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
+			// Simulation 2C : S + Ia + Ic
+//			pJS.chart.el.data.datasets = pJS.chart.el.data.datasets.filter(e => e.label != LABEL_DATA_IB);
+			dataMap.set(LABEL_DATA_IC, pJS.fn.netlogo.nb_Ifr());
+		} else if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
+			// Simulation 3C : S + Ia + Ib
+			pJS.chart.el.data.datasets = pJS.chart.el.data.datasets.filter(e => e.label != LABEL_DATA_IC);
+			dataMap.set(LABEL_DATA_IB, pJS.fn.netlogo.nb_Inr());
+		} else {
+			pJS.chart.el.data.datasets = pJS.chart.el.data.datasets.filter(e => (e.label != LABEL_DATA_IB) && (e.label != LABEL_DATA_IC));
+		}
+
 		addData(pJS.chart.el, pJS.simulation.tick, dataMap);
 	}
+
 
 //to set_respect_rules
 //  if SIMULATIONS = "Simulation 2c : Le maillon faible"
@@ -477,7 +480,7 @@ var pJS = function(tag_id, params){
 //  ]
 //end
 	pJS.fn.netlogo.set_respect_rules = function() {
-		if(pJS.simulation.scenario == "Simulation 2c") {
+		if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
 			var infected_particles = pJS.particles.array.filter(p => p.epidemic_state == 1)
 			for(var i = 0; i < infected_particles.length ; i++) {
 				infected_particles[i].respect_rules = false;
@@ -503,33 +506,31 @@ var pJS = function(tag_id, params){
 	 		var p = n_particles[i];
 	 		p.setEpidemicState(1);
 	 	}
-	 	if(pJS.simulation.scenario == "Simulation 3c") {
+	 	if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
 	 		var one_particle = pJS.fn.netlogo.one_of(pJS.particles.array.filter(p => p.epidemic_state == 0));
 	 		one_particle.setEpidemicState(2)
 	 	}
 	}
 
 	pJS.fn.netlogo.setup_globals = function() {
-	 	if( (pJS.simulation.scenario == "Simulation 1b")
-	 		|| (pJS.simulation.scenario == "Simulation 2b")
-	 		|| (pJS.simulation.scenario == "Simulation 3c") ) {
+	 	if( (pJS.simulation.scenario == LABEL_SIMULATION_1B)
+	 		|| (pJS.simulation.scenario == LABEL_SIMULATION_2B)
+	 		|| (pJS.simulation.scenario == LABEL_SIMULATION_3C) ) {
 	 		pJS.simulation.number_particles = 650;
+	 	} else if( (pJS.simulation.scenario == LABEL_SIMULATION_3B) ) {
+	 		pJS.simulation.number_particles = 1000;
 	 	} else {
-	 		if( (pJS.simulation.scenario == "Simulation 3b") ) {
-	 			pJS.simulation.number_particles = 1000;
-	 		} else {
-	 			pJS.simulation.number_particles = 100;
-	 		}
+	 		pJS.simulation.number_particles = 100;
 	 	}
 
-	 	if( pJS.simulation.scenario == "Simulation 3b") {
+	 	if( pJS.simulation.scenario == LABEL_SIMULATION_3B) {
 	 		pJS.simulation.walking_angle = 50
 	 	} else {
 	 		pJS.simulation.walking_angle = 50
 	 	}
 
 
-	 	if (pJS.simulation.scenario == "Simulation 3c") {
+	 	if (pJS.simulation.scenario == LABEL_SIMULATION_3C) {
 	 		pJS.simulation.rate_unreported_infections = 50;
 	 		pJS.simulation.probability_transmission_unreported_infected = 1;
 	 		pJS.simulation.wall = 50;
@@ -575,7 +576,7 @@ var pJS = function(tag_id, params){
 	}
 
 	pJS.fn.netlogo.avoid_infected = function() {
-		throw "pJS.fn.netlogo.avoid_infected  not implemented";
+//		throw "pJS.fn.netlogo.avoid_infected  not implemented";
 	}
 
 /*to move_distanciation_citizens
@@ -684,7 +685,7 @@ end
 				if( (target.epidemic_state == 1) || ( (target.epidemic_state == 2) && (Math.random(1.0) < pJS.simulation.probability_transmission_unreported_infected)) ) {
 					target.nb_other_infected = target.nb_other_infecteds + 1;
 
-					if(pJS.simulation.scenario == "Simulation 3c") {
+					if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
 
 						if(Math.random(100.0) < pJS.simulation.rate_unreported_infections) {
 							this.setEpidemicState(1);
@@ -714,8 +715,14 @@ end
 	}
 
 	pJS.fn.particle.prototype.setEpidemicState = function(new_state) {
-		this.setColor("FF00FF");
 		this.epidemic_state = new_state;
+		if(this.epidemic_state == 0) {
+			this.setColor(COLOR_S);
+		} else if(this.epidemic_state == 1) {
+			this.setColor(COLOR_INFECTED);
+		} else if(this.epidemic_state == 2) {
+			this.setColor(COLOR_INFECTED_NO_SYMPTOM);
+		}
 	}
 
 	pJS.fn.netlogo.one_of = function(arr) {
@@ -814,29 +821,56 @@ end
 
 
 	pJS.fn.particlesUpdate = function(){
-		if( (pJS.simulation.scenario == "Simulation 2a")
-				|| (pJS.simulation.scenario == "Simulation 2b")
-				|| (pJS.simulation.scenario == "Simulation 2c") ) {
+		if( (pJS.simulation.scenario == LABEL_SIMULATION_2A)
+				|| (pJS.simulation.scenario == LABEL_SIMULATION_2B)
+				|| (pJS.simulation.scenario == LABEL_SIMULATION_2C) ) {
 			pJS.fn.netlogo.move_distanciation_citizens();
+		} else if( (pJS.simulation.scenario == LABEL_SIMULATION_3A)
+				|| (pJS.simulation.scenario == LABEL_SIMULATION_3B)
+				|| (pJS.simulation.scenario == LABEL_SIMULATION_3C) ) {
+			pJS.fn.netlogo.avoid_infected();
 		} else {
-			if( (pJS.simulation.scenario == "Simulation 3a")
-					|| (pJS.simulation.scenario == "Simulation 3b")
-					|| (pJS.simulation.scenario == "Simulation 3c") ) {
-				pJS.fn.netlogo.avoid_infected();
-			} else {
-				pJS.fn.netlogo.move_randomly_citizens();
-			}
+			pJS.fn.netlogo.move_randomly_citizens();
 		}
 
 		pJS.simulation.tick++;
 
 		// TODO : à mettre dans le draw ???
 		var dataMap = new Map();
-		dataMap.set('S', pJS.particles.array.filter(x => x.epidemic_state == 0).length);
-		dataMap.set('I', pJS.particles.array.filter(x => (x.epidemic_state == 1) || (x.epidemic_state == 2)).length);
+		// all scenario : S + Ia
+		dataMap.set(LABEL_DATA_S, pJS.fn.netlogo.nb_S() );
+		dataMap.set(LABEL_DATA_IA, pJS.fn.netlogo.nb_Ir());
+
+		if(pJS.simulation.scenario != LABEL_SIMULATION_2C) {
+			// Simulation 2C : S + Ia + Ic
+			dataMap.set(LABEL_DATA_IC, pJS.fn.netlogo.nb_Ifr());
+		} else if(pJS.simulation.scenario != LABEL_SIMULATION_3C) {
+			// Simulation 3C : S + Ia + Ib
+			dataMap.set(LABEL_DATA_IB, pJS.fn.netlogo.nb_Inr());
+		}
 		addData(pJS.chart.el, pJS.simulation.tick, dataMap);
 
 	};
+
+	pJS.fn.netlogo.nb_S = function(){
+		return pJS.particles.array.filter(x => x.epidemic_state == 0).length;
+	}
+
+	pJS.fn.netlogo.nb_I = function(){
+		return pJS.particles.array.filter(x => (x.epidemic_state == 1) || (x.epidemic_state == 2)).length;
+	}
+
+	pJS.fn.netlogo.nb_Ir = function(){
+		return pJS.particles.array.filter(x => x.epidemic_state == 1).length;
+	}
+
+	pJS.fn.netlogo.nb_Inr = function(){
+		return pJS.particles.array.filter(x => x.epidemic_state == 2).length;
+	}
+
+	pJS.fn.netlogo.nb_Ifr = function() {
+		return pJS.particles.array.filter(x => (!x.respect_rules) && (x.epidemic_state == 1)).length;
+	}
 
 	function addData(chart, label, data) {
 		chart.data.labels.push(label);
@@ -845,7 +879,7 @@ end
 		});
 		chart.update();
 
-		if (data.get('I') == pJS.simulation.number_particles){
+		if (data.get(LABEL_DATA_IA) == pJS.simulation.number_particles){
 			pJS.fn.vendors.draw = () => {}
 		}
 	}
@@ -934,137 +968,6 @@ end
 		// if(!pJS.particles.move.enable){
 		// 	pJS.fn.particlesDraw();
 		// }
-	};
-
-	pJS.fn.modes.bubbleParticle = function(p){
-
-		/* on hover event */
-		if(pJS.interactivity.events.onhover.enable && isInArray('bubble', pJS.interactivity.events.onhover.mode)){
-
-			var dx_mouse = p.x - pJS.interactivity.mouse.pos_x,
-			dy_mouse = p.y - pJS.interactivity.mouse.pos_y,
-			dist_mouse = Math.sqrt(dx_mouse*dx_mouse + dy_mouse*dy_mouse),
-			ratio = 1 - dist_mouse / pJS.interactivity.modes.bubble.distance;
-
-			function init(){
-				p.opacity_bubble = p.opacity;
-				p.radius_bubble = p.radius;
-			}
-
-			/* mousemove - check ratio */
-			if(dist_mouse <= pJS.interactivity.modes.bubble.distance){
-
-				if(ratio >= 0 && pJS.interactivity.status == 'mousemove'){
-
-					/* size */
-					if(pJS.interactivity.modes.bubble.size != pJS.particles.size.value){
-
-						if(pJS.interactivity.modes.bubble.size > pJS.particles.size.value){
-							var size = p.radius + (pJS.interactivity.modes.bubble.size*ratio);
-							if(size >= 0){
-								p.radius_bubble = size;
-							}
-						}else{
-							var dif = p.radius - pJS.interactivity.modes.bubble.size,
-							size = p.radius - (dif*ratio);
-							if(size > 0){
-								p.radius_bubble = size;
-							}else{
-								p.radius_bubble = 0;
-							}
-						}
-
-					}
-
-					/* opacity */
-					if(pJS.interactivity.modes.bubble.opacity != pJS.particles.opacity.value){
-
-						if(pJS.interactivity.modes.bubble.opacity > pJS.particles.opacity.value){
-							var opacity = pJS.interactivity.modes.bubble.opacity*ratio;
-							if(opacity > p.opacity && opacity <= pJS.interactivity.modes.bubble.opacity){
-								p.opacity_bubble = opacity;
-							}
-						}else{
-							var opacity = p.opacity - (pJS.particles.opacity.value-pJS.interactivity.modes.bubble.opacity)*ratio;
-							if(opacity < p.opacity && opacity >= pJS.interactivity.modes.bubble.opacity){
-								p.opacity_bubble = opacity;
-							}
-						}
-					}
-				}
-			}else{
-				init();
-			}
-
-
-			/* mouseleave */
-			if(pJS.interactivity.status == 'mouseleave'){
-				init();
-			}
-
-		}
-
-		/* on click event */
-		else if(pJS.interactivity.events.onclick.enable && isInArray('bubble', pJS.interactivity.events.onclick.mode)){
-
-
-			if(pJS.tmp.bubble_clicking){
-				var dx_mouse = p.x - pJS.interactivity.mouse.click_pos_x,
-				dy_mouse = p.y - pJS.interactivity.mouse.click_pos_y,
-				dist_mouse = Math.sqrt(dx_mouse*dx_mouse + dy_mouse*dy_mouse),
-				time_spent = (new Date().getTime() - pJS.interactivity.mouse.click_time)/1000;
-
-				if(time_spent > pJS.interactivity.modes.bubble.duration){
-					pJS.tmp.bubble_duration_end = true;
-				}
-
-				if(time_spent > pJS.interactivity.modes.bubble.duration*2){
-					pJS.tmp.bubble_clicking = false;
-					pJS.tmp.bubble_duration_end = false;
-				}
-			}
-
-
-			function process(bubble_param, particles_param, p_obj_bubble, p_obj, id){
-
-				if(bubble_param != particles_param){
-
-					if(!pJS.tmp.bubble_duration_end){
-						if(dist_mouse <= pJS.interactivity.modes.bubble.distance){
-							if(p_obj_bubble != undefined) var obj = p_obj_bubble;
-							else var obj = p_obj;
-							if(obj != bubble_param){
-								var value = p_obj - (time_spent * (p_obj - bubble_param) / pJS.interactivity.modes.bubble.duration);
-								if(id == 'size') p.radius_bubble = value;
-								if(id == 'opacity') p.opacity_bubble = value;
-							}
-						}else{
-							if(id == 'size') p.radius_bubble = undefined;
-							if(id == 'opacity') p.opacity_bubble = undefined;
-						}
-					}else{
-						if(p_obj_bubble != undefined){
-							var value_tmp = p_obj - (time_spent * (p_obj - bubble_param) / pJS.interactivity.modes.bubble.duration),
-							dif = bubble_param - value_tmp;
-							value = bubble_param + dif;
-							if(id == 'size') p.radius_bubble = value;
-							if(id == 'opacity') p.opacity_bubble = value;
-						}
-					}
-
-				}
-
-			}
-
-			if(pJS.tmp.bubble_clicking){
-				/* size */
-				process(pJS.interactivity.modes.bubble.size, pJS.particles.size.value, p.radius_bubble, p.radius, 'size');
-				/* opacity */
-				process(pJS.interactivity.modes.bubble.opacity, pJS.particles.opacity.value, p.opacity_bubble, p.opacity, 'opacity');
-			}
-
-		}
-
 	};
 
 	pJS.fn.vendors.densityAutoParticles = function(){
