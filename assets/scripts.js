@@ -3,8 +3,16 @@ $(function () {
 })
 
 /*
-	JS Simulation
- */
+	+=======
+	|  JS Simulation  |
+               =======+
+*/
+
+/*
+	+=======
+	| Pause&Play
+*/
+
 // Check if the double chart is in view
 function elementInView(elem){
   return (($(window).scrollTop() + $(window).height()) > $(elem).offset().top + (3 * $(elem).parent().height()/4))
@@ -23,3 +31,9 @@ $(window).scroll(function(){
   }
 
 });
+
+
+/*
+	+=======
+	| Restart
+*/
