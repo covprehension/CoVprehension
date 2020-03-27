@@ -9,7 +9,7 @@ background: '/img/bg-ressources.jpg'
 > Nous nous sommes inspirés de ce site créé très rapidement au début de l'épidémie et mis à jour régulièrement par Harry Stevens.
 
 - [Coronavirus COVID-19 Global Cases by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6)
-> Une des bases de données à l'échelle mondiale les plus complètes. Sa mise en jour est quotidienne.
+> Une des bases de données à l'échelle mondiale les plus complètes à l'heure actuelle. Sa fiabilité reste toute relative, compte tenu de la disparité des systèmes de soin dans les pays mais aussi du grand nombre d'inconnues qui demeurent quant à la dynamique de cette épidémie. La base est mise à jour en permanence.
 
 - [Coronavirus en France : le bilan actualisé et la carte des contaminations](https://www.lemonde.fr/les-decodeurs/article/2020/03/16/coronavirus-en-france-le-bilan-actualise-et-la-carte-des-contaminations_6033283_4355770.html)
 > Une page du journal Le Monde mise à jour quotidiennement par Gary Dagorn
