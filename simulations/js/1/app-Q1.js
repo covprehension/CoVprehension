@@ -1,4 +1,4 @@
-particlesJS('particles-js-Q1A',
+particlesJS('particles-js-Q1A', true,
   {
     "simulation": {
       "tick": 0,
@@ -12,7 +12,7 @@ particlesJS('particles-js-Q1A',
   }
 );
 
-particlesJS('particles-js-Q1B',
+particlesJS('particles-js-Q1B', true,
 {
   "simulation": {
     "tick": 0,

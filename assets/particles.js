@@ -32,13 +32,12 @@ var COLOR_INFECTED 				= "#D63239";
 var COLOR_INFECTED_NO_SYMPTOM 	= '#2D8DBE';
 var COLOR_INFECTED_FREE_RIDER 	= '#8C8C8C';
 
-var pJS = function(tag_id, params){
+var pJS = function(tag_id, with_chart, params){
 	/*
 	+============
 	| DOM
 	*/
 	var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');
-	var chart_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el-chart');
 
 	var nb_quarantine = 0;
 
@@ -46,53 +45,57 @@ var pJS = function(tag_id, params){
 	+============
 	| Charts.js
 	*/
-	var chart_obj = new Chart(chart_el.getContext('2d'), {
-		// The type of chart we want to create
-		type: 'line',
+	var chart_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el-chart');
 
-		// The data for our dataset
-		data: {
-			labels: ['0'],
-			datasets: [
-			{
-				label: LABEL_DATA_S,
-				fill: false,
-				backgroundColor: COLOR_S,
-				borderColor: COLOR_S,
-				radius: 1,
-				data: []
+	if(with_chart) {
+		var chart_obj = new Chart(chart_el.getContext('2d'), {
+			// The type of chart we want to create
+			type: 'line',
+
+			// The data for our dataset
+			data: {
+				labels: ['0'],
+				datasets: [
+				{
+					label: LABEL_DATA_S,
+					fill: false,
+					backgroundColor: COLOR_S,
+					borderColor: COLOR_S,
+					radius: 1,
+					data: []
+				},
+				{
+					label: LABEL_DATA_IA,
+					fill: false,
+					backgroundColor: COLOR_INFECTED,
+					borderColor: COLOR_INFECTED,
+					radius: 1,
+					data: []
+				}
+				]
 			},
-			{
-				label: LABEL_DATA_IA,
-				fill: false,
-				backgroundColor: COLOR_INFECTED,
-				borderColor: COLOR_INFECTED,
-				radius: 1,
-				data: []
-			}
-			]
-		},
 
-		// Configuration options go here
-		options: {
-			scales: {
-				yAxes: [{
-					scaleLabel: {
-						display: true,
-						fontSize: 18,
-						labelString: "Nombre de cas"
-					}
-				}],
-				xAxes: [{
-					scaleLabel: {
-						display: true,
-						fontSize: 18,
-						labelString: "Temps"
-					}
-				}]
+			// Configuration options go here
+			options: {
+				scales: {
+					yAxes: [{
+						scaleLabel: {
+							display: true,
+							fontSize: 18,
+							labelString: "Nombre de cas"
+						}
+					}],
+					xAxes: [{
+						scaleLabel: {
+							display: true,
+							fontSize: 18,
+							labelString: "Temps"
+						}
+					}]
+				}
 			}
-		}
-	});
+		});
+	}
 
 
 	/* particles.js variables with default values */
@@ -478,43 +481,45 @@ var pJS = function(tag_id, params){
 		}
 
 		// Initialize the chart
-		var dataMap = new Map();
-		dataMap.set(LABEL_DATA_S, pJS.fn.netlogo.nb_S() );
-		dataMap.set(LABEL_DATA_IA, pJS.fn.netlogo.nb_Ir() );
+		if(with_chart) {
+			var dataMap = new Map();
+			dataMap.set(LABEL_DATA_S, pJS.fn.netlogo.nb_S() );
+			dataMap.set(LABEL_DATA_IA, pJS.fn.netlogo.nb_Ir() );
 
-		if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
-			// Simulation 2C : S + Ia + Ic
+			if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
+				// Simulation 2C : S + Ia + Ic
 
-			var datasetIC = {
-				label: LABEL_DATA_IC,
-				fill: false,
-				backgroundColor: COLOR_INFECTED_FREE_RIDER,
-				borderColor: COLOR_INFECTED_FREE_RIDER,
-				radius: 1,
-				data: []
-			};
-			pJS.chart.el.data.datasets.push(datasetIC);
+				var datasetIC = {
+					label: LABEL_DATA_IC,
+					fill: false,
+					backgroundColor: COLOR_INFECTED_FREE_RIDER,
+					borderColor: COLOR_INFECTED_FREE_RIDER,
+					radius: 1,
+					data: []
+				};
+				pJS.chart.el.data.datasets.push(datasetIC);
 
-			dataMap.set(LABEL_DATA_IC, pJS.fn.netlogo.nb_Ifr());
-		} else if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
-			// Simulation 3C : S + Ia + Ib
+				dataMap.set(LABEL_DATA_IC, pJS.fn.netlogo.nb_Ifr());
+			} else if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
+				// Simulation 3C : S + Ia + Ib
 
-			var datasetIB = {
-						label: LABEL_DATA_IB,
-						fill: false,
-						backgroundColor: COLOR_INFECTED_NO_SYMPTOM,
-						borderColor: COLOR_INFECTED_NO_SYMPTOM,
-						radius: 1,
-						data: []
-					};
-			pJS.chart.el.data.datasets.push(datasetIB);
+				var datasetIB = {
+							label: LABEL_DATA_IB,
+							fill: false,
+							backgroundColor: COLOR_INFECTED_NO_SYMPTOM,
+							borderColor: COLOR_INFECTED_NO_SYMPTOM,
+							radius: 1,
+							data: []
+						};
+				pJS.chart.el.data.datasets.push(datasetIB);
 
-			dataMap.set(LABEL_DATA_IB, pJS.fn.netlogo.nb_Inr());
-		} else {
-			pJS.chart.el.data.datasets = pJS.chart.el.data.datasets.filter(e => (e.label != LABEL_DATA_IB) && (e.label != LABEL_DATA_IC));
+				dataMap.set(LABEL_DATA_IB, pJS.fn.netlogo.nb_Inr());
+			} else {
+				pJS.chart.el.data.datasets = pJS.chart.el.data.datasets.filter(e => (e.label != LABEL_DATA_IB) && (e.label != LABEL_DATA_IC));
+			}
+
+			addData(pJS.chart.el, pJS.simulation.tick, dataMap);
 		}
-
-		addData(pJS.chart.el, pJS.simulation.tick, dataMap);
 	}
 
 
@@ -591,20 +596,21 @@ var pJS = function(tag_id, params){
 		pJS.simulation.tick++;
 
 		// TODO : à mettre dans le draw ???
-		var dataMap = new Map();
-		// all scenario : S + Ia
-		dataMap.set(LABEL_DATA_S, pJS.fn.netlogo.nb_S() );
-		dataMap.set(LABEL_DATA_IA, pJS.fn.netlogo.nb_Ir());
+		if(with_chart) {
+			var dataMap = new Map();
+			// all scenario : S + Ia
+			dataMap.set(LABEL_DATA_S, pJS.fn.netlogo.nb_S() );
+			dataMap.set(LABEL_DATA_IA, pJS.fn.netlogo.nb_Ir());
 
-		if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
-			// Simulation 2C : S + Ia + Ic
-			dataMap.set(LABEL_DATA_IC, pJS.fn.netlogo.nb_Ifr());
-		} else if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
-			// Simulation 3C : S + Ia + Ib
-			dataMap.set(LABEL_DATA_IB, pJS.fn.netlogo.nb_Inr());
+			if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
+				// Simulation 2C : S + Ia + Ic
+				dataMap.set(LABEL_DATA_IC, pJS.fn.netlogo.nb_Ifr());
+			} else if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
+				// Simulation 3C : S + Ia + Ib
+				dataMap.set(LABEL_DATA_IB, pJS.fn.netlogo.nb_Inr());
+			}
+			addData(pJS.chart.el, pJS.simulation.tick, dataMap);
 		}
-		addData(pJS.chart.el, pJS.simulation.tick, dataMap);
-
 	};
 
 	//////////////////////
@@ -1048,7 +1054,9 @@ var pJS = function(tag_id, params){
 	pJS.fn.vendors.destroypJS = function(){
 		cancelAnimationFrame(pJS.fn.drawAnimFrame);
 		canvas_el.remove();
-		chart_el.remove();
+		if(with_chart) {
+			chart_el.remove();
+		}
 		pJSDom.splice( pJSDom.indexOf(pJS), 1);
 	};
 
@@ -1283,7 +1291,7 @@ function any(array) {
 
 window.pJSDom = [];
 
-window.particlesJS = function(tag_id, params){
+window.particlesJS = function(tag_id, with_chart, params){
 
 	//console.log(params);
 
@@ -1301,7 +1309,6 @@ window.particlesJS = function(tag_id, params){
 	/* pJS elements */
 	var pJS_tag = document.getElementById(tag_id),
 	pJS_canvas_class = 'particles-js-canvas-el',
-	pJS_canvas_chart_class = 'particles-js-canvas-el-chart',
 	exist_canvas = pJS_tag.getElementsByClassName(pJS_canvas_class);
 
 	/* remove canvas if exists into the pJS target tag */
@@ -1315,20 +1322,19 @@ window.particlesJS = function(tag_id, params){
 	var canvas_el = document.createElement('canvas');
 	canvas_el.className = pJS_canvas_class;
 
-	/* set size canvas */
-	//canvas_el.style.width = "100%";
-	//canvas_el.style.height = "100%";
-
-	var chart_el = document.createElement('canvas');
-	chart_el.className = pJS_canvas_chart_class;
-
 	/* append canvas */
 	var canvas = document.getElementById(tag_id).appendChild(canvas_el);
-	var canvas = document.getElementById(tag_id).appendChild(chart_el);
+
+	if(with_chart) {
+		var pJS_canvas_chart_class = 'particles-js-canvas-el-chart';
+		var chart_el = document.createElement('canvas');
+		chart_el.className = pJS_canvas_chart_class;
+		canvas = document.getElementById(tag_id).appendChild(chart_el);
+	}
 
 	/* launch particle.js */
 	if(canvas != null){
-		pJSDom.push(new pJS(tag_id, params));
+		pJSDom.push(new pJS(tag_id, with_chart, params));
 	}
 
 };
