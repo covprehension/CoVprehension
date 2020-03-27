@@ -1,0 +1,40 @@
+---
+layout: default
+title: Le simulateur
+description: Nous vous proposons un outils de modélisation avec des scénarios présentés dans les questions pour aller plus loin dans la compréhension.
+---
+
+<style>
+	html, body, iframe { height: 100%; }
+	iframe {
+		width: 100%;
+	    border: none;
+	}
+	header.masthead .page-heading, header.masthead .post-heading, header.masthead .site-heading {
+    	padding: 100px 0;
+	}
+</style>
+
+<!-- Page Header -->
+{% if page.background %}
+<header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1567427018141-0584cfcbf1b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9')">
+  {% else %}
+  <header class="masthead">
+    {% endif %}
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>{{ page.title }}</h1>
+            {% if page.description %}
+            <span class="subheading">{{ page.description }}</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+<iframe src='{{ "simulations/CoVprehension.html" | relative_url }}'></iframe>
