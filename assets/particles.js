@@ -108,6 +108,7 @@ var pJS = function(tag_id, params){
 			walking_angle: 50,
 			transmission_distance: 40,
 			distanciation_distance: 25,
+			Respect_Distanciation: 90,
 			probability_transmission: 0.3,
 			probability_transmission_unreported_infected: 1.0,
 			rate_unreported_infections: 50,
@@ -245,6 +246,7 @@ var pJS = function(tag_id, params){
 		// Attributes of particles
 		// radius
 		// color
+		// shape
 		// opacity
 		// x
 		// y
@@ -255,7 +257,7 @@ var pJS = function(tag_id, params){
 
 		/* infectious state */
 		/* 0 = sain     */
-		/* 2 = infecté  */
+		/* 1 = infecté  */
 		this.setEpidemicState(0);
 
 		this.respect_rules = true;
@@ -296,34 +298,8 @@ var pJS = function(tag_id, params){
 			}
 		}
 
-		this.vx_i = this.vx;
-		this.vy_i = this.vy;
-
-		/* if shape is image */
-		var shape_type = pJS.particles.shape.type;
-		if(typeof(shape_type) == 'object'){
-			if(shape_type instanceof Array){
-				var shape_selected = shape_type[Math.floor(Math.random() * shape_type.length)];
-				this.shape = shape_selected;
-			}
-		}else{
-			this.shape = shape_type;
-		}
-
-		if(this.shape == 'image'){
-			var sh = pJS.particles.shape;
-			this.img = {
-				src: sh.image.src,
-				ratio: sh.image.width / sh.image.height
-			}
-			if(!this.img.ratio) this.img.ratio = 1;
-			if(pJS.tmp.img_type == 'svg' && pJS.tmp.source_svg != undefined){
-				pJS.fn.vendors.createSvgImg(this);
-				if(pJS.tmp.pushing){
-					this.img.loaded = false;
-				}
-			}
-		}
+		/* shape */
+		this.shape = 'circle';
 	}
 
 	pJS.fn.particle.prototype.setColor = function(col) {
@@ -363,7 +339,7 @@ var pJS = function(tag_id, params){
 			pJS.canvas.ctx.arc(p.x, p.y, radius, 0, Math.PI * 2, false);
 			break;
 
-			case 'edge':
+			case 'square':
 			pJS.canvas.ctx.rect(p.x-radius, p.y-radius, radius*2, radius*2);
 			break;
 
@@ -470,22 +446,41 @@ var pJS = function(tag_id, params){
 	}
 
 
-//to set_respect_rules
-//  if SIMULATIONS = "Simulation 2c : Le maillon faible"
-//
-//  [
-//    ask citizens with [epidemic-state = 1] [set respect-rules? 1 set shape "square" set size 1.5]
-//  ask n-of ((population-size - round (%Respect_Distanciation * population-size / 100)) - nb-infected-initialisation) citizens with [epidemic-state = 0]
-//    [set respect-rules? 1 set shape "square" set size 1.5]
-//  ]
-//end
+/*
+to set_respect_rules
+  if SIMULATIONS = "Simulation 2c : Le maillon faible"
+  [
+    ask citizens with [epidemic-state = 1] [
+      set respect-rules? 1
+      set shape "square"
+      set size 1.5
+    ]
+    ask n-of ((population-size - round (%Respect_Distanciation * population-size / 100)) - nb-infected-initialisation) citizens with [epidemic-state = 0]
+    [
+      set respect-rules? 1
+      set shape "square"
+      set size 1.5
+    ]
+  ]
+end
+*/
 	pJS.fn.netlogo.set_respect_rules = function() {
-		if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
+//		if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
 			var infected_particles = pJS.particles.array.filter(p => p.epidemic_state == 1)
 			for(var i = 0; i < infected_particles.length ; i++) {
 				infected_particles[i].respect_rules = false;
+				infected_particles[i].shape = 'square';
 			}
-		}
+
+			var nb_free_riders = pJS.particles.array.length
+									- Math.round(pJS.simulation.Respect_Distanciation * pJS.particles.array.length / 100)
+									- pJS.simulation.nb_infected_initialisation;
+			var free_riders = pJS.fn.netlogo.n_of(nb_free_riders, pJS.particles.array.filter(p => p.epidemic_state == 0));
+			for(var j = 0; j < free_riders.length ; j++) {
+				free_riders[j].respect_rules = false;
+				free_riders[j].shape = 'square';
+			}
+//		}
 	}
 
 
