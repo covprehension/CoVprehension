@@ -108,14 +108,14 @@ var pJS = function(tag_id, params){
 			tick: 0,
 			nb_infected_initialisation: 1,
 			walking_angle: 50,
-			transmission_distance: 15,   // 1
-			distanciation_distance: 75,  // 5
+			transmission_distance: 15,							// 1
+			distanciation_distance: 75,							// 5
 			Respect_Distanciation: 90,
-			infected_avoidance_distance: 50,  // 2
-			probability_transmission: 0.3,
+			infected_avoidance_distance: 50,					// 2
+			probability_transmission: 1,
 			probability_transmission_unreported_infected: 1.0,
 			rate_unreported_infections: 50,
-			speed: 3,
+			speed: 3,											// 0.5
 			number_particles: 0,
 			scenario: '',
 			isPlay: true
@@ -416,11 +416,13 @@ var pJS = function(tag_id, params){
 		| NetLogo
 	*/
 
-
+	//////////////////////
+	// Check for 260320 //
+	//////////////////////
 	pJS.fn.netlogo.setup_globals = function() {
 		if( (pJS.simulation.scenario == LABEL_SIMULATION_1B)
-			|| (pJS.simulation.scenario == LABEL_SIMULATION_2B)
-			|| (pJS.simulation.scenario == LABEL_SIMULATION_3C) ) {
+				|| (pJS.simulation.scenario == LABEL_SIMULATION_2B)
+				|| (pJS.simulation.scenario == LABEL_SIMULATION_3C) ) {
 			pJS.simulation.number_particles = 500;
 		} else if( (pJS.simulation.scenario == LABEL_SIMULATION_3B) ) {
 			pJS.simulation.number_particles = 400;
@@ -438,27 +440,28 @@ var pJS = function(tag_id, params){
 		if (pJS.simulation.scenario == LABEL_SIMULATION_3C) {
 			pJS.simulation.rate_unreported_infections = 50;
 			pJS.simulation.probability_transmission_unreported_infected = 1;
-			pJS.simulation.wall = 50;
+			pJS.simulation.wall = 5;
 		}
 
+		pJS.simulation.wall = 3;
+		// set probability-transmission 1
+  		// set transmission-distance 1
 		if(pJS.simulation.scenario == LABEL_SIMULATION_3B) {
 			pJS.simulation.nb_infected_initialisation = 20;
 		} else {
 			pJS.simulation.nb_infected_initialisation = 1;
 		}
-
-	  // pJS.simulation.probability_transmission = 1;
-	  // pJS.simulation.transmission_distance =
-	  // set probability-transmission 1
-	  // set transmission-distance 1
-	  // set nb-infected-initialisation 1
-	  // set distanciation-distance 3
-	  // set %Respect_Distanciation 90
-	  // set infected-avoidance-distance 5
-	  // set speed 0.5
-	  // set transparency 145
+		//  set distanciation-distance 5
+  		// set %Respect_Distanciation 90
+  		// set infected-avoidance-distance 2
+  		// set speed 0.5
+  		// set transparency 145
 	}
 
+
+	//////////////////////
+	// Check for 260320 //
+	//////////////////////
 	pJS.fn.netlogo.setup = function() {
 		pJS.fn.netlogo.setup_globals();
 
@@ -466,7 +469,7 @@ var pJS = function(tag_id, params){
 			pJS.particles.array.push(new pJS.fn.particle(pJS.particles.color, pJS.particles.opacity.value));
 		}
 
-		/* init a random infected */
+		/* init infected particles */
 		pJS.fn.netlogo.set_infected_initialisation();
 
 		if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
@@ -494,30 +497,17 @@ var pJS = function(tag_id, params){
 	}
 
 
-/*
-to set_respect_rules
-  if SIMULATIONS = "Simulation 2c : Le maillon faible"
-  [
-    ask citizens with [epidemic-state = 1] [
-      set respect-rules? 1
-      set shape "square"
-      set size 1.5
-    ]
-    ask n-of ((population-size - round (%Respect_Distanciation * population-size / 100)) - nb-infected-initialisation) citizens with [epidemic-state = 0]
-    [
-      set respect-rules? 1
-      set shape "square"
-      set size 1.5
-    ]
-  ]
-end
-*/
+	//////////////////////
+	// Check for 260320 //
+	//////////////////////
 	pJS.fn.netlogo.set_respect_rules = function() {
-//		if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
+		if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
 			var infected_particles = pJS.particles.array.filter(p => p.epidemic_state == 1)
+
 			for(var i = 0; i < infected_particles.length ; i++) {
 				infected_particles[i].respect_rules = false;
 				infected_particles[i].shape = 'square';
+				// set size 1.5
 			}
 
 			var nb_free_riders = pJS.particles.array.length
@@ -527,74 +517,78 @@ end
 			for(var j = 0; j < free_riders.length ; j++) {
 				free_riders[j].respect_rules = false;
 				free_riders[j].shape = 'square';
+				// set size 1.5
 			}
-//		}
+		}
 	}
 
 
-	// 250320
-	// to set_infected_initialisation
-	//  ask n-of nb-infected-initialisation citizens
-	// [
-	//   set epidemic-state 1
-	//    show_epidemic_state
-	//  ]
-	//  if SIMULATION = "Simulation 3c : L’arbre qui cache la forêt"
-	//  [ask one-of citizens with[epidemic-state = 0]
-	//    [set epidemic-state 2 show_epidemic_state]]
-	// end
+	//////////////////////
+	// Check for 260320 //
+	//////////////////////
 	pJS.fn.netlogo.set_infected_initialisation = function() {
 	 	var n_particles = pJS.fn.netlogo.n_of(pJS.simulation.nb_infected_initialisation, pJS.particles.array);
 	 	for(var i = 0; i < n_particles.length; i++) {
 	 		var p = n_particles[i];
 	 		p.setEpidemicState(1);
+	 		// show_epidemic_state
 	 	}
 	 	if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
 	 		var one_particle = pJS.fn.netlogo.one_of(pJS.particles.array.filter(p => p.epidemic_state == 0));
 	 		one_particle.setEpidemicState(2)
+	 		// show_epidemic_state
 	 	}
 	}
 
+	////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////
+	//                                  GO                                //
+	////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////
 
-//
-// NETLOGO 260320
-//
-/*
-to avoid_infected
-  ask citizens
-  [
-    let target min-one-of other citizens with [epidemic-state = 1] in-radius infected-avoidance-distance [distance myself]
-    ifelse epidemic-state != 1 and is-agent? target
-    [
-      face target
-      rt 180
-      avoid_walls
-    ]
-    [
-      set heading heading + random walking-angle - random walking-angle
-      avoid_walls
-    ]
-    ifelse epidemic-state != 1
-    [
-      fd speed
-    ]
-    [
-      ifelse  SIMULATIONS = "Simulation 3c : L’arbre qui cache la forêt"
-      [
-        quarantine_infected
-      ]
-      [
-        fd speed / 2
-      ]
-    ]
-    if epidemic-state = 0
-    [
-      get_virus
-    ]
-  ]
-end
-*/
+	//////////////////////
+	// Check for 260320 //
+	//////////////////////
+	pJS.fn.particlesUpdate = function(){
+		// if nb_S = 0 [show_asymptotic_cases stop]
+		//update_previous_epidemic_counts
 
+		if( (pJS.simulation.scenario == LABEL_SIMULATION_2A)
+				|| (pJS.simulation.scenario == LABEL_SIMULATION_2B)
+				|| (pJS.simulation.scenario == LABEL_SIMULATION_2C) ) {
+			pJS.fn.netlogo.move_distanciation_citizens();
+		} else if( (pJS.simulation.scenario == LABEL_SIMULATION_3A)
+				|| (pJS.simulation.scenario == LABEL_SIMULATION_3B)
+				|| (pJS.simulation.scenario == LABEL_SIMULATION_3C) ) {
+			pJS.fn.netlogo.avoid_infected();
+		} else {
+			pJS.fn.netlogo.move_randomly_citizens();
+		}
+
+		// update_current_epidemic_counts
+
+		pJS.simulation.tick++;
+
+		// TODO : à mettre dans le draw ???
+		var dataMap = new Map();
+		// all scenario : S + Ia
+		dataMap.set(LABEL_DATA_S, pJS.fn.netlogo.nb_S() );
+		dataMap.set(LABEL_DATA_IA, pJS.fn.netlogo.nb_Ir());
+
+		if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
+			// Simulation 2C : S + Ia + Ic
+			dataMap.set(LABEL_DATA_IC, pJS.fn.netlogo.nb_Ifr());
+		} else if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
+			// Simulation 3C : S + Ia + Ib
+			dataMap.set(LABEL_DATA_IB, pJS.fn.netlogo.nb_Inr());
+		}
+		addData(pJS.chart.el, pJS.simulation.tick, dataMap);
+
+	};
+
+	//////////////////////
+	// Check for 260320 //
+	//////////////////////
 	pJS.fn.netlogo.avoid_infected = function() {
 		for(var i = 0; i < pJS.particles.array.length; i++){
 			var p = pJS.particles.array[i];
@@ -627,32 +621,10 @@ end
 		}
 	}
 
-	pJS.fn.netlogo.closest = function(p, array) {
-		var target;
-		if( any(array ) ) {
-			var min_distance = Infinity;
-			for(var k = 0; k < array.length; k++) {
-				var dist = distance(p,array[k]);
-				if(dist < min_distance) {
-					min_distance = dist;
-					target = array[k];
-				}
-			}
-		}
-		return target;
-	}
 
-/*
-to quarantine_infected
-  if quarantined = 0
-  [
-    set shape "square"
-    move-to min-one-of patches with  [not any? citizens-here] [pxcor]
-    set size 1
-    set quarantined 1
-  ]
-end
-*/
+	//////////////////////
+	// Check for 260320 //
+	//////////////////////
 	pJS.fn.particle.prototype.quarantine_infected = function() {
 		if(!this.quarantined) {
 			this.shape = "square";
@@ -670,37 +642,13 @@ end
 	}
 
 
-/*to move_distanciation_citizens
-  ask citizens
-  [
-    ifelse respect-rules? = 0
-  [ifelse any? other citizens in-radius distanciation-distance
-  [
-    let target min-one-of other citizens
-    in-radius distanciation-distance
-    [distance myself]
-    face target
-    rt 180
-       avoid_walls
-    fd speed
-    ]
-      [set heading heading + random walking-angle - random walking-angle
-      avoid_walls
-   fd speed
-    ]]
-
-    [set heading heading + random walking-angle - random walking-angle
-      avoid_walls
-   fd speed
-    ]
-    if epidemic-state = 0
-    [get_virus]
-  ]
-end
-*/
+	//////////////////////
+	// Check for 260320 //
+	//////////////////////
 	pJS.fn.netlogo.move_distanciation_citizens = function() {
 		for(var i = 0; i < pJS.particles.array.length; i++){
 			var p = pJS.particles.array[i];
+
 			if(p.respect_rules) {
 			// ifelse any? other citizens in-radius distanciation-distance
 				var particule_at_distanciation_dist = p.in_radius(pJS.particles.array, pJS.simulation.distanciation_distance);
@@ -730,20 +678,10 @@ end
 		}
 	}
 
-	/// 260320
-/*
-to move_randomly_citizens
-  ask citizens
-  [
-   set heading heading + random walking-angle - random walking-angle
-    avoid_walls
-   fd speed
-    if epidemic-state = 0
-    [get_virus]
-  ]
-end
-*/
 
+	//////////////////////
+	// Check for 260320 //
+	//////////////////////
 	pJS.fn.netlogo.move_randomly_citizens = function() {
 		for(var i = 0; i < pJS.particles.array.length; i++){
 			var p = pJS.particles.array[i];
@@ -758,34 +696,26 @@ end
 		}
 	}
 
-	//to get_virus
-		 /// 250320
-	/*
-	to get_virus
 
-			if any? other citizens in-radius transmission-distance with [epidemic-state = 1 or epidemic-state = 2]
-			[
+	//////////////////////
+	// Check for 260320 //
+	//////////////////////
+	pJS.fn.particle.prototype.avoid_walls = function() {
+		next_x = this.x + pJS.simulation.wall * pJS.simulation.speed*cosDegre(this.heading);
+		next_y = this.y + pJS.simulation.wall * pJS.simulation.speed*sinDegre(this.heading);
 
-				let target one-of other citizens in-radius transmission-distance with [epidemic-state = 1 or epidemic-state = 2]
-				if random-float 1 < probability-transmission
-				[
-				if [epidemic-state] of target = 1 or ([epidemic-state] of target = 2 and random-float 1 < Proba-transmission-unreported-infected)
-			 [ ask target [set nb-other-infected nb-other-infected + 1]
-				ifelse SIMULATION = "Simulation 3c : L’arbre qui cache la forêt"
-				[ifelse random 100 > %Unreported-infections
-				[set epidemic-state 1]
-				[set epidemic-state 2]
-				]
-				[set epidemic-state 1]
+		if((next_x > pJS.canvas.w) || (next_x < 0)) {
+			this.heading = (180 - this.heading) % 360;
+		}
+		if((next_y > pJS.canvas.h) || (next_y < 0)) {
+			this.heading = (360 - this.heading) % 360;
+		}
+	}
 
-			]
-	show_epidemic_state
-			set infection-date ticks
-		]
-			]
-	end
-	*/
 
+	//////////////////////
+	// Check for 260320 //
+	//////////////////////
 	pJS.fn.particle.prototype.get_virus = function() {
 		var infectious_neighbours = pJS.particles.array
 										.filter(p2 => (distance(this,p2) <= pJS.simulation.transmission_distance) )
@@ -793,7 +723,6 @@ end
 
 		if( infectious_neighbours.length != 0) {
 			target = pJS.fn.netlogo.one_of(infectious_neighbours);
-//			if() {
 			if(   ((target.epidemic_state == 1) && (Math.random(1.0) < pJS.simulation.probability_transmission))
 				||((target.epidemic_state == 2) && (Math.random(1.0) < pJS.simulation.probability_transmission_unreported_infected)) ) {
 				target.nb_other_infected = target.nb_other_infecteds + 1;
@@ -807,12 +736,28 @@ end
 					}
 				} else {
 					this.setEpidemicState(1);
+        			// ask target [set nb-other-infected nb-other-infected + 1]
 				}
-
 			}
-//			}
+		}
+
+		// show_epidemic_state
+    	// set infection-date ticks
+	}
+
+
+	pJS.fn.particle.prototype.setEpidemicState = function(new_state) {
+		this.epidemic_state = new_state;
+		if(this.epidemic_state == 0) {
+			this.setColor(COLOR_S);
+		} else if(this.epidemic_state == 1) {
+			this.setColor(COLOR_INFECTED);
+		} else if(this.epidemic_state == 2) {
+			this.setColor(COLOR_INFECTED_NO_SYMPTOM);
 		}
 	}
+
+
 
 	pJS.fn.particle.prototype.fd = function(sp) {
 		this.x = this.x + sp*cosDegre(this.heading);
@@ -827,16 +772,22 @@ end
 		this.heading = (this.heading - angle) % 360;
 	}
 
-	pJS.fn.particle.prototype.setEpidemicState = function(new_state) {
-		this.epidemic_state = new_state;
-		if(this.epidemic_state == 0) {
-			this.setColor(COLOR_S);
-		} else if(this.epidemic_state == 1) {
-			this.setColor(COLOR_INFECTED);
-		} else if(this.epidemic_state == 2) {
-			this.setColor(COLOR_INFECTED_NO_SYMPTOM);
+	pJS.fn.netlogo.closest = function(p, array) {
+		var target;
+		if( any(array ) ) {
+			var min_distance = Infinity;
+			for(var k = 0; k < array.length; k++) {
+				var dist = distance(p,array[k]);
+				if(dist < min_distance) {
+					min_distance = dist;
+					target = array[k];
+				}
+			}
 		}
+		return target;
 	}
+
+
 
 	pJS.fn.netlogo.one_of = function(arr) {
 		return arr[getRandomInt(arr.length)];
@@ -878,92 +829,10 @@ end
 		return array;
 	}
 
-  //Used like so
-	/*  var arr = [2, 11, 37, 42];
-  var arrSple = arr.concat();
-  console.log(arr);
-  console.log(arrSple);
-  console.log(pJS.fn.netlogo.n_of(3,arr));
-  console.log(arr);*/
 
-	//to avoid_walls
-	//  let v 1
-	// if SIMULATION = "Simulation 3c : L’arbre qui cache la forêt" [set v 6]
-	//  if abs [pxcor] of patch-ahead v = max-pxcor
-	//    [ set heading (- heading) ]
-	//  if abs [pycor] of patch-ahead v = max-pycor
-	//    [ set heading (180 - heading) ]
-	//end
-	pJS.fn.particle.prototype.avoid_walls = function() {
-		v = 10;
-
-		next_x = this.x + v*pJS.simulation.speed*cosDegre(this.heading);
-		next_y = this.y + v*pJS.simulation.speed*sinDegre(this.heading);
-
-		if((next_x > pJS.canvas.w) || (next_x < 0)) {
-			this.heading = (180 - this.heading) % 360;
-		}
-		if((next_y > pJS.canvas.h) || (next_y < 0)) {
-			this.heading = (360 - this.heading) % 360;
-		}
-	}
-
-	//to go
-	//  if nb_S = 0 [show_asymptotic_cases stop]
-	//  update_previous_epidemic_counts
-	//  ifelse
-	//  SIMULATION = "Simulation 2a : Gardons nos distances !"
-	//  or
-	//  SIMULATION = "Simulation 2b : Bain de foule"
-	//  or
-	//  SIMULATION = "Simulation 2c : Le maillon faible"
-	//  [move_distanciation_citizens]
-	//
-	//  [ifelse
-	//  SIMULATION = "Simulation 3a : Courage, fuyons !"
-	//  or
-	//  SIMULATION = "Simulation 3b : Un malade sur la piste de danse"
-	//  or
-	//  SIMULATION = "Simulation 3c : L’arbre qui cache la forêt"
-	//  [avoid_infected]
-	//    [move_randomly_citizens]]
-	//  get_virus
-	//  update_current_epidemic_counts
-	//  tick
-	//end
-
-
-	pJS.fn.particlesUpdate = function(){
-		if( (pJS.simulation.scenario == LABEL_SIMULATION_2A)
-				|| (pJS.simulation.scenario == LABEL_SIMULATION_2B)
-				|| (pJS.simulation.scenario == LABEL_SIMULATION_2C) ) {
-			pJS.fn.netlogo.move_distanciation_citizens();
-		} else if( (pJS.simulation.scenario == LABEL_SIMULATION_3A)
-				|| (pJS.simulation.scenario == LABEL_SIMULATION_3B)
-				|| (pJS.simulation.scenario == LABEL_SIMULATION_3C) ) {
-			pJS.fn.netlogo.avoid_infected();
-		} else {
-			pJS.fn.netlogo.move_randomly_citizens();
-		}
-
-		pJS.simulation.tick++;
-
-		// TODO : à mettre dans le draw ???
-		var dataMap = new Map();
-		// all scenario : S + Ia
-		dataMap.set(LABEL_DATA_S, pJS.fn.netlogo.nb_S() );
-		dataMap.set(LABEL_DATA_IA, pJS.fn.netlogo.nb_Ir());
-
-		if(pJS.simulation.scenario == LABEL_SIMULATION_2C) {
-			// Simulation 2C : S + Ia + Ic
-			dataMap.set(LABEL_DATA_IC, pJS.fn.netlogo.nb_Ifr());
-		} else if(pJS.simulation.scenario == LABEL_SIMULATION_3C) {
-			// Simulation 3C : S + Ia + Ib
-			dataMap.set(LABEL_DATA_IB, pJS.fn.netlogo.nb_Inr());
-		}
-		addData(pJS.chart.el, pJS.simulation.tick, dataMap);
-
-	};
+	////////////////////////////////////
+	// Reporters
+	////////////////////////////////////
 
 	pJS.fn.netlogo.nb_S = function(){
 		return pJS.particles.array.filter(x => x.epidemic_state == 0).length;
@@ -984,6 +853,12 @@ end
 	pJS.fn.netlogo.nb_Ifr = function() {
 		return pJS.particles.array.filter(x => (!x.respect_rules) && (x.epidemic_state == 1)).length;
 	}
+
+	pJS.fn.netlogo.nb_R = function() {
+		return pJS.particles.array.filter(x => x.epidemic_state == 3).length;
+	}
+
+
 
 	function addData(chart, label, data) {
 		chart.data.labels.push(label);
