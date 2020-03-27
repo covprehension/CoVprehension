@@ -20,10 +20,10 @@ jobs:
         #with:
           # Version range or exact version of a Ruby version to use.
           #version: # optional, default is >= 2.4
-
-      - name: [SIMULATOR] Center simulator in page view
+      
+      - name: SIMULATOR - Center simulator in page view
         run: sed -i 's/\<body\ style\=\"/\<body\ style\=\"text-align\:\ center\;/g' simulations/CoVprehension.html
-
+      
       - name: Install jenkyll plugins
         run: bundle install
         env:
