@@ -20,6 +20,12 @@ background: '/img/bg-ressources.jpg'
 - [Sciences2](https://www.lemonde.fr/blog/huet/)
 > Le blog scientifique de Sylvestre Huet, du journal Le Monde, avec plusieurs articles sur le COVID-19.
 
+- [Non, une épidémie mortelle ne « nettoie » pas la Terre tous les cent ans](https://www.lemonde.fr/les-decodeurs/article/2020/03/25/non-une-epidemie-mortelle-ne-nettoie-pas-la-terre-tous-les-cent-ans_6034414_4355770.html)
+> Une interview par Le Monde d'Emmanuel Eliot, membre du collectif CoVprehension
+
+- [Covid-19 : comment sont conçus les modèles des épidémies ?](https://lejournal.cnrs.fr/articles/covid-19-comment-sont-concus-les-modeles-des-epidemies)
+> Une interview par Le Journal du CNRS d'Eric Daudé, membre du collectif CoVprehension
+
 - [Coronavirus : sur le front scientifique](http://www.cnrs.fr/fr/cnrsinfo/coronavirus-sur-le-front-scientifique)
 > Le site du CNRS dédié au COVID-19.
 
