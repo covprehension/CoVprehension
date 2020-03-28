@@ -114,14 +114,14 @@ var pJS = function(tag_id, with_chart, params){
 			tick: 0,
 			nb_infected_initialisation: 1,
 			walking_angle: 50,
-			transmission_distance: 15,							// 1
+			transmission_distance: 20,							// 1
 			distanciation_distance: 75,							// 5
 			Respect_Distanciation: 90,
 			infected_avoidance_distance: 50,					// 2
 			probability_transmission: 1,
 			probability_transmission_unreported_infected: 1.0,
 			rate_unreported_infections: 50,
-			speed: 3,											// 0.5
+			speed: 10,											// 0.5
 			number_particles: 0,
 			scenario: '',
 			isPlay: true
@@ -132,16 +132,6 @@ var pJS = function(tag_id, with_chart, params){
 				density: {
 					enable: false,
 					value_area: 800
-				}
-			},
-			size: {
-				value: 5,
-				random: false,
-				anim: {
-					enable: false,
-					speed: 40,
-					size_min: 0.1,
-					sync: false
 				}
 			},
 			shape: {
@@ -166,6 +156,16 @@ var pJS = function(tag_id, with_chart, params){
 					enable: false,
 					speed: 2,
 					opacity_min: 0,
+					sync: false
+				}
+			},
+			size: {
+				value: 7.5,
+				random: false,
+				anim: {
+					enable: false,
+					speed: 20,
+					size_min: 0,
 					sync: false
 				}
 			},
@@ -267,8 +267,9 @@ var pJS = function(tag_id, with_chart, params){
 		this.nb_other_infected = 0;
 
 		/* size */
-		this.radius = pJS.canvas.w * 7.5 / 800;
+		// this.radius = pJS.particles.size.value;
 
+		this.radius = pJS.canvas.w * pJS.particles.size.value / 800;
 		//this.radius = (pJS.particles.size.random ? Math.random() : 1) * pJS.particles.size.value;
 		//if(pJS.particles.size.anim.enable){
 		//	this.size_status = false;
@@ -315,11 +316,11 @@ var pJS = function(tag_id, with_chart, params){
 	pJS.fn.particle.prototype.draw = function() {
 		var p = this;
 
-		if(p.radius_bubble != undefined){
-			var radius = p.radius_bubble;
-		}else{
+//		if(p.radius_bubble != undefined){
+//			var radius = p.radius_bubble;
+//		}else{
 			var radius = p.radius;
-		}
+//		}
 
 		if(p.opacity_bubble != undefined){
 			var opacity = p.opacity_bubble;
@@ -438,22 +439,20 @@ var pJS = function(tag_id, with_chart, params){
 		if (pJS.simulation.scenario == LABEL_SIMULATION_3C) {
 			pJS.simulation.rate_unreported_infections = 50;
 			pJS.simulation.probability_transmission_unreported_infected = 1;
-			pJS.simulation.wall = 5;
+			pJS.simulation.wall = 50 * pJS.canvas.w / 800;
 		}
 
-		pJS.simulation.wall = 3;
-		// set probability-transmission 1
-  		// set transmission-distance 1
 		if(pJS.simulation.scenario == LABEL_SIMULATION_3B) {
 			pJS.simulation.nb_infected_initialisation = 20;
 		} else {
 			pJS.simulation.nb_infected_initialisation = 1;
 		}
-		//  set distanciation-distance 5
-  		// set %Respect_Distanciation 90
-  		// set infected-avoidance-distance 2
-  		// set speed 0.5
-  		// set transparency 145
+
+		pJS.simulation.wall = 5 * pJS.canvas.w / 800;
+		pJS.simulation.transmission_distance = pJS.simulation.transmission_distance * pJS.canvas.w / 800;
+		pJS.simulation.infected_avoidance_distance = pJS.simulation.infected_avoidance_distance * pJS.canvas.w / 800;
+		pJS.simulation.distanciation_distance = pJS.simulation.distanciation_distance * pJS.canvas.w / 800;
+  		pJS.simulation.speed = pJS.simulation.speed * pJS.canvas.w / 800;
 	}
 
 
