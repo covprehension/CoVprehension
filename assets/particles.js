@@ -124,7 +124,7 @@ var pJS = function(tag_id, with_chart, params){
 			speed: 10,											// 0.5
 			number_particles: 0,
 			scenario: '',
-			isPlay: true
+			isPlay: false
 		},
 		particles: {
 			number: {
@@ -914,7 +914,7 @@ var pJS = function(tag_id, with_chart, params){
 
 		if (data.get(LABEL_DATA_IA) == pJS.simulation.number_particles || data.get(LABEL_DATA_S) == 0){
 			pJS.fn.vendors.draw = () => {}
-			restartButton(tag_id, params);
+//			restartButton(tag_id, params);
 		}
 	}
 
@@ -923,16 +923,16 @@ var pJS = function(tag_id, with_chart, params){
 	| CUSTOM Function
 	*/
 	pJS.fn.custom.pause = function() {
-		if (pJS.isPlay != false){
-			pJS.isPlay = false;
+		if (pJS.simulation.isPlay != false){
+			pJS.simulation.isPlay = false;
 
 			pJS._tempFn = pJS.fn.vendors.draw;
 			pJS.fn.vendors.draw = () => {}
 		}
 	}
 	pJS.fn.custom.play = function() {
-		if (pJS.isPlay != true){
-			pJS.isPlay = true;
+		if (pJS.simulation.isPlay != true){
+			pJS.simulation.isPlay = true;
 
 			if(pJS._tempFn != undefined){
 				pJS.fn.vendors.draw = pJS._tempFn;
@@ -1328,6 +1328,7 @@ window.particlesJS = function(tag_id, with_chart, params){
 
 	/* pJS elements */
 	var pJS_tag = document.getElementById(tag_id),
+
 	pJS_canvas_class = 'particles-js-canvas-el',
 	exist_canvas = pJS_tag.getElementsByClassName(pJS_canvas_class);
 
@@ -1337,6 +1338,11 @@ window.particlesJS = function(tag_id, with_chart, params){
 			pJS_tag.removeChild(exist_canvas[0]);
 		}
 	}
+
+	/* create relaunch button */
+	$( "#"+tag_id ).append( '<a class="btn btn-info" style="color: white;" onclick=\'restartSimulation("' + tag_id + '", ' + with_chart + ', ' + JSON.stringify(params) + ')\'><i class="fas fa-redo-alt"></i> Recommencer la simulation</a>' );
+	$( "#"+tag_id ).append( '<a class="btn btn-info" style="color: white;" onclick=\'playPause("' + tag_id + '")\'><i class="fas fa-redo-alt"></i> Play/Pause</a>' );
+
 
 	/* create canvas element */
 	var canvas_el = document.createElement('canvas');

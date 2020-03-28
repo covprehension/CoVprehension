@@ -37,14 +37,15 @@ $(window).scroll(function(){
 	+=======
 	| Restart
 */
-function restartButton(tag_id, params){
-	if ( $( "#"+tag_id ).find("a.btn").length == 0 ){
-		$( "#"+tag_id ).append( '<a class="btn btn-info" style="color: white;" onclick=\'restartSimulation("' + tag_id + '", ' + JSON.stringify(params) + ')\'><i class="fas fa-redo-alt"></i> Recommencer la simulation</a>' );
-	}else{
-		console.error( "Already a tag in #" + tag_id );
-	}
-}
-function restartSimulation(tag_id, params){
+//function restartButton(tag_id, params){
+//	if ( $( "#"+tag_id ).find("a.btn").length == 0 ){
+//		$( "#"+tag_id ).append( '<a class="btn btn-info" style="color: white;" onclick=\'restartSimulation("' + tag_id + '", ' + JSON.stringify(params) + ')\'><i class="fas fa-redo-alt"></i> Recommencer la simulation</a>' );
+//	}else{
+//		console.error( "Already a tag in #" + tag_id );
+//	}
+//}
+
+function restartSimulation(tag_id, with_chart, params){
 
 	/*
 		Remove simulation from pJSDom
@@ -59,5 +60,18 @@ function restartSimulation(tag_id, params){
 	$("#" + tag_id).html("");
 
 	// Launch new one
-	particlesJS(tag_id, params);
+	particlesJS(tag_id, with_chart, params);
+}
+
+function playPause(tag_id){
+	for (var i = pJSDom.length - 1; i >= 0; i--) {
+		if ( $(pJSDom[i].pJS.canvas.el).parent().attr('id') == tag_id ){
+			if(pJSDom[i].pJS.simulation.isPlay == true) {
+				pJSDom[i].pJS.fn.custom.pause();
+			} else {
+				pJSDom[i].pJS.fn.custom.play();
+			}
+			break;
+		}
+	}
 }
