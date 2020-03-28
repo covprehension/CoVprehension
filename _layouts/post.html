@@ -40,11 +40,11 @@ layout: default
 
       <div class="clearfix">
 
-        {% if page.previous.url %}
+        {% if page.previous.url | where:"hidden", false %}
         <a class="btn btn-primary float-left" href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{ page.previous.title }}">&larr; Question<span class="d-none d-md-inline">
             Précédente</span></a>
         {% endif %}
-        {% if page.next.url %}
+        {% if page.next.url && page.next.url.hidden == false %}
         <a class="btn btn-primary float-right" href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{ page.next.title }}">Question<span class="d-none d-md-inline">
             Suivante</span> &rarr;</a>
         {% endif %}
