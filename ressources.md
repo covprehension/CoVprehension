@@ -6,13 +6,19 @@ background: '/img/bg-ressources.jpg'
 ---
 
 - [Why outbreaks like coronavirus spread exponentially, and how to “flatten the curve”](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)
-> Nous nous sommes inspirés de ce site créé très rapidement au début de l'épidémie et mis à jour régulièrement par Harry Stevens.
+> Nous nous sommes inspirés de ce site créé très rapidement au début de l'épidémie par Harry Stevens.
 
 - [Coronavirus COVID-19 Global Cases by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6)
 > Une des bases de données à l'échelle mondiale les plus complètes à l'heure actuelle. Sa fiabilité reste toute relative, compte tenu de la disparité des systèmes de soin dans les pays mais aussi du grand nombre d'inconnues qui demeurent quant à la dynamique de cette épidémie. La base est mise à jour en permanence.
 
 - [Coronavirus en France : le bilan actualisé et la carte des contaminations](https://www.lemonde.fr/les-decodeurs/article/2020/03/16/coronavirus-en-france-le-bilan-actualise-et-la-carte-des-contaminations_6033283_4355770.html)
 > Une page du journal Le Monde mise à jour quotidiennement par Gary Dagorn.
+
+- [Modéliser la diffusion du covid-19 ? (1)](https://blogs.mediapart.fr/bluejuliette/blog/220320/modeliser-la-diffusion-du-covid-19-1) et [Modéliser la diffusion du covid-19 ? (2)](https://blogs.mediapart.fr/bluejuliette/blog/240320/modeliser-la-diffusion-du-covid-19-2)
+> Deux billets récents dédiés à la modélisation du COVID-19 sur le blog de Juliette Rouchier, membre du collectif CoVprehension
+
+- [Sciences2](https://www.lemonde.fr/blog/huet/)
+> Le blog scientifique de Sylvestre Huet, du journal Le Monde, avec plusieurs articles sur le COVID-19.
 
 - [Coronavirus : sur le front scientifique](http://www.cnrs.fr/fr/cnrsinfo/coronavirus-sur-le-front-scientifique)
 > Le site du CNRS dédié au COVID-19.
@@ -31,7 +37,4 @@ background: '/img/bg-ressources.jpg'
 
 - [Le site du Conseil Scientifique COVID-19](https://solidarites-sante.gouv.fr/actualites/presse/dossiers-de-presse/article/covid-19-conseil-scientifique-covid-19)
 > Pour suivre les avis émis par le Conseil Scientifique COVID-19.
-
-- [Sciences2](https://www.lemonde.fr/blog/huet/)
-> Le blog scientifique de Sylvestre Huet, du journal Le Monde, avec plusieurs articles sur le COVID-19.
 
