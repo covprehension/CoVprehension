@@ -15,8 +15,8 @@ $(function () {
 
 // Check if the double chart is in view
 function elementInView(elem){
-  return (($(window).scrollTop() + $(window).height()) > $(elem).offset().top + (3 * $(elem).parent().height()/4))
-          && ( $(window).scrollTop() < $(elem).offset().top + $(elem).parent().height()/2 ) ;
+  return (($(window).scrollTop() + $(window).height()) > $(elem).offset().top + ( $(elem).parent().height()/2))
+          && ( $(window).scrollTop() < $(elem).offset().top + $(elem).parent().height()/3 ) ;
 };
 
 // Pause&Play JS simulation if in view or not
