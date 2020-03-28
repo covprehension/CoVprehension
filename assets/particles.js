@@ -934,7 +934,9 @@ var pJS = function(tag_id, with_chart, params){
 		if (pJS.isPlay != true){
 			pJS.isPlay = true;
 
-			pJS.fn.vendors.draw = pJS._tempFn;
+			if(pJS._tempFn != undefined){
+				pJS.fn.vendors.draw = pJS._tempFn;
+			}
 			pJS.fn.vendors.draw();
 		}
 	}
