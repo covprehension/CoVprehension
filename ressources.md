@@ -15,7 +15,7 @@ background: '/img/bg-ressources.jpg'
 > Une page du journal Le Monde mise à jour quotidiennement par Gary Dagorn.
 
 - [Modéliser la diffusion du covid-19 ? (1)](https://blogs.mediapart.fr/bluejuliette/blog/220320/modeliser-la-diffusion-du-covid-19-1) et [Modéliser la diffusion du covid-19 ? (2)](https://blogs.mediapart.fr/bluejuliette/blog/240320/modeliser-la-diffusion-du-covid-19-2)
-> Deux billets récents dédiés à la modélisation du COVID-19 sur le blog de Juliette Rouchier, membre du collectif CoVprehension
+> Deux billets récents dédiés à la modélisation du COVID-19 sur le blog de Juliette Rouchier, membre du collectif CoVprehension.
 
 - [Sciences2](https://www.lemonde.fr/blog/huet/)
 > Le blog scientifique de Sylvestre Huet, du journal Le Monde, avec plusieurs articles sur le COVID-19.
