@@ -85,12 +85,18 @@ subtitle: "Le sous-titre de l'article. eg/ blablabla. Démonstration !"
 # Par défaut image du masque 
 #background: '/img/bg-index.jpg'
 
-# Choisir un auteur
-# Par défaut "Des scientifiques"
-#author: "Jean Jean"
+# Choisir les auteurs
+# Ne s'affichera pas si vide
+author_text : 
+author_simulations : 
+author_illustration : 
+
 
 # Pour ne pas afficher la question dans le flux global
 hidden: false
+
+# Marque la question comme "traitée" ou "en traitement" si elle est, dans cette ordre, publiée ou non
+publish: true
 ---
 ```
 4. Remplir le contenu de l'article en écrivant un article au format [HTML](https://www.w3schools.com/html/) ou au format [MarkDown](https://www.markdownguide.org/).
