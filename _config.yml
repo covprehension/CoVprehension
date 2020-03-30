@@ -19,8 +19,8 @@ question_form_link: https://framaforms.org/covprehension-mettez-nous-au-defi-pos
 # Build settings
 markdown:           kramdown
 paginate:           5
-paginate_path:      "/posts/page:num/"
+paginate_path:      "/posts/:num/"
 plugins:
   - jekyll-feed
   - jekyll-paginate
-  - jekyll-sitemap ## Uncomment this line to silently generate a sitemaps.org compliant sitemap for your Jekyll site
+  - jekyll-sitemap 

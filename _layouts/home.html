@@ -38,15 +38,17 @@ layout: default
       
           {% endfor %}
         </ul>
-        <h3>Questions en traitement</h3>
-        <ul>
-          {% for post in postsUnpublished  %}
+        {% if postsUnpublished.size > 0 %}
+          <h3>Questions en traitement</h3>
+          <ul>
+            {% for post in postsUnpublished  %}
 
-            {% assign title = post.title | split: ":" %}
-            <li><p style="text-align: initial; margin: 0;">Q{{title[0] | split: " " | last }} : {{ title[1] }}</p></li>
-      
-          {% endfor %}
-        </ul>
+              {% assign title = post.title | split: ":" %}
+              <li><p style="text-align: initial; margin: 0;">Q{{title[0] | split: " " | last }} : {{ title[1] }}</p></li>
+        
+            {% endfor %}
+          </ul>
+        {% endif %}
       </aside>
 
       <div class="col-md-9 mx-auto">
