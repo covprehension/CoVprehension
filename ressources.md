@@ -38,7 +38,7 @@ background: '/img/bg-ressources.jpg'
 - [Le site COVID-19 de l'Institut des Systèmes Complexes de Paris-Ile de France](https://iscpif.fr/projects/coronavirus-related-projects/)
 > Le site COVID-19 de l'ISC-PIF, avec deux exemples de cartographie des connaissances interactives.
 
-- [La fiche COVID19 de l'Institut Pasteur](https://www.pasteur.fr/fr/centre-medical/fiches-maladies/coronavirus-wuhan)
+- [La fiche COVID-19 de l'Institut Pasteur](https://www.pasteur.fr/fr/centre-medical/fiches-maladies/coronavirus-wuhan)
 > Une référence à consulter sans modération.
 
 - [Le site COVID-19 de l'Organisation Mondiale de la Santé](https://www.who.int/fr/emergencies/diseases/novel-coronavirus-2019)
