@@ -29,13 +29,13 @@ background: '/img/bg-ressources.jpg'
 - [Covid-19 : comment sont conçus les modèles des épidémies ?](https://lejournal.cnrs.fr/articles/covid-19-comment-sont-concus-les-modeles-des-epidemies)
 > Une interview par Le Journal du CNRS d'Eric Daudé, membre du collectif CoVprehension
 
-- [Coronavirus : sur le front scientifique](http://www.cnrs.fr/fr/cnrsinfo/coronavirus-sur-le-front-scientifique)
+- [Coronavirus : sur le front scientifique, CNRS](http://www.cnrs.fr/fr/cnrsinfo/coronavirus-sur-le-front-scientifique)
 > Le site du CNRS dédié au COVID-19.
 
-- [INSERM EPIcx lab CoVID-19](https://www.epicx-lab.com/covid-19.html)
+- [Le site COVID-19 de l'équipe INSERM EPIcx lab](https://www.epicx-lab.com/covid-19.html)
 > Le site COVID-19 de l'équipe INSERM Epidemics in complex environments dirigée par Vittoria Colizza.
 
-- [Institut des Systèmes Complexes de Paris-Ile de France](https://iscpif.fr/projects/coronavirus-related-projects/)
+- [Le site COVID-19 de l'Institut des Systèmes Complexes de Paris-Ile de France](https://iscpif.fr/projects/coronavirus-related-projects/)
 > Le site COVID-19 de l'ISC-PIF, avec deux exemples de cartographie des connaissances interactives.
 
 - [La fiche COVID19 de l'Institut Pasteur](https://www.pasteur.fr/fr/centre-medical/fiches-maladies/coronavirus-wuhan)
