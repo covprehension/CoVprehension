@@ -52,6 +52,7 @@ $(window).scroll(function(){
 	// Remove HTML elements from old simulations
 	$("#" + tag_id).html("");
 
+	params.simulation.startPlay = true;
 	// Launch new one
 	particlesJS(tag_id, with_chart, params);
 }

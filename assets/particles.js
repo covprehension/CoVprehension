@@ -124,7 +124,8 @@ var pJS = function(tag_id, with_chart, params){
 			speed: 10,											// 0.5
 			number_particles: 0,
 			scenario: '',
-			isPlay: false
+			startPlay: false,
+			isPlay: true
 		},
 		particles: {
 			number: {
@@ -1196,6 +1197,9 @@ var pJS = function(tag_id, with_chart, params){
 		}else{
 			pJS.fn.vendors.init();
 			pJS.fn.vendors.draw();
+			if(!pJS.simulation.startPlay) {
+				pJS.fn.custom.pause();
+			}
 		}
 	};
 
@@ -1341,7 +1345,7 @@ window.particlesJS = function(tag_id, with_chart, params){
 
 	/* create relaunch button */
 	$( "#"+tag_id ).append( '<a class="btn btn-info" style="color: white;" onclick=\'restartSimulation("' + tag_id + '", ' + with_chart + ', ' + JSON.stringify(params) + ')\'><i class="fas fa-redo-alt"></i> Recommencer la simulation</a>' );
-	$( "#"+tag_id ).append( '<a class="btn btn-info" style="color: white;" onclick=\'playPause("' + tag_id + '")\'><i class="fas fa-redo-alt"></i> Play/Pause</a>' );
+	$( "#"+tag_id ).append( '<a class="btn btn-info" style="color: white;" onclick=\'playPause("' + tag_id + '")\'><i class="fas fa-play"></i> Play/Pause</a>' );
 
 
 	/* create canvas element */
