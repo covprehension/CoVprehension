@@ -29,6 +29,9 @@ background: '/img/bg-ressources.jpg'
 - [Covid-19 : comment sont conçus les modèles des épidémies ?](https://lejournal.cnrs.fr/articles/covid-19-comment-sont-concus-les-modeles-des-epidemies)
 > Une interview par Le Journal du CNRS d'Eric Daudé, membre du collectif CoVprehension
 
+- [Épidémiologie des pandémies grippales](https://websenti.u707.jussieu.fr/sentiweb/2063.pdf)
+> Une introduction claire et concise par l'un des meilleurs spécialistes du domaine, Antoine Flahault 
+
 - [Coronavirus : sur le front scientifique, CNRS](http://www.cnrs.fr/fr/cnrsinfo/coronavirus-sur-le-front-scientifique)
 > Le site du CNRS dédié au COVID-19.
 
