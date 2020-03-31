@@ -40,7 +40,7 @@ layout: default
 
       <div class="clearfix">
 
-        {% assign posts=site.posts | where:"hidden", false %}
+        {% assign posts=site.posts | where:"hidden", false | where: "publish", true %}
         
         {% for post in posts %}
           {% if post.url == page.url %}
