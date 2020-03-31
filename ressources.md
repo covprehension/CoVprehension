@@ -5,6 +5,13 @@ description: Liste non exhaustive de lien utile et intéressant autour de l'épi
 background: '/img/bg-ressources.jpg'
 ---
 
+<style>
+	/* Do not touch me please :D */
+	li a {
+		font-style: italic;
+	}
+</style>
+
 - [Why outbreaks like coronavirus spread exponentially, and how to “flatten the curve”](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)
 > Nous nous sommes inspirés de ce site créé très rapidement au début de l'épidémie par Harry Stevens. 
 
