@@ -4,32 +4,37 @@
 
 @import "styles";
 
+/*
+    +============
+    | GENERAL
+ */
+
 p {
   text-align: justify;
 }
-img,
-img.full-size {
-	width: 100%
-}
-.subheading a {
-  color: white !important;
-}
-img.half-size {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
-
 .container{
-	max-width: 90vw;
+  max-width: 90vw;
 }
 .btn-primary {
     width: 100%;
 }
-.clearfix .btn-primary {
+
+/*
+    +============
+    | HEADER
+ */
+
+.subheading a {
+  color: white !important;
+}.clearfix .btn-primary {
     width: auto;
 }
+
+/*
+    +============
+    | HOME
+ */
+
 .fa-plus-circle {
 	float: right;
 	font-size: 36px;
@@ -37,4 +42,29 @@ img.half-size {
 .align-container {
 	display: flex; 
 	align-items: center;
+}
+
+/*
+    +============
+    | IMAGES RULES
+ */
+img,
+img.full-size {
+  width: 100%
+}
+img.half-size {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+@media only screen and (max-width: 1200px) {
+  img.half-size {
+    width: 75%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  img.half-size {
+    width: 100%;
+  } 
 }
