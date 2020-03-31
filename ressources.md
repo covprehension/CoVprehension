@@ -7,7 +7,7 @@ background: '/img/bg-ressources.jpg'
 
 <style>
 	/* Do not touch me please :D */
-	li a {
+	.mx-auto li a {
 		font-style: italic;
 	}
 </style>
