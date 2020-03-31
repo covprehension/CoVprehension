@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Le simulateur
-description: Jouez avec les simulations des questions 1 à 3 
+description: Jouez avec les simulations des questions 
 ---
 
 <style>
@@ -13,6 +13,9 @@ description: Jouez avec les simulations des questions 1 à 3
 	header.masthead .page-heading, header.masthead .post-heading, header.masthead .site-heading {
     	padding: 100px 0;
 	}
+  header.masthead {
+      margin-bottom: 0;
+  } 
 </style>
 
 <!-- Page Header -->
@@ -32,5 +35,24 @@ description: Jouez avec les simulations des questions 1 à 3
   </div>
 </header>
 
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+      {% comment %} === CONTENT === {% endcomment %}
+
+      <p>Mode d'emploi en 3 étapes :</p>
+      <ol>
+        <li>Choisissez votre simulation dans le menu déroulant</li>
+        <li>Cliquez sur le bouton "Initialiser"</li>
+        <li>Cliquez sur le bouton "Simuler" </li>
+      </ol>
+      <p>Vous n'avez plus qu'à observer la simulation et la relancer autant de fois que vous le souhaitez.</p>
+
+    </div>
+  </div>
+
+</div>
 
 <iframe src='{{ "simulations/CoVprehension.html" | relative_url }}'></iframe>
