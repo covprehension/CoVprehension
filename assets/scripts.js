@@ -2,6 +2,32 @@ $(function () {
 	$('[data-toggle="tooltip"]').tooltip()
 })
 
+
+/*
+	+=======
+	| Load Iframe
+	*/
+function loadIframeSimulator(id, aTag){
+	newHtmlContent = "";
+	divIframe = $(aTag).parent().next()[0];
+
+	if (divIframe.innerHTML != ""){ // Clear view
+		newHtmlContent = "";
+
+		$(divIframe).removeAttr("class");
+		$(divIframe).addClass("iframeContainer");
+	}else{ // Set view
+		newHtmlContent = '<iframe class="embed-responsive-item" src="../../../simulations/CoVprehension_Confinement_Q'+id+'.html"></iframe>';
+		
+		$(divIframe).removeAttr("class");
+		$(divIframe).addClass("embed-responsive");
+		$(divIframe).addClass("embed-responsive-4by3");
+	}
+
+	// Set new content
+	$(divIframe).html(newHtmlContent);
+}
+
 /*
 	+=======
 	|  JS Simulation  |
