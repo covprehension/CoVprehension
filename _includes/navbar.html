@@ -20,6 +20,23 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ "/about" | relative_url }}">Qui sommes-nous ?</a>
         </li>
+        {% comment %}
+        <li class="nav-item dropdown show">
+          <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {% translate global.navbar %}
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            {% if site.lang == "fr" %}
+              {% capture link1 %}/en{{ page.url}}{% endcapture %}
+              <a class="dropdown-item" href="{{ link1 | prepend: site.baseurl | replace: '//', '/' }}" >🇺🇸</a>
+            {% elsif site.lang == "en" %}
+              {% capture link2 %}{{ page.url }}{% endcapture %}
+              <a class="dropdown-item" href="{{ link2 | prepend: site.baseurl_root | replace: '//', '/' }}" >🇫🇷</a>
+            {% endif %}
+          </div>
+        </li>
+        {% endcomment %}
       </ul>
     </div>
   </div>

@@ -10,23 +10,23 @@
 
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
 
-  <link rel="shortcut icon" href="{{ "/img/favicon.ico" | relative_url }}" type="image/x-icon">
-  <link rel="icon" href="{{ "/img/favicon.ico" | relative_url }}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ "/img/favicon.ico" | prepend: site.baseurl_root }}" type="image/x-icon">
+  <link rel="icon" href="{{ "img/favicon.ico" | prepend: site.baseurl_root }}" type="image/x-icon">
 
   <!-- TEMPLATE -->
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-  <link rel="stylesheet" href="{{"/assets/vendor/bootstrap/css/bootstrap.min.css" | relative_url }}">
+  <link rel="stylesheet" href="{{"assets/vendor/bootstrap/css/bootstrap.min.css" | prepend: site.baseurl_root }}">
 
-  <link rel="stylesheet" href="{{"/assets/vendor/fontawesome-free/css/all.min.css" | relative_url }}">
+  <link rel="stylesheet" href="{{"assets/vendor/fontawesome-free/css/all.min.css" | prepend: site.baseurl_root }}">
 
   <!-- PLUGIN -->
-  <link rel="stylesheet" href="{{"/assets/particules.css" | relative_url }}">
+  <link rel="stylesheet" href="{{"assets/particules.css" | prepend: site.baseurl_root }}">
 
   <!-- CUSTOM -->
-  <link rel="stylesheet" href="{{"/assets/main.css" | relative_url }}">
+  <link rel="stylesheet" href="{{"assets/main.css" | prepend: site.baseurl_root }}">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
-  <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "/feed.xml" | relative_url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "/feed.xml" | prepend: site.baseurl_root }}">
 
 </head>

@@ -24,3 +24,8 @@ plugins:
   - jekyll-feed
   - jekyll-paginate
   - jekyll-sitemap 
+  - jekyll-multiple-languages-plugin
+
+# Multi language website
+languages: ["fr", "en"]
+exclude_from_localizations: ["assets", "img", "simulations", "/feed.xml"]
