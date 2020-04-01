@@ -14,3 +14,9 @@ footer:
   github: Aller voir les sources du site
   rss: Lien RSS des questions
   questions: Posez nous vos questions
+
+reading:
+  title: Estimation du temps de lecture
+  minute: minute
+  minutes: s 
+  to_read: de lecture

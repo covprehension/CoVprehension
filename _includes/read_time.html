@@ -1,3 +1,4 @@
-<span class="reading-time" title="Estimated read time">
+<span class="reading-time" title="{% translate reading.title %}">
   {% assign words = include.content | number_of_words %}
-  {% if words < 270 %} 1 minute {% else %} {{ words | divided_by:135 }} minutes {% endif %} de lecture </span>
+  {% if words < 270 %} 1 {% translate reading.minute %} {% else %} {{ words | divided_by:135 }} {% translate reading.minutes %} {% endif %} {% translate reading.to_read %}
+</span>

@@ -14,3 +14,9 @@ footer:
   github: Go to check website sources
   rss: RSS link to questions
   questions: Ask us something
+
+reading:
+  title: Estimated read time
+  minute: minute
+  minutes: s 
+  to_read: to read
