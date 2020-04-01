@@ -1,3 +1,6 @@
+global:
+  author: The CoVprehension collective
+
 navbar:
   menu: Menu
   simulator: Simulator
@@ -5,3 +8,9 @@ navbar:
   ressources: Ressources
   about: About us
   flag: 🇬🇧
+
+footer:
+  mail: Send us an email
+  github: Go to check website sources
+  rss: RSS link to questions
+  questions: Ask us something

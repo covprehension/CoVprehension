@@ -1,3 +1,6 @@
+global:
+  author: Le collectif CoVprehension
+
 navbar:
   menu: Menu
   simulator: Simulateur
@@ -5,3 +8,9 @@ navbar:
   ressources: Ressources
   about: Qui sommes-nous ?
   flag: 🇫🇷
+
+footer:
+  mail: Envoyez nous un mail
+  github: Aller voir les sources du site
+  rss: Lien RSS des questions
+  questions: Posez nous vos questions
