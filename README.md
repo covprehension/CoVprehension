@@ -3,10 +3,6 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/covprehension/covprehension)
 
 ![Jekyll site CI](https://github.com/covprehension/CoVprehension/workflows/Jekyll%20site%20CI/badge.svg?branch=master)
-![Gem Jekyll](https://img.shields.io/gem/v/jekyll?label=Jekyll)
-![Gem tzinfo](https://img.shields.io/gem/v/tzinfo-data?label=tzinfo-data)
-![Gem wdm](https://img.shields.io/gem/v/wdm?label=wdm)
-
 ![Discord](https://img.shields.io/discord/690125443952672780?label=Discord)
 
 # [CoVprehension](https://covprehension.org) 
