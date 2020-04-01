@@ -9,34 +9,34 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="{{ "/simulateur" | relative_url }}">Simulateur</a>
+          <a class="nav-link" href="{{ "/simulateur" | relative_url }}">{% translate navbar.simulator %}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ site.question_form_link }}" target="_blank">Posez vos questions</a>
+          <a class="nav-link" href="{{ site.question_form_link }}" target="_blank">{% translate navbar.questions %}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ "/ressources" | relative_url }}">Ressources</a>
+          <a class="nav-link" href="{{ "/ressources" | relative_url }}">{% translate navbar.ressources %}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ "/about" | relative_url }}">Qui sommes-nous ?</a>
+          <a class="nav-link" href="{{ "/about" | relative_url }}">{% translate navbar.about %}</a>
         </li>
-        {% comment %}
+
         <li class="nav-item dropdown show">
           <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {% translate global.navbar %}
+            {% translate navbar.flag %}
           </a>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             {% if site.lang == "fr" %}
               {% capture link1 %}/en{{ page.url}}{% endcapture %}
-              <a class="dropdown-item" href="{{ link1 | prepend: site.baseurl | replace: '//', '/' }}" >🇺🇸</a>
+              <a class="dropdown-item" href="{{ link1 | prepend: site.baseurl | replace: '//', '/' }}" >{{ site.translations["en"]["navbar"]["flag"] }}</a>
             {% elsif site.lang == "en" %}
               {% capture link2 %}{{ page.url }}{% endcapture %}
-              <a class="dropdown-item" href="{{ link2 | prepend: site.baseurl_root | replace: '//', '/' }}" >🇫🇷</a>
+              <a class="dropdown-item" href="{{ link2 | prepend: site.baseurl_root | replace: '//', '/' }}" >{{ site.translations["fr"]["navbar"]["flag"] }}</a>
             {% endif %}
           </div>
         </li>
-        {% endcomment %}
+
       </ul>
     </div>
   </div>

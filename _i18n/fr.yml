@@ -1,2 +1,7 @@
-global:
-  navbar: 🇫🇷
+navbar:
+  menu: Menu
+  simulator: Simulateur
+  questions: Posez vos questions
+  ressources: Ressources
+  about: Qui sommes-nous ?
+  flag: 🇫🇷

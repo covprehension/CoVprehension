@@ -1,2 +1,7 @@
-global:
-  navbar: 🇺🇸
+navbar:
+  menu: Menu
+  simulator: Simulator
+  questions: Ask us something
+  ressources: Ressources
+  about: About us
+  flag: 🇬🇧
