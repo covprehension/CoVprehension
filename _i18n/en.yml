@@ -3,7 +3,7 @@ global:
   months:
     - January
     - February
-    - Mars
+    - March
     - April
     - May
     - June
@@ -23,16 +23,16 @@ global:
 navbar:
   menu: Menu
   simulator: Simulator
-  questions: Ask us something
+  questions: Ask your questions
   ressources: Ressources
   about: About us
   flag: 🇬🇧
 
 footer:
   mail: Send us an email
-  github: Go to check website sources
+  github: Check website sources
   rss: RSS link to questions
-  questions: Ask us something
+  questions: Ask your questions
 
 #
 # +============
@@ -40,7 +40,7 @@ footer:
 #
 home:
   question_done: Questions answered
-  question_wip: Questions in progress
+  question_wip: Questions being answered
   see_newest: See latest questions
 
 post:
@@ -54,15 +54,15 @@ post:
 
 # Page with the full list of questions
 posts:
-  previous: Previous questions
-  next: Next questions
+  previous: Previous question
+  next: Next question
 
 #
 # +============
 # | Plugins
 #
 reading:
-  title: Estimated read time
+  title: Estimated reading time
   minute: minute
-  minutes: minutes 
-  to_read: to read
+  minutes: minute
+  to_read: read
