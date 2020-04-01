@@ -1,13 +1,25 @@
-![License](https://img.shields.io/github/license/covprehension/covprehension)
-![GitHub issues](https://img.shields.io/github/issues/covprehension/CoVprehension)
-![GitHub contributors](https://img.shields.io/github/contributors/covprehension/covprehension)
+<p align="center">
+  <a href="https://github.com/github_username/repo">
+    <img src="img/favicon.png" alt="Logo" width="80" height="80">
+  </a>
 
-![Jekyll site CI](https://github.com/covprehension/CoVprehension/workflows/Jekyll%20site%20CI/badge.svg?branch=master)
-![Discord](https://img.shields.io/discord/690125443952672780?label=Discord)
+  <h3 align="center"><a href="https://covprehension.org" target="_blank">CoVprehension</a></h3>
 
-# [CoVprehension](https://covprehension.org) 
-
-French informative website about the corona virus.
+  <p align="center">
+    Informative website about the corona virus.
+    <br />
+    <br />
+    <img src="https://img.shields.io/github/license/covprehension/covprehension" alt="License" />
+    ·
+    <img src="https://img.shields.io/github/issues/covprehension/CoVprehension" alt="GitHub issues" />
+    ·
+    <img src="https://img.shields.io/github/contributors/covprehension/covprehension" alt="GitHub contributors" />
+    <br />
+    <img src="https://github.com/covprehension/CoVprehension/workflows/Jekyll%20site%20CI/badge.svg?branch=master" alt="Jekyll site CI" />
+    ·
+    <img src="https://img.shields.io/discord/690125443952672780?label=Discord" alt="Discord" />
+  </p>
+</p>
 
 This repository holds the Jekyll sources of the CoVprehension website!
 
