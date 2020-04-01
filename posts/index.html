@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Posts
-background: '/img/bg-post.jpg'
+background: 'img/bg-post.jpg'
 ---
 
 {% assign posts=paginator.posts | where:"publish", true %}
@@ -10,16 +10,17 @@ background: '/img/bg-post.jpg'
 
 <article class="post-preview">
   <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
-    <h2 class="post-title">{{ post.title }}</h2><i class="fas fa-plus-circle" aria-hidden="true"></i>
-    {% if post.subtitle %}
-    <h3 class="post-subtitle">{{ post.subtitle }}</h3>
-    {% else %}
-    <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
-    {% endif %}
+    <h2 class="post-title">{{ post.title }}</h2>
+    <div class="align-container">
+      {% if post.subtitle %}
+        <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+      {% else %}
+        <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
+      {% endif %}
+      <i class="fas fa-plus-circle" aria-hidden="true"></i>
+    </div>
   </a>
-  <p class="post-meta">Posté {% if post.author %}par {{ post.author }}{% endif %}
-    {% comment %} --======  FRENCH DATE FORMATING  ======-- {% endcomment %}
-    le {{ post.date | date: "%-d" }} {% assign m = post.date | date: "%-m" | minus: 1 %}{{ site.data.fr.months[m] }} {{ post.date | date: "%Y" }} &middot; {% include read_time.html content=post.content %}            
+  <p class="post-meta">{% translate post.posted %} {% translate post.the %} {% include date.html post=post %} &middot; {% include read_time.html content=post.content %}
   </p>
 </article>
 
@@ -33,12 +34,11 @@ background: '/img/bg-post.jpg'
 <div class="clearfix">
 
   {% if paginator.previous_page %}
-  <a class="btn btn-primary float-left" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr;
-    Questions<span class="d-none d-md-inline"> Plus Récentes</span></a>
+  <a class="btn btn-primary float-left" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; {% translate posts.next %}</a>
   {% endif %}
 
   {% if paginator.next_page %}
-  <a class="btn btn-primary float-right" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Questions<span class="d-none d-md-inline"> Plus Anciennes</span> &rarr;</a>
+  <a class="btn btn-primary float-right" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">{% translate posts.previous %} &rarr;</a>
   {% endif %}
 
 </div>

@@ -16,6 +16,10 @@ global:
   sub-title: Comprendre l'épidémie actuelle de COVID-19
   sub-title2: Une question, un modèle
 
+#
+# +============
+# | _includes
+#
 navbar:
   menu: Menu
   simulator: Simulateur
@@ -30,6 +34,10 @@ footer:
   rss: Lien RSS des questions
   questions: Posez nous vos questions
 
+#
+# +============
+# | _layout
+#
 home:
   question_done: Questions traitées
   question_wip: Questions en traitement
@@ -39,7 +47,20 @@ post:
   posted: Posté
   from: par
   the: le
+#
+# +============
+# | single page
+#
 
+# Page with the full list of questions
+posts:
+  previous: Questions Plus Anciennes
+  next: Questions Plus Récentes
+
+#
+# +============
+# | Plugins
+#
 reading:
   title: Estimation du temps de lecture
   minute: minute
