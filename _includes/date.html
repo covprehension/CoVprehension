@@ -1,0 +1,6 @@
+{% assign post = include.post %}
+{% if site.lang == "fr" %}
+	{{ post.date | date: "%-d" }} {% assign m = post.date | date: "%-m" | minus: 1 %}{{ site.translations["fr"]["global"]["months"][m] }} {{ post.date | date: "%Y" }}
+{% else %}
+	{{ post.date | date: "%-d %B %Y" }}
+{% endif %}

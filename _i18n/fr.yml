@@ -1,5 +1,20 @@
 global:
   author: Le collectif CoVprehension
+  months:
+    - Janvier
+    - Février
+    - Mars
+    - Avril
+    - Mai
+    - Juin
+    - Juillet
+    - Aout
+    - Septembre
+    - Octobre
+    - Novembre
+    - Décembre
+  sub-title: Comprendre l'épidémie actuelle de COVID-19
+  sub-title2: Une question, un modèle
 
 navbar:
   menu: Menu
@@ -15,8 +30,18 @@ footer:
   rss: Lien RSS des questions
   questions: Posez nous vos questions
 
+home:
+  question_done: Questions traitées
+  question_wip: Questions en traitement
+  see_newest: Voir les dernières Questions
+
+post:
+  posted: Posté
+  from: par
+  the: le
+
 reading:
   title: Estimation du temps de lecture
   minute: minute
-  minutes: s 
+  minutes: minutes 
   to_read: de lecture
