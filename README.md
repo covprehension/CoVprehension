@@ -109,7 +109,7 @@ subtitle: "Le sous-titre de l'article. eg/ blablabla. Démonstration !"
 author_text : 
 author_simulations : 
 author_illustration : 
-
+author_translation :
 
 # Pour ne pas afficher la question dans le flux global
 hidden: false
