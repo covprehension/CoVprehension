@@ -21,6 +21,7 @@
           <a class="nav-link" href="{{ "/about" | relative_url }}">{% translate navbar.about %}</a>
         </li>
 
+        {% comment %}
         <li class="nav-item dropdown show">
           <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {% translate navbar.flag %}
@@ -36,6 +37,7 @@
             {% endif %}
           </div>
         </li>
+        {% endcomment %}
 
       </ul>
     </div>
