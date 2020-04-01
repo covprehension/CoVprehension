@@ -17,7 +17,7 @@ layout: default
           {% if page.subtitle %}
           <h2 class="subheading">{{ page.subtitle }}</h2>
           {% endif %}
-          <span class="meta">{% if page.author_text %}Texte : <i>{{ page.author_text }}</i>{% endif %}{% if page.author_simulations %} / Simulation : <i>{{ page.author_simulations }}</i>{% endif %}{% if page.author_illustration %} / Illustration : <i>{{ page.author_illustration }}</i>{% endif %}<br/>
+          <span class="meta">{% if page.author_text %}Texte : <i>{{ page.author_text }}</i>{% endif %}{% if page.author_simulations %} / Simulation : <i>{{ page.author_simulations }}</i>{% endif %}{% if page.author_illustration %} / Illustration : <i>{{ page.author_illustration }}</i>{% endif %} {% if page.author_translation %} / Translation : <i>{{ page.author_translation }}</i>{% endif %}<br/>
             {% comment %} --======  FRENCH DATE FORMATING  ======-- {% endcomment %}
             le {% if page.postDate %}{{ page.postDate | date: "%-d" }} {% assign m = page.postDate | date: "%-m" | minus: 1 %}{{ site.data.fr.months[m] }} {{ page.postDate | date: "%Y" }}
             {% else %}{{ page.date | date: "%-d" }} {% assign m = page.date | date: "%-m" | minus: 1 %}{{ site.data.fr.months[m] }} {{ page.date | date: "%Y" }}{% endif %} &middot; {% include read_time.html

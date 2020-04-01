@@ -18,6 +18,9 @@ background: '/img/bg-ressources.jpg'
 - [Coronavirus COVID-19 Global Cases by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6)
 > Une des bases de données à l'échelle mondiale les plus complètes à l'heure actuelle. Sa fiabilité reste toute relative, compte tenu de la disparité des systèmes de soin dans les pays mais aussi du grand nombre d'inconnues qui demeurent quant à la dynamique de cette épidémie. La base est mise à jour en permanence.
 
+- [Le site COVID-19 du Medialab de Science-Po](https://boogheta.github.io/coronavirus-countries/)
+> Ce site propose une visualisation par pays des données de COVID-19 mises à disposition par l'Université Johns Hopkins 
+
 - [Données des urgences hospitalières et de SOS médecins relatives à l'épidémie de COVID-19](https://www.data.gouv.fr/fr/datasets/donnees-des-urgences-hospitalieres-et-de-sos-medecins-relatives-a-lepidemie-de-covid-19/)
 > Les données quotidiennes de SOS médecins et des urgences hospitalières par département, région et France entière, par sexe et tranche d’âge des patients. Par Santé publique France.
 
