@@ -21,6 +21,9 @@ background: '/img/bg-ressources.jpg'
 - [Le site COVID-19 du Medialab de Science-Po](https://boogheta.github.io/coronavirus-countries/)
 > Ce site propose une visualisation par pays des données de COVID-19 mises à disposition par l'Université Johns Hopkins 
 
+- [COVID-19 Our World in Data](https://ourworldindata.org/coronavirus)
+> Un site qui recense et visualise les données mondiales mises à disposition par le European Center for Disease Prevention and Control (ECDC).
+
 - [Données des urgences hospitalières et de SOS médecins relatives à l'épidémie de COVID-19](https://www.data.gouv.fr/fr/datasets/donnees-des-urgences-hospitalieres-et-de-sos-medecins-relatives-a-lepidemie-de-covid-19/)
 > Les données quotidiennes de SOS médecins et des urgences hospitalières par département, région et France entière, par sexe et tranche d’âge des patients. Par Santé publique France.
 
