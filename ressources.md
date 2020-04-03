@@ -39,6 +39,9 @@ background: '/img/bg-ressources.jpg'
 - [Non, une épidémie mortelle ne « nettoie » pas la Terre tous les cent ans](https://www.lemonde.fr/les-decodeurs/article/2020/03/25/non-une-epidemie-mortelle-ne-nettoie-pas-la-terre-tous-les-cent-ans_6034414_4355770.html)
 > Une interview par Le Monde d'Emmanuel Eliot, membre du collectif CoVprehension
 
+- [Are We Already Missing the Next Epidemic?](https://www.politico.com/amp/news/magazine/2020/03/31/coronavirus-americafear-contagion-can-we-handle-it-157711?__twitter_impression=true)
+> Très bon article, en anglais, de Joshua Epstein, l'un des meilleurs spécialistes de la modélisation des épidémies
+
 - [Covid-19 : comment sont conçus les modèles des épidémies ?](https://lejournal.cnrs.fr/articles/covid-19-comment-sont-concus-les-modeles-des-epidemies)
 > Une interview par Le Journal du CNRS d'Eric Daudé, membre du collectif CoVprehension
 
