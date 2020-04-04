@@ -5,5 +5,3 @@ node_modules
 Gemfile.lock
 *.gem
 simulations/js/.DS_Store
-
-_includes/footer.html
