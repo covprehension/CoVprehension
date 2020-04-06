@@ -54,6 +54,14 @@ post:
 # | single page
 #
 
+about:
+  title: À propos de nous
+  subtitle: Nous sommes un collectif de chercheurs tentant d'expliquer de manière simple et avec des outils scientifiques l'épidémie actuelle de COVID-19.<br/><b>Contactez-nous sur <a href="mailto:covprehension@gmail.com">covprehension@gmail.com</a></b>
+
+ressources:
+  title: Ressources
+  subtitle: Liste non exhaustive de lien utile et intéressant autour de l'épidémie actuelle de COVID-19
+
 # Page with the full list of questions
 posts:
   previous: Questions Plus Anciennes

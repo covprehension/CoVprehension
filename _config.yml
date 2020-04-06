@@ -4,6 +4,8 @@ description:        Comprendre l'épidémie actuelle de COVID-19<br>Une question
 baseurl:            "/"
 url:                "https://covprehension.org"
 
+include: ['_pages']
+
 # Social Profiles
 twitter_username:   
 github_username:    covprehension
