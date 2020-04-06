@@ -30,7 +30,7 @@ jobs:
           NOKOGIRI_USE_SYSTEM_LIBRARIES: true
 
       - name: Build the site 
-        run: timeout -s SIGTERM 15 bundle exec jekyll serve --trace
+        run: (timeout 15 bundle exec jekyll serve --trace; exit 0)
         env:
           NOKOGIRI_USE_SYSTEM_LIBRARIES: true
 
