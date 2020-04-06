@@ -12,7 +12,7 @@
           <a class="nav-link" href={{ "/simulator" | prepend: site.baseurl | replace: '//', '/'}}>{% translate navbar.simulator %}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ site.question_form_link }}" target="_blank">{% translate navbar.questions %}</a>
+          <a class="nav-link" href="{% translate global.question_form_link %}" target="_blank">{% translate navbar.questions %}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ "/ressources" | prepend: site.baseurl | replace: '//', '/' }}">{% translate navbar.ressources %}</a>
