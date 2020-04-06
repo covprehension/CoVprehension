@@ -66,12 +66,12 @@ about:
 
 ressources:
   title: Ressources
-  subtitle: Non-exhaustive list of useful and interesting links around the current VIDOC epidemic-19
+  subtitle: Non exhaustive list of useful and interesting links about the current epidemic of COVID-19
 
 simulator:
-  title: The simulator
-  subtitle: Test some of the simulations mobilized in the site
-
+  title: Simulator
+  subtitle: Replicate some of the simulations yourself
+  
 # Page with the full list of questions
 posts:
   previous: Previous questions
