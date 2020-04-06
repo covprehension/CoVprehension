@@ -8,6 +8,6 @@ Instructions:
 - Click on the "Initialize" button
 - Click on the "Simulate" button 
 
-All you have to do now is watch the simulation run and run it as many times as you like.
+All you have to do now is watch the simulation run. Run it as many times as you like.
 
 Enjoy!
