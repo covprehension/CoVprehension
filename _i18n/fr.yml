@@ -62,6 +62,10 @@ ressources:
   title: Ressources
   subtitle: Liste non exhaustive de lien utile et intéressant autour de l'épidémie actuelle de COVID-19
 
+simulator:
+  title: Le simulateur
+  subtitle: Testez quelques-unes des simulations mobilisées dans le site
+
 # Page with the full list of questions
 posts:
   previous: Questions Plus Anciennes
