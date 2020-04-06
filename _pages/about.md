@@ -7,7 +7,7 @@ background: '/img/bg-about.jpg'
 ---
 
 <style>
-	img { 
+	li img { 
 		width: 10em; 
 		border-radius: 25px;
 	}
