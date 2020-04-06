@@ -1,8 +1,8 @@
 ---
 layout: page
-permalink: /ressources/
-title: "{% t ressources.title %}"
-description: "{% t ressources.subtitle %}"
+permalink: /resources/
+title: "{% t resources.title %}"
+description: "{% t resources.subtitle %}"
 background: '/img/bg-ressources.jpg'
 ---
 
@@ -13,4 +13,4 @@ background: '/img/bg-ressources.jpg'
 	}
 </style>
 
-{% translate_file pages/ressources.md %}
+{% translate_file pages/resources.md %}
