@@ -9,7 +9,7 @@
 <script src="{{"assets/particles.js" | prepend: site.baseurl_root }}"></script>
 
 {% assign t = page.title | split: " " %}
-{% assign simuPath = 'simulations/js/' | append: t[1] | append: "/" %}
+{% assign simuPath = '/simulations/js/' | append: t[1]  | remove: ":" | append: "/" %}
 {% assign questions = site.static_files | where_exp:"item", "item.path contains simuPath" %}
 
 {% if questions.size > 0 %}
