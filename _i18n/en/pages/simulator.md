@@ -1,13 +1,13 @@
 Welcome to our simulator page!
 
-Here you will be able to explore by yourself some of the simulations mobilized to feed the site, in particular in questions 1 to 3.
+Here you are able to run, by yourself, some of the simulation models used to feed the website, in particular questions 1 to 3.
 
-Instructions for use in 3 steps :
+Instructions:
 
 - Choose your simulation in the drop-down menu
 - Click on the "Initialize" button
 - Click on the "Simulate" button 
 
-All you have to do is watch the simulation and run it as many times as you like.
+All you have to do now is watch the simulation run and run it as many times as you like.
 
-Good simulations!
+Enjoy!
