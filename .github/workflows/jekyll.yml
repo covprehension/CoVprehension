@@ -20,6 +20,9 @@ jobs:
         #with:
           # Version range or exact version of a Ruby version to use.
           #version: # optional, default is >= 2.4
+          
+      - name: Bundle - check version
+        run: bundle -v
       
       - name: SIMULATOR - Center simulator in page view
         run: sed -i 's/body\ style\=\"/body\ style\=\"text-align\:\ center\;/g' simulations/CoVprehension.html
@@ -30,9 +33,7 @@ jobs:
           NOKOGIRI_USE_SYSTEM_LIBRARIES: true
 
       - name: Build the site 
-        run: (timeout 15 bundle exec jekyll serve --trace; exit 0)
-        env:
-          NOKOGIRI_USE_SYSTEM_LIBRARIES: true
+        run: bundle exec jekyll build
 
       - name: Upload to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v1.3.0
