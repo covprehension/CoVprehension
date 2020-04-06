@@ -49,6 +49,13 @@ post:
   posted: Posté
   from: par
   the: le
+  text: Texte
+  simulation: Simulation
+  illustrator: Illustration
+  translator: Traduction
+  next_question: Question suivante
+  prev_question: Question précédente
+
 #
 # +============
 # | single page
@@ -68,8 +75,8 @@ simulator:
 
 # Page with the full list of questions
 posts:
-  previous: Questions Plus Anciennes
-  next: Questions Plus Récentes
+  previous: Questions plus anciennes
+  next: Questions plus récentes
 
 #
 # +============
