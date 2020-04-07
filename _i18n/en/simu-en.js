@@ -7,11 +7,11 @@ const LABEL_SIMULATION_3A = "Simulation 3a";
 const LABEL_SIMULATION_3B = "Simulation 3b";
 const LABEL_SIMULATION_3C = "Simulation 3c";
 
-const LABEL_DATA_S = "Sains";
-const LABEL_DATA_IA = "Infectés";
-const LABEL_DATA_IAbis = "Infectés respectant la distanciation";
-const LABEL_DATA_IB = "Infectés non identifiés";
-const LABEL_DATA_IC = "Infectés ne respectant pas la distanciation";
+const LABEL_DATA_S = "Healthy people";
+const LABEL_DATA_IA = "Infected people";
+const LABEL_DATA_IAbis = "Infected people who respect social distancing";
+const LABEL_DATA_IB = "Non-identified infected people";
+const LABEL_DATA_IC = "Infected people who do not respect social distancing";
 
-const BUTTON_RESTART = "Recommencer la simulation";
+const BUTTON_RESTART = "Restart the simulation";
 const BUTTON_PLAY_PAUSE 	= "Play/Pause"
