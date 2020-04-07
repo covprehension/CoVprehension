@@ -6,6 +6,12 @@
 <!-- PLUGIN -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
+
+{% if site.lang == "fr" %}
+	<script  src="{{"assets/lang/simu-fr.js" | prepend: site.baseurl_root }}"></script>
+{% else %}
+	<script  src="{{"assets/lang/simu-en.js" | prepend: site.baseurl_root }}"></script>
+{% endif %}
 <script src="{{"assets/particles.js" | prepend: site.baseurl_root }}"></script>
 
 {% assign t = page.title | split: " " %}

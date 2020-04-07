@@ -13,26 +13,10 @@
 /* v2.0.0
 /* ----------------------------------------------- */
 
-var LABEL_SIMULATION_1A = "Simulation 1a";
-var LABEL_SIMULATION_1B = "Simulation 1b";
-var LABEL_SIMULATION_2A = "Simulation 2a";
-var LABEL_SIMULATION_2B = "Simulation 2b";
-var LABEL_SIMULATION_2C = "Simulation 2c";
-var LABEL_SIMULATION_3A = "Simulation 3a";
-var LABEL_SIMULATION_3B = "Simulation 3b";
-var LABEL_SIMULATION_3C = "Simulation 3c";
-
-var LABEL_DATA_S  = "Sains";
-var LABEL_DATA_IA = "Infectés";
-var LABEL_DATA_IAbis = "Infectés respectant la distanciation";
-var LABEL_DATA_IB = "Infectés non identifiés";
-var LABEL_DATA_IC = "Infectés ne respectant pas la distanciation";
-
-
-var COLOR_S 					= "#2CD13B";
-var COLOR_INFECTED 				= "#D63239";
-var COLOR_INFECTED_NO_SYMPTOM 	= '#2D8DBE';
-var COLOR_INFECTED_FREE_RIDER 	= '#8C8C8C';
+const COLOR_S 						= "#2CD13B";
+const COLOR_INFECTED 				= "#D63239";
+const COLOR_INFECTED_NO_SYMPTOM 	= '#2D8DBE';
+const COLOR_INFECTED_FREE_RIDER 	= '#8C8C8C';
 
 var pJS = function(tag_id, with_chart, params){
 	/*
@@ -1344,8 +1328,8 @@ window.particlesJS = function(tag_id, with_chart, params){
 	}
 
 	/* create relaunch button */
-	$( "#"+tag_id ).append( '<a class="btn btn-info" style="color: white;" onclick=\'restartSimulation("' + tag_id + '", ' + with_chart + ', ' + JSON.stringify(params) + ')\'><i class="fas fa-redo-alt"></i> Recommencer la simulation</a>' );
-	$( "#"+tag_id ).append( '<a class="btn btn-info" style="color: white;" onclick=\'playPause("' + tag_id + '")\'><i class="fas fa-play"></i> Play/Pause</a>' );
+	$( "#"+tag_id ).append( '<a class="btn btn-info" style="color: white;" onclick=\'restartSimulation("' + tag_id + '", ' + with_chart + ', ' + JSON.stringify(params) + ')\'><i class="fas fa-redo-alt"></i> ' + BUTTON_RESTART + '</a>' );
+	$( "#"+tag_id ).append( '<a class="btn btn-info" style="color: white;" onclick=\'playPause("' + tag_id + '")\'><i class="fas fa-play"></i> ' + BUTTON_PLAY_PAUSE + '</a>' );
 
 
 	/* create canvas element */
