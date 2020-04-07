@@ -5,8 +5,8 @@ Here you are able to run, by yourself, some of the simulation models used to fee
 Instructions:
 
 - Choose your simulation in the drop-down menu
-- Click on the "Initialize" button
-- Click on the "Simulate" button 
+- Click "Initialise"
+- Click "Simulate"  
 
 All you have to do now is watch the simulation run. Run it as many times as you like.
 
