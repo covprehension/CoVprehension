@@ -1,1 +1,1 @@
-simu-fr.js
+../../assets/lang/simu-fr.js
