@@ -121,7 +121,7 @@ var pJS = function(tag_id, with_chart, params){
 			probability_transmission: 1,
 			probability_transmission_unreported_infected: 1.0,
 			rate_unreported_infections: 50,
-			speed: 10,											// 0.5
+			speed: 2.5,											// 0.5
 			number_particles: 0,
 			scenario: '',
 			startPlay: false,
