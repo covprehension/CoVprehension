@@ -77,6 +77,7 @@ simulator:
 posts:
   previous: Previous questions
   next: Next questions
+  going_futher: Going further
 
 #
 # +============
