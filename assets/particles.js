@@ -62,7 +62,7 @@ var pJS = function(tag_id, with_chart, params){
 						scaleLabel: {
 							display: true,
 							fontSize: 18,
-							labelString: "Nombre de cas"
+							labelString: LABEL_NB_CAS
 						}
 					}],
 					xAxes: [{
@@ -75,7 +75,7 @@ var pJS = function(tag_id, with_chart, params){
 						scaleLabel: {
 							display: true,
 							fontSize: 18,
-							labelString: "Temps"
+							labelString: LABEL_TIME
 						}
 					}]
 				}

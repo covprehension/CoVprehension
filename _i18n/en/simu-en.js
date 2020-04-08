@@ -12,6 +12,8 @@ const LABEL_DATA_IA = "Infected people";
 const LABEL_DATA_IAbis = "Infected people who respect social distancing";
 const LABEL_DATA_IB = "Non-identified infected people";
 const LABEL_DATA_IC = "Infected people who do not respect social distancing";
+const LABEL_TIME = "Time";
+const LABEL_NB_CAS = "Number of cases";
 
 const BUTTON_RESTART = "Restart the simulation";
 const BUTTON_PLAY_PAUSE 	= "Play/Pause"

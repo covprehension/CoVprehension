@@ -12,6 +12,8 @@ const LABEL_DATA_IA = "Infectés";
 const LABEL_DATA_IAbis = "Infectés respectant la distanciation";
 const LABEL_DATA_IB = "Infectés non identifiés";
 const LABEL_DATA_IC = "Infectés ne respectant pas la distanciation";
+const LABEL_TIME = "Temps";
+const LABEL_NB_CAS = "Nombre de cas";
 
 const BUTTON_RESTART = "Recommencer la simulation";
 const BUTTON_PLAY_PAUSE 	= "Play/Pause"
