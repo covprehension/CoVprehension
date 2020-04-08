@@ -12,8 +12,3 @@ particlesJS('particles-js-Q1B', true,
     "scenario": "Simulation 1b"
   }
 });
-
-// Pause simulation once loaded
-for (var i = pJSDom.length - 1; i >= 0; i--) {
-  pJSDom[i].pJS.fn.custom.pause();
-}

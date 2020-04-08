@@ -20,6 +20,12 @@ jobs:
         #with:
           # Version range or exact version of a Ruby version to use.
           #version: # optional, default is >= 2.4
+          
+      - name: Bundle - check version
+        run: bundle -v
+      
+      - name: SIMULATOR JS - Copy translation files
+        run: rm -f assets/lang/*.js && cp _i18n/*/simu-*.js assets/lang/
       
       - name: SIMULATOR - Center simulator in page view
         run: sed -i 's/body\ style\=\"/body\ style\=\"text-align\:\ center\;/g' simulations/CoVprehension.html
@@ -31,8 +37,6 @@ jobs:
 
       - name: Build the site 
         run: bundle exec jekyll build
-        env:
-          NOKOGIRI_USE_SYSTEM_LIBRARIES: true
 
       - name: Upload to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v1.3.0
@@ -42,7 +46,7 @@ jobs:
           # Git branch where assets will be deployed
           #target_branch: # optional, default is gh-pages
           # Create incremental commit instead of doing push force
-          keep_history: true
+          keep_history: false
           # Allow an empty commit to be created
           allow_empty_commit: false
           # Build directory to deploy

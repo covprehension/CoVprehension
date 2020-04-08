@@ -1,0 +1,48 @@
+---
+layout: default
+permalink: /simulator/
+---
+
+<style>
+	html, body, iframe { height: 100%; }
+	iframe {
+		width: 100%;
+	    border: none;
+	}
+	header.masthead .page-heading, header.masthead .post-heading, header.masthead .site-heading {
+    	padding: 100px 0;
+	}
+  header.masthead {
+      margin-bottom: 0;
+  } 
+</style>
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{ '/img/bg-simulator.jpg' | prepend: site.baseurl_root | replace: '//', '/' }}')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <h1>{% t simulator.title %}</h1>
+          <span class="subheading">{% t simulator.subtitle %}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+      {% comment %} === CONTENT === {% endcomment %}
+      {% translate_file pages/simulator.md %}
+
+    </div>
+  </div>
+
+</div>
+
+<iframe src='{{ "/simulations/CoVprehension.html" | prepend: site.baseurl_root | replace: '//', '/' }}'></iframe>

@@ -15,6 +15,7 @@ global:
     - Décembre
   sub-title: Comprendre l'épidémie actuelle de COVID-19
   sub-title2: Une question, un modèle
+  question_form_link: https://framaforms.org/covprehension-mettez-nous-au-defi-posez-vos-questions-1585223922
 
 #
 # +============
@@ -33,6 +34,8 @@ footer:
   github: Aller voir les sources du site
   rss: Lien RSS des questions
   questions: Posez nous vos questions
+  license_text: Le texte est mis à disposition selon les termes de la license
+  license_img: Les illustrations sont mises à disposition selon les termes de la license
 
 #
 # +============
@@ -47,15 +50,35 @@ post:
   posted: Posté
   from: par
   the: le
+  text: Texte
+  simulation: Simulation
+  illustrator: Illustration
+  translator: Traduction
+  next_question: Question suivante
+  prev_question: Question précédente
+
 #
 # +============
 # | single page
 #
 
+about:
+  title: À propos de nous
+  subtitle: Nous sommes un collectif de chercheurs tentant d'expliquer de manière simple et avec des outils scientifiques l'épidémie actuelle de COVID-19.<br/><b>Contactez-nous sur <a href="mailto:covprehension@gmail.com">covprehension@gmail.com</a></b>
+
+resources:
+  title: Ressources
+  subtitle: Liste non exhaustive de lien utile et intéressant autour de l'épidémie actuelle de COVID-19
+
+simulator:
+  title: Le simulateur
+  subtitle: Testez quelques-unes des simulations mobilisées dans le site
+
 # Page with the full list of questions
 posts:
-  previous: Questions Plus Anciennes
-  next: Questions Plus Récentes
+  previous: Questions plus anciennes
+  next: Questions plus récentes
+  going_futher: Aller plus loin
 
 #
 # +============

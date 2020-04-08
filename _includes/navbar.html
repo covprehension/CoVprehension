@@ -1,7 +1,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
   <div class="container">
-    <a class="navbar-brand" href="{{"/" | relative_url | replace: '//', '/' }}">{{ site.title | escape }}</a>
+    <a class="navbar-brand" href="{{"/" | prepend: site.baseurl | replace: '//', '/' }}">{{ site.title | escape }}</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       Menu
       <i class="fa fa-bars"></i>
@@ -9,19 +9,18 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="{{ "/simulateur" | relative_url }}">{% translate navbar.simulator %}</a>
+          <a class="nav-link" href={{ "/simulator" | prepend: site.baseurl | replace: '//', '/'}}>{% translate navbar.simulator %}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ site.question_form_link }}" target="_blank">{% translate navbar.questions %}</a>
+          <a class="nav-link" href="{% translate global.question_form_link %}" target="_blank">{% translate navbar.questions %}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ "/ressources" | relative_url }}">{% translate navbar.ressources %}</a>
+          <a class="nav-link" href="{{ "/resources" | prepend: site.baseurl | replace: '//', '/' }}">{% translate navbar.ressources %}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ "/about" | relative_url }}">{% translate navbar.about %}</a>
+          <a class="nav-link" href="{{ "/about" | prepend: site.baseurl | replace: '//', '/' }}">{% translate navbar.about %}</a>
         </li>
 
-        {% comment %}
         <li class="nav-item dropdown show">
           <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {% translate navbar.flag %}
@@ -30,14 +29,13 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             {% if site.lang == "fr" %}
               {% capture link1 %}/en{{ page.url}}{% endcapture %}
-              <a class="dropdown-item" href="{{ link1 | prepend: site.baseurl | replace: '//', '/' }}" >{{ site.translations["en"]["navbar"]["flag"] }}</a>
+              <a class="dropdown-item" href="{{ link1 | prepend: site.baseurl | replace: '//', '/' }}" >🇬🇧</a>
             {% elsif site.lang == "en" %}
               {% capture link2 %}{{ page.url }}{% endcapture %}
               <a class="dropdown-item" href="{{ link2 | prepend: site.baseurl_root | replace: '//', '/' }}" >{{ site.translations["fr"]["navbar"]["flag"] }}</a>
             {% endif %}
           </div>
         </li>
-        {% endcomment %}
 
       </ul>
     </div>

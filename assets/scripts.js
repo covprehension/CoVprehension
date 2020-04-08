@@ -17,7 +17,7 @@ function loadIframeSimulator(id, aTag){
 		$(divIframe).removeAttr("class");
 		$(divIframe).addClass("iframeContainer");
 	}else{ // Set view
-		newHtmlContent = '<iframe class="embed-responsive-item" src="../../../simulations/CoVprehension_Confinement_Q'+id+'.html"></iframe>';
+		newHtmlContent = '<iframe class="embed-responsive-item" src="/simulations/CoVprehension_Confinement_Q'+id+'.html"></iframe>';
 		
 		$(divIframe).removeAttr("class");
 		$(divIframe).addClass("embed-responsive");
