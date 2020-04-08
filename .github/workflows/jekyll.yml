@@ -25,7 +25,7 @@ jobs:
         run: bundle -v
       
       - name: SIMULATOR JS - Copy translation files
-        run: rm -f assets/lang/*.js && cp _i18n/en/simu-en.js assets/lang/ && cp _i18n/fr/simu-fr.js assets/lang/
+        run: rm -f assets/lang/*.js && cp _i18n/*/simu-*.js assets/lang/
       
       - name: SIMULATOR - Center simulator in page view
         run: sed -i 's/body\ style\=\"/body\ style\=\"text-align\:\ center\;/g' simulations/CoVprehension.html
