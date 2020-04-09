@@ -23,11 +23,23 @@
 
 This repository holds the Jekyll sources of the CoVprehension website!
 
-> The following section will be in french, sorry 🤷
+CoVprehension is a collective of researchers trying to explain the current epidemic of COVID-19 simply yet with scientific tools.
 
-## Comment utiliser ce site ?
+## How to contribute to the project
 
-### Structure du repository
+### I'm not a dev
+
+Please go to the `_i18n/` sub-folder where everything's is explained ;)
+
+[> Click me <](https://github.com/covprehension/CoVprehension/tree/master/_i18n)
+
+### I'm a dev
+
+Read the [contributing guidelines](https://github.com/covprehension/CoVprehension/blob/master/CONTRIBUTING.md) 👩‍💻
+
+## Technical part
+
+### Structure of the repository
 
 <details>
 <summary>View contents</summary>
@@ -35,108 +47,55 @@ This repository holds the Jekyll sources of the CoVprehension website!
 ```
 $ tree
 .
-├── assets
-│   ├── <custom JS/CSS files>
-│   │
-│   └── vendor <default resources>
-│       ├── bootstrap
-│       ├── fontawesome-free
-│       ├── jquery
-│       └── template
-│
-├── img
+├── assets/
+│   ├── lang/
+│   |   ├── <translation files for JS simulations>
+│   │   └── simu-XX.js -> ../../_i18n/fr/simu-XX.js
+│   ├── vendor/ <default resources>
+│   └── <custom JS/CSS files>
+|
+├── _i18n/ <== Folder where website is translated
+│   ├── <anyLanguageCode>/
+│   │   ├── pages/
+│   │   │   ├── about.html
+│   │   │   ├── resources.md
+│   │   │   └── simulator.md
+│   │   ├── _posts/
+│   │   │   ├── YYYY-MM-DD-qXX.md
+│   │   │   └── <All your questions>
+│   │   └── simu-<anyLanguageCode>.js
+│   └── <anyLanguageCode>.yml
+|
+├── img/
+│   ├── about/
+│   ├── post/
 │   └── <website images>
 │
-├── _includes
+├── _includes/
 │   └── <Global part of website : Header/Footer/etc>
 │
-├── _layouts
+├── _layouts/
 │   └── <HTML pages template>
 │
-├── _posts
-│   ├── ...
-│   └── <All your questions>
-│
-├── posts
+├── posts/
 │   └── <IGNORE ME, I'm a trap 🙊>
 │
-├── _sass
-│   ├── js
-│   │   └── <JS simulation in sub-dir>
-│   │
-│   └── styles.scss
+├── _pages/
+│   └── <Defined layout for translated pages>
 │
-├── simulations
+├── simulations/
+│   ├── js/
+│   │   └── <JS simulation in sub-dir>
 │   └── <Web NetLogo export simulations>
 │
 ├── _config.yml
 │
-├── about.html
-├── contact.html
-├── index.html
-├── ressources.md
-├── simulateur.html <Don't touch me>
-│
-└── <others...>
+└── <others uninteresting stuff...>
 
 <plenty> directories, <too many> files
 ```
 
 </details>
-
-### Créer un nouvel article
-
-1. Aller dans le sous-dossier [`_posts`](https://github.com/RoiArthurB/CoVprehension/tree/master/_posts)
-2. Créer un nouveau fichier au format suivant : `AAAA-MM-JJ-mots-clefs.md`
-3. **Copier-coller** puis **Compléter** l'en-tête suivante :
-```
----
-layout: post
-
-# Toutes les lignes commençant par un "#" sont ignorées, ce sont des commentaires pour les humains !
-
-# Cette partie est réutilisé pour l'apperçu du post dans les pages principales
-title: "Le titre de l'article. eg/ Question 1: Pourquoi je tousse ?"
-subtitle: "Le sous-titre de l'article. eg/ blablabla. Démonstration !"
-
-# Choisir une image d'illustration qui doit être un chemin relatif vers le dossier img/
-# (si cette phrase n'a pas été comprise, demandez de l'aide :) ) 
-# Par défaut image du masque 
-#background: '/img/bg-index.jpg'
-
-# Choisir les auteurs
-# Ne s'affichera pas si vide
-author_text : 
-author_simulations : 
-author_illustration : 
-author_translation :
-
-# Pour ne pas afficher la question dans le flux global
-hidden: false
-
-# Marque la question comme "traitée" ou "en traitement" si elle est, dans cette ordre, publiée ou non
-publish: true
----
-```
-4. Remplir le contenu de l'article en écrivant un article au format [HTML](https://www.w3schools.com/html/) ou au format [MarkDown](https://www.markdownguide.org/).
-
-### Configuration globale du site
-
-Toute la configuration globale du site se trouve dans le fichier [`_config.yml`](https://github.com/RoiArthurB/CoVprehension/blob/master/_config.yml) qui a la structure suivante :
- - `baseurl` ⚠️ ne pas changer ⚠️
- - `url` ⚠️ ne pas changer ⚠️
- - `title` 
- - `email` (mail global utilisé un peu partout: contact, liens, etc)
- - `description` (page d'accueil)
- - `author` (valeur par défaut)
- - `twitter_username` (Optionel - Enlève l'icone en pied de page si vide)
- - `facebook_username` (Optionel - Enlève l'icone en pied de page si vide)
- - `github_username` (Optionel - Enlève l'icone en pied de page si vide)
- - `linkedin_username` (Optionel - Enlève l'icone en pied de page si vide)
-
-## Technical part
-
-> I'm switching back in english, hi again friends ! :D
 
 ### Local installation & Setup
 
@@ -146,25 +105,66 @@ Toute la configuration globale du site se trouve dans le fichier [`_config.yml`]
 4. Build your site: `bundle exec jekyll serve`
 5. Connect to your running instance [http://127.0.0.1:4000/CoVprehension/](http://127.0.0.1:4000/CoVprehension/)
 
+
+### Global configuration of the website
+
+All the global configuration of the site can be found in the file [`_config.yml`](https://github.com/RoiArthurB/CoVprehension/blob/master/_config.yml) which is structured as follow :
+
+<details>
+<summary>View contents</summary>
+  
+- General settings
+  - `title` Global title
+  - `email` Global mail 
+  - `description`
+  - `url`
+  - `baseurl` root position of the website in the url variable 
+    - Don't change me
+  - `include` Jekyll collection list
+- Social Profiles (all optionals)
+  - `twitter_username`
+  - `github_username`
+  - `facebook_username`
+  - `linkedin_username`
+  - `rss_link`
+  - `google_analytics`
+- Build settings
+  - `markdown` MarkDown compiler
+  - `paginate`
+  - `paginate_path` how to generate pagination url
+  - `plugins` list of ruby plugins used in the website
+- Multi language website => See https://github.com/kurtsson/jekyll-multiple-languages-plugin/#4-configuration
+  - `languages` list of enabled languages
+  - `exclude_from_localizations`
+  
+</details>
+
 ## Bugs and Issues
 
-Have a bug or an issue with this template? [Open a new issue](https://github.com/RoiArthurB/CoVprehension/issues/new) here on GitHub!
+Have a bug or an issue with this template? [Open a new issue](https://github.com/covprehension/CoVprehension/issues/new) here on GitHub!
 
 ## Made with
 
 * Pipeline
-  * Jenkyll
-  * Github Pages
+  * Jekyll
+  * GitHub Actions
+  * GitHub Pages
 
 * Front-end
   * Bootstrap / jQuery
     * Theme from [Start Bootstrap](https://startbootstrap.com/)
-  * [Particle.js](https://vincentgarreau.com/particles.js/)
-  * [Charts.js](https://www.chartjs.org/)
 
 * Simulations
+  * JS
+    * [Particle.js](https://vincentgarreau.com/particles.js/)
+    * [Charts.js](https://www.chartjs.org/)
   * NetLogo
 
 ## Copyright and License
 
-This website is released under the [MIT](https://github.com/RoiArthurB/CoVprehension/blob/gh-pages/LICENSE) license.
+
+The **code** of this project is licensed under the [***LGPL-3.0 License***](https://github.com/covprehension/CoVprehension/blob/master/LICENSE).
+
+The **text content** in posts is licensed under the [![***CC BY-SA 4.0***](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/).
+
+These **illustrations** in posts are licensed under [![***CC BY-NC-ND 4.0***](https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/). 
