@@ -29,25 +29,30 @@ layout: default
       {% assign postsUnpublished=site.posts | where:"hidden", false | where:"publish", false | reverse %}
 
       <aside class="col d-none d-md-block mx-auto">
-        <h3>{% translate home.question_done %}</h3>
-        <ul>
-          {% for post in postsPublished  %}
-
-            {% assign title = post.title | split: ":" %}
-            <li><a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">Q{{title[0] | split: " " | last }} : {{ title[1] }}</a></li>
-      
-          {% endfor %}
-        </ul>
-        {% if postsUnpublished.size > 0 %}
-          <h3>{% translate home.question_wip %}</h3>
+        <style>aside div { max-height: 100vh; overflow: auto}</style>
+        <div>
+          <h3>{% translate home.question_done %}</h3>
           <ul>
-            {% for post in postsUnpublished  %}
+            {% for post in postsPublished  %}
 
               {% assign title = post.title | split: ":" %}
-              <li><p style="text-align: initial; margin: 0;">Q{{title[0] | split: " " | last }} : {{ title[1] }}</p></li>
+              <li><a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">Q{{title[0] | split: " " | last }} : {{ title[1] }}</a></li>
         
             {% endfor %}
           </ul>
+        </div>
+        {% if postsUnpublished.size > 0 %}
+          <div>
+            <h3>{% translate home.question_wip %}</h3>
+            <ul>
+              {% for post in postsUnpublished  %}
+
+                {% assign title = post.title | split: ":" %}
+                <li><p style="text-align: initial; margin: 0;">Q{{title[0] | split: " " | last }} : {{ title[1] }}</p></li>
+          
+              {% endfor %}
+            </ul>
+          </div>
         {% endif %}
       </aside>
 
