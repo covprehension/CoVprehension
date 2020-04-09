@@ -28,7 +28,7 @@ jobs:
         run: rm -f assets/lang/*.js && cp _i18n/*/simu-*.js assets/lang/
       
       - name: SIMULATOR - Center simulator in page view
-        run: sed -i 's/body\ style\=\"/body\ style\=\"text-align\:\ center\;/g' simulations/CoVprehension.html
+        run: sed -i 's/body\ style\=\"/body\ style\=\"text-align\:\ center\;/g' simulations/CoVprehension*.html
       
       - name: Install jenkyll plugins
         run: bundle install
