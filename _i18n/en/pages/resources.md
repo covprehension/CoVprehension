@@ -18,3 +18,6 @@
 
 - [Epidemic modelling of COVID-19](http://alizon.ouvaton.org/COVID_en.html)
 > This reference website on the subject, with very polished reports and an “epidemic simulator” (COVIDSIM) allows you to visualise the effect of different control strategies, with variations of duration and intensity.
+
+- [Computational Models That Matter During a Global Pandemic Outbreak: A Call to Action](http://jasss.soc.surrey.ac.uk/23/2/10.html)
+> This article reviews the existing models of COVID-19 as of the 31st March 2020. It calls for collaboration between scientists and decision makers, with trusted data and model exchanges while maintain the standards of scientific rigour and transparency.

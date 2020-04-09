@@ -54,3 +54,7 @@
 
 - [Le site du Conseil Scientifique COVID-19](https://solidarites-sante.gouv.fr/actualites/presse/dossiers-de-presse/article/covid-19-conseil-scientifique-covid-19)
 > Pour suivre les avis émis par le Conseil Scientifique COVID-19.
+
+
+- [Appel à l'action: des modèles qui comptent pendant une pandémie mondiale](http://jasss.soc.surrey.ac.uk/23/2/10.html)
+> Cet article recense les modèles existants de l'épidémie (au 31 Mars 2020) et appelle la communauté modélisatrice à collaborer avec les décideurs publics, à partager données et modèles dans les deux sens, mais aussi à conserver les standards de rigueur scientifique et de transparence.
