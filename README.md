@@ -27,7 +27,7 @@ CoVprehension is a collective of researchers trying to explain the current epide
 
 ## How to contribute to the project
 
-### I a writer / translator
+### I'm a writer / translator
 
 Please go to the `_i18n/` sub-folder where everything's is explained ;)
 
