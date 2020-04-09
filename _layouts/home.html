@@ -29,7 +29,7 @@ layout: default
       {% assign postsUnpublished=site.posts | where:"hidden", false | where:"publish", false | reverse %}
 
       <aside class="col d-none d-md-block mx-auto">
-        <style>aside div { max-height: 100vh; overflow: auto}</style>
+        <style>aside div ul { max-height: 75vh; overflow: auto}</style>
         <div>
           <h3>{% translate home.question_done %}</h3>
           <ul>
@@ -42,6 +42,7 @@ layout: default
           </ul>
         </div>
         {% if postsUnpublished.size > 0 %}
+          <hr>
           <div>
             <h3>{% translate home.question_wip %}</h3>
             <ul>
