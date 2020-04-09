@@ -45,4 +45,12 @@ permalink: /simulator/
 
 </div>
 
-<iframe src='{{ "/simulations/CoVprehension.html" | prepend: site.baseurl_root | replace: '//', '/' }}'></iframe>
+
+{% assign lang = site.lang %}
+{% if lang == "fr" %}
+  {% assign lang = "" %}
+{% else %}
+  {% assign lang = lang | capitalize | prepend: "_" %}
+{% endif%}
+
+<iframe src='{{ "/simulations/CoVprehension" | append: lang | append: ".html" | prepend: site.baseurl_root | replace: '//', '/' }}'></iframe>
