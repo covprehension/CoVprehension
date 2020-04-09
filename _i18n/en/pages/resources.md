@@ -15,3 +15,6 @@
 
 - [The COVID-19 website of the World Health Organisation](https://www.who.int/emergencies/diseases/novel-coronavirus-2019)
 > To track the situation at the world scale, from the WHO point of view.
+
+- [Epidemic modelling of COVID-19](http://alizon.ouvaton.org/COVID_en.html)
+> This reference website on the subject, with very polished reports and an “epidemic simulator” (COVIDSIM) allows you to visualise the effect of different control strategies, with variations of duration and intensity.
