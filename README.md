@@ -27,7 +27,7 @@ CoVprehension is a collective of researchers trying to explain the current epide
 
 ## How to contribute to the project
 
-### I'm not a dev
+### I a writer / translator
 
 Please go to the `_i18n/` sub-folder where everything's is explained ;)
 
@@ -35,7 +35,13 @@ Please go to the `_i18n/` sub-folder where everything's is explained ;)
 
 ### I'm a dev
 
+#### I want to work on this website
+
 Read the [contributing guidelines](https://github.com/covprehension/CoVprehension/blob/master/CONTRIBUTING.md) 👩‍💻
+
+#### I want to work on a NetLogo simulation
+
+Go on this other repository [covprehension/proto](https://github.com/covprehension/proto)
 
 ## Technical part
 
