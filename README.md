@@ -105,7 +105,7 @@ $ tree
 
 ### Local installation & Setup
 
-1. Clone the repo `git clone https://github.com/covprehension/CoVprehension.git
+1. Clone the repo `git clone https://github.com/covprehension/CoVprehension.git`
 2. Move in the folder `cd CoVprehension`
 3. Install plugins: `bundle install`
 4. Build your site: `bundle exec jekyll serve`
