@@ -17,7 +17,7 @@ Ok so you'll have some stuff to prepare before starting to translate !
 
 First, you'll have to get your language code mark. Sounds complicated but it's just 2 letters to identify it (you can find them on [this website](http://www.lingoes.net/en/translator/langcode.htm)). I'll call this 2 letters `codeLang` now !
 
-## Activate your language on the website
+### Activate your language on the website
 
 Ok now it's the most sensitive moment, you'll have to add that code in the configuration file of the whole website named `_config.yml` ([there](https://github.com/covprehension/CoVprehension/blob/master/_config.yml)). 
 
@@ -32,13 +32,13 @@ languages: ["fr", "en", "sv"]
 ```
 Not that complicated 😉
 
-#### Prepare files
+### Prepare files
 
 Now all you have to do is to duplicate files from another language in this folder `/_i18n/`.
 
 So you'll have to duplicate the general translation file (like `/_i18n/fr.yml` into `/_i18n/<codeLang>.yml`) and the full translated content folder (like `/_i18n/fr/` into `/_i18n/<codeLang>/`).
 
-#### Start translate
+### Start translate
 
 You did it all, now you're ready to go and a full website is just waiting for your translation 😉
 
