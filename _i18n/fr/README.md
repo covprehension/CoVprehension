@@ -1,6 +1,6 @@
 Hey ! Salut à toi l'ami et merci d'avance de participer au projet CoVpréhension 😀
 
-Voilà un petit guide pour t'expliquer comment contribuer au site
+Voilà un petit guide pour t'expliquer comment contribuer au site.
 
 ## Comment créer un nouvel article ?
 
@@ -40,17 +40,17 @@ publish: false
 
 ### Bonus
 
-Il y a un fichier d'exemple avec tout ce qu'il est possible de mettre dans les posts qui est disponible [ici](https://github.com/covprehension/CoVprehension/blob/master/_i18n/fr/_posts/TEMPLATE-COMMUN.md) (bouton `raw` pour voir le code en _Markdown_)
+Il y a un fichier d'exemple avec tout ce qu'il est possible de mettre dans les posts qui est disponible [ici](https://github.com/covprehension/CoVprehension/blob/master/_i18n/fr/_posts/TEMPLATE-COMMUN.md) (bouton `raw` pour voir le code en _Markdown_).
 
 ### Comment voir mon article ?
 
 T'as écrit ton article et c'est cool, mais ce qui serait encore plus cool serait de voir ton article directement dans le site non ?
 
-Pour se faire, soit t'es un développeur et tu sais comment faire, soit t'es un humain normal et tu vas devoir un peu bidouiller !
+Pour ce faire, soit t'es un développeur et tu sais comment faire, soit t'es un humain normal et tu vas devoir un peu bidouiller !
 
 **La manip**
 
-Tous les articles dans le dossier `_posts` sont générées et accessibles sur le site, il manque juste le lien pour les articles _en traitement_.
+Tous les articles dans le dossier `_posts` sont générés et accessibles sur le site, il manque juste le lien pour les articles _en traitement_.
 
 Pour aller voir l'article sur le site, il suffit donc de prendre le nom du fichier et de le transformer comme ça :
 ```
@@ -65,14 +65,14 @@ Facile non ? 😉
 
 ## Comment mettre mes fichiers en ligne ?
 
-Il va te falloir mettre les fichiers dans des dossiers particuliers en fonction de leur nature. Une fois qu'ils sont uploadé tu peux les rajouter dans ton article comme montré dans le [template](https://github.com/covprehension/CoVprehension/blob/master/_i18n/fr/_posts/TEMPLATE-COMMUN.md)
+Il va te falloir mettre les fichiers dans des dossiers particuliers en fonction de leur nature. Une fois qu'ils sont uploadés, tu peux les rajouter dans ton article comme montré dans le [template](https://github.com/covprehension/CoVprehension/blob/master/_i18n/fr/_posts/TEMPLATE-COMMUN.md).
 
 ### Les images
 
 <details>
 <summary>Voir l'explication</summary>
 
-Dans le dossier racine `/img/posts` (tu peux cliquer [ici](https://github.com/covprehension/CoVprehension/tree/master/img/posts) pour aller directement dans le dossier)
+Dans le dossier racine `/img/posts` (tu peux cliquer [ici](https://github.com/covprehension/CoVprehension/tree/master/img/posts) pour aller directement dans le dossier).
 
 </details>
 
@@ -81,20 +81,20 @@ Dans le dossier racine `/img/posts` (tu peux cliquer [ici](https://github.com/co
 <details>
 <summary>Voir l'explication</summary>
 
-#### Avant de l'upload
+#### Avant de l'uploader
 
-1. Les simulations NetLogo doivent être exportée 
+1. Les simulations NetLogo doivent être exportées depuis le logiciel NetLogo en cliquant sur "File" puis "Save As NetLogo Web..."
 2. Tu dois nommer ton fichier de cette manière `CoVprehension_Confinement_Q<indexNumeriqueArbitraire>.html`
 
-#### Où l'upload
+#### Où l'uploader
 
-Dans le dossier racine `/simulations/` (tu peux cliquer [ici](https://github.com/covprehension/CoVprehension/tree/master/simulations) pour aller directement dans le dossier)
+Dans le dossier racine `/simulations/` (tu peux cliquer [ici](https://github.com/covprehension/CoVprehension/tree/master/simulations) pour aller directement dans le dossier).
 
 #### Utiliser la simulation dans la page
 
-Tu vas devoir mettre ce petit bout de code en changeant `<indexNumeriqueArbitraire>` par celui que t'as choisi dans le nom de ton fichier
-```
+Tu vas devoir mettre ce petit bout de code en changeant `<indexNumeriqueArbitraire>` par celui que t'as choisi dans le nom de ton fichier :
 
+```
 <a href="#" class="btn btn-primary" onclick="loadIframeSimulator(<indexNumeriqueArbitraire>, this); return false;">Simuler l'impact du confinement sur la courbe épidémique</a>
 <div class="iframeContainer"></div>
 ```
@@ -108,13 +108,13 @@ Tu vas devoir mettre ce petit bout de code en changeant `<indexNumeriqueArbitrai
 
 #### Les ressources
 
-La librarie utilisée est basée sur [particles.js](https://vincentgarreau.com/particles.js/) et a été retravaillée par @benoitgaudou et @RoiArthurB
+La librarie utilisée est basée sur [particles.js](https://vincentgarreau.com/particles.js/) et a été retravaillée par @benoitgaudou et @RoiArthurB.
 
-Tu la trouveras [là](https://github.com/covprehension/CoVprehension/blob/master/assets/particles.js) `/assets/particles.js`
+Tu la trouveras [là](https://github.com/covprehension/CoVprehension/blob/master/assets/particles.js) `/assets/particles.js`.
 
 #### Où mettre les fichiers
 
-Les fichiers d'appels sont appelé dynamiquement dans les posts. Ils devront se trouver dans un dossier unique `/simulations/js/<numeroQuestion>/` (avec n'importe quel nom et appelé dans l'ordre alphabetique). 
+Les fichiers d'appels sont appelés dynamiquement dans les posts. Ils devront se trouver dans un dossier unique `/simulations/js/<numeroQuestion>/` (avec n'importe quel nom et appelés dans l'ordre alphabetique). 
 
 </details>
 

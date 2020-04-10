@@ -1,15 +1,15 @@
-Hey! Hi to you friend and thank you in advance for participating in the CoVpréhension project 😀
+Hey! Welcome to you friend and thank you in advance for participating in the CoVprehension project 😀
 
-Here's a short guide to explain how you can contribute to the site
+Here's a short guide to explain how you can contribute to the website.
 
 ## How do I create a new item?
 
 <details>
-<summary>See the explanation.</summary>
+<summary>See the explanation</summary>
 
 1. Go to subfolder [`_posts`](https://github.com/RoiArthurB/CoVprehension/tree/master/_i18n/fr/_posts)
-2. Create a new file with the following format: `YYYYY-MM-DD-qXX.md`.
-3. **Copy and paste** then **Complete** the following header :
+2. Create a new file with the following format: `YYYYY-MM-DD-qXX.md`
+3. **Copy and paste** then **Complete** the following header:
 ```
 ---
 layout: post
@@ -36,23 +36,23 @@ publish: false
 
 <!-- YOUR TEXT HERE -->
 ```
-4. Fill in the content of the article by writing an article in [HTML](https://www.w3schools.com/html/) or [MarkDown](https://www.markdownguide.org/) format.
+4. Fill in the content of the article in [HTML](https://www.w3schools.com/html/) or [MarkDown](https://www.markdownguide.org/) format
 
 ### Bonus
 
-There's an example file with everything you can put in the posts which is available [here](https://github.com/covprehension/CoVprehension/blob/master/_i18n/fr/_posts/TEMPLATE-COMMUN.md) (button `raw` to see the code in _Markdown_)
+There's a template file with everything you can put in the posts available [here](https://github.com/covprehension/CoVprehension/blob/master/_i18n/fr/_posts/TEMPLATE-COMMUN.md) (button `raw` to see the code in _Markdown_).
 
 ### How can I see my article?
 
-You've written your article and it's cool, but what would be even cooler would be to see your article directly on the site, right ?
+You've written your article and it's cool, but it would be even cooler to see your article directly on the website, right?
 
-Either you're a developer and you know how to do it, or you're a normal human and you're going to have to tinker a little bit !
+Either you're a developer and you know how to do it, or you're a normal human being and you're going to have to tinker a little bit!
 
 **How to**
 
-All the articles in the `_posts` folder are generated and accessible on the site, just the link for the articles _in process_ is missing.
+All the articles in the `_posts` folder are generated and accessible on the website, only the links for the articles _in process_ are missing.
 
-To go and see the article on the site, you just have to take the name of the file and transform it like this :
+To go and see the article on the website, you just have to take the name of the file and transform it like this :
 ```
                              2020-03-24-q0.md
                           \/  \/  \/ \/ \/ \/
@@ -65,36 +65,36 @@ Easy, isn't it? 😉
 
 ## How do I get my files online?
 
-You will need to put the files in particular folders according to their nature. Once they are uploaded you can add them in your article as shown in the [template](https://github.com/covprehension/CoVprehension/blob/master/_i18n/fr/_posts/TEMPLATE-COMMUN.md)
+You will need to put the files in particular folders according to their nature. Once they are uploaded you can add them in your article as shown in the [template](https://github.com/covprehension/CoVprehension/blob/master/_i18n/fr/_posts/TEMPLATE-COMMUN.md).
 
 ### Images
 
 <details>
-<summary>See the explanation.</summary>
+<summary>See the explanation</summary>
 
-In the root directory `/img/posts` (you can click [here](https://github.com/covprehension/CoVprehension/tree/master/img/posts) to go directly into the directory)
+In the root directory `/img/posts` (you can click [here](https://github.com/covprehension/CoVprehension/tree/master/img/posts) to go directly into the directory).
 
 </details>
 
 ### NetLogo simulations
 
 <details>
-<summary>See the explanation.</summary>
+<summary>See the explanation</summary>
 
 #### Before uploading
 
-1. NetLogo simulations must be exported 
+1. NetLogo simulations must be exported via the NetLogo software by clicking "File" then "Save As NetLogo Web..."
 2. You should name your file like this `CoVprehension_Confinement_Q<indexNumericArbitrary>.html`.
 
-#### Where the upload
+#### Where to upload
 
-In the root directory `/simulations/` (you can click [here](https://github.com/covprehension/CoVprehension/tree/master/simulations) to go directly to the directory)
+In the root directory `/simulations/` (you can click [here](https://github.com/covprehension/CoVprehension/tree/master/simulations) to go directly to the directory).
 
 #### Use simulation in the page
 
-You'll have to put this little piece of code by changing `<ArbitraryNumericIndex>` by the one you chose in the name of your file
-```
+You'll have to put this little piece of code by changing `<ArbitraryNumericIndex>` by the one you chose in the name of your file:
 
+```
 <a href="#" class="btn btn-primary" onclick="loadIframeSimulator(<indexNumericArbitrary>, this); return false;">Simulate the impact of containment on the epidemic curve</a>
 <div class="iframeContainer"></div>
 ```
@@ -104,13 +104,13 @@ You'll have to put this little piece of code by changing `<ArbitraryNumericIndex
 ### JavaScript simulation
 
 <details>
-<summary>See the explanation.</summary>
+<summary>See the explanation</summary>
 
 #### Resources
 
-The library used is based on [particles.js](https://vincentgarreau.com/particles.js/) and has been reworked by @benoitgaudou and @RoiArthurB
+The library used is based on [particles.js](https://vincentgarreau.com/particles.js/) and has been reworked by @benoitgaudou and @RoiArthurB.
 
-You'll find it [there](https://github.com/covprehension/CoVprehension/blob/master/assets/particles.js) `/assets/particles.js`
+You'll find it [there](https://github.com/covprehension/CoVprehension/blob/master/assets/particles.js) `/assets/particles.js`.
 
 #### Where to put the files
 
@@ -118,4 +118,4 @@ Call files are called dynamically in posts. They should be located in a single d
 
 </details>
 
-There, I hope you won't need any more help than what's written here. But if you ever need any help, come and ask your questions about The Discord 😉.
+There, I hope you won't need any more help than what's written here. But if you ever do, come and ask your questions on Discord 😉
