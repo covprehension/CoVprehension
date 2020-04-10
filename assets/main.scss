@@ -84,3 +84,28 @@ img.half-size {
     width: 100%;
   } 
 }
+
+/*
+    +============
+    | VIDEO RULES
+ */
+video,
+video.full-size {
+  width: 100%
+}
+video.half-size {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+@media only screen and (max-width: 1200px) {
+  video.half-size {
+    width: 75%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  video.half-size {
+    width: 100%;
+  } 
+}
