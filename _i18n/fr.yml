@@ -30,12 +30,12 @@ navbar:
   flag: 🇫🇷
 
 footer:
-  mail: Envoyez nous un mail
+  mail: Envoyez-nous un email
   github: Aller voir les sources du site
   rss: Lien RSS des questions
-  questions: Posez nous vos questions
-  license_text: Le texte est mis à disposition selon les termes de la license
-  license_img: Les illustrations sont mises à disposition selon les termes de la license
+  questions: Posez-nous vos questions
+  license_text: Le texte est mis à disposition selon les termes de la licence
+  license_img: Les illustrations sont mises à disposition selon les termes de la licence
 
 #
 # +============
@@ -44,7 +44,7 @@ footer:
 home:
   question_done: Questions traitées
   question_wip: Questions en traitement
-  see_newest: Voir les dernières Questions
+  see_newest: Voir les dernières questions
 
 post:
   posted: Posté
@@ -68,7 +68,7 @@ about:
 
 resources:
   title: Ressources
-  subtitle: Liste non exhaustive de lien utile et intéressant autour de l'épidémie actuelle de COVID-19
+  subtitle: Liste non exhaustive de liens utiles et intéressants autour de l'épidémie actuelle de COVID-19
 
 simulator:
   title: Le simulateur
