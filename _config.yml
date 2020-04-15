@@ -5,6 +5,7 @@ baseurl:            "/"
 url:                "https://covprehension.org"
 
 include: ['_pages']
+exclude: [bundles]
 
 # Social Profiles
 twitter_username:   
