@@ -105,6 +105,8 @@ $ tree
 
 ### Local installation & Setup
 
+First of all, make sure ruby is intalled on your computer.
+
 1. Clone the repo `git clone https://github.com/covprehension/CoVprehension.git`
 2. Move in the folder `cd CoVprehension`
 3. Install plugins: `bundle install`
