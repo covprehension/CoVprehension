@@ -105,11 +105,14 @@ $ tree
 
 ### Local installation & Setup
 
+First of all, make sure ruby is intalled on your computer.
+
 1. Clone the repo `git clone https://github.com/covprehension/CoVprehension.git`
 2. Move in the folder `cd CoVprehension`
 3. Install plugins: `bundle install`
-4. Build your site: `bundle exec jekyll serve`
-5. Connect to your running instance [http://127.0.0.1:4000/CoVprehension/](http://127.0.0.1:4000/CoVprehension/)
+4. Replace the symlink JS translation files by the real ones `rm -f assets/lang/*.js && cp _i18n/*/simu-*.js assets/lang/`
+5. Build your site: `bundle exec jekyll serve`
+6. Connect to your running instance [http://127.0.0.1:4000/CoVprehension/](http://127.0.0.1:4000/CoVprehension/)
 
 
 ### Global configuration of the website
