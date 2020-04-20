@@ -5,6 +5,7 @@ node_modules
 Gemfile.lock
 *.gem
 _site
+.Rhistory
 
 # Mac
 simulations/js/.DS_Store
