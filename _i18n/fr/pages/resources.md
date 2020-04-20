@@ -37,6 +37,9 @@
 - [Covid-19 : comment sont conçus les modèles des épidémies ?](https://lejournal.cnrs.fr/articles/covid-19-comment-sont-concus-les-modeles-des-epidemies)
 > Une interview par Le Journal du CNRS d'Eric Daudé, membre du collectif CoVprehension.
 
+- [Les modèles épidémiologiques, tout un cinéma !](https://theconversation.com/les-modeles-epidemiologiques-tout-un-cinema-135230)
+> Eric Daudé, membre du collectif CoVprehension, prend la plume pour nous parler d'épidémies, de modélisation...et de cinéma !
+
 - [Coronavirus : sur le front scientifique, CNRS](http://www.cnrs.fr/fr/cnrsinfo/coronavirus-sur-le-front-scientifique)
 > Le site du CNRS dédié au COVID-19.
 
