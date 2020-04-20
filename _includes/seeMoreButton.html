@@ -1,1 +1,1 @@
-<a href="{{ include.posturl | prepend: site.baseurl | replace: '//', '/' }}" class="btn btn-primary">{% t posts.going_futher%}</a>
+<a href="{{ include.posturl | replace_first: '-', '/' | replace_first: '-', '/' | replace_first: '-', '/' | prepend: site.baseurl | append: '.html' | replace: '//', '/' }}" class="btn btn-primary">{% t posts.going_futher%}</a>
