@@ -37,6 +37,9 @@
 - [Are We Already Missing the Next Epidemic?](https://www.politico.com/amp/news/magazine/2020/03/31/coronavirus-americafear-contagion-can-we-handle-it-157711?__twitter_impression=true)
 > Très bon article, en anglais, de Joshua Epstein, l'un des meilleurs spécialistes de la modélisation des épidémies.
 
+[Comprendre les bases des modèles mathématiques des épidémies](https://theconversation.com/comprendre-les-bases-des-modeles-mathematiques-des-epidemies-136056)
+> Une très bonne introduction au sujet par Étienne Pardoux.
+
 - [COVID-19 : comment sont conçus les modèles des épidémies ?](https://lejournal.cnrs.fr/articles/covid-19-comment-sont-concus-les-modeles-des-epidemies)
 > Une interview par Le Journal du CNRS d'Eric Daudé, membre du collectif CoVprehension.
 
