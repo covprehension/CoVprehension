@@ -6,7 +6,7 @@ layout: default
 {% if page.background %}
 <header class="masthead" style="background-image: url('{{ page.background | prepend: site.baseurl | replace: '//', '/' }}')">
 {% else %}
-<header class="masthead"  style="background-image: url('{{ '/img/bg-index.jpg' | prepend: site.baseurl | replace: '//', '/' }}')">
+<header class="masthead"  style="background-image: url('{{ 'img/bg-index.jpg' | prepend: site.baseurl_root | replace: '//', '/' }}')">
 {% endif %}
   <div class="overlay"></div>
   <div class="container">
@@ -17,12 +17,8 @@ layout: default
           {% if page.subtitle %}
           <h2 class="subheading">{{ page.subtitle }}</h2>
           {% endif %}
-          <span class="meta">Posté {% if page.author %}par 
-            <a href="#">{{ page.author }}{% endif %}</a>
-            {% comment %} --======  FRENCH DATE FORMATING  ======-- {% endcomment %}
-            le {% if page.postDate %}{{ page.postDate | date: "%-d" }} {% assign m = page.postDate | date: "%-m" | minus: 1 %}{{ site.data.fr.months[m] }} {{ page.postDate | date: "%Y" }}
-            {% else %}{{ page.date | date: "%-d" }} {% assign m = page.date | date: "%-m" | minus: 1 %}{{ site.data.fr.months[m] }} {{ page.date | date: "%Y" }}{% endif %} &middot; {% include read_time.html
-            content=page.content %}
+          <span class="meta">{% if page.author_text %}{% t post.text %} : <i>{{ page.author_text }}</i>{% endif %}{% if page.author_simulations %} / {% t post.simulation %} : <i>{{ page.author_simulations }}</i>{% endif %}{% if page.author_illustration %} / {% t post.illustrator %} : <i>{{ page.author_illustration }}</i>{% endif %} {% if page.author_translation %} / {% t post.translator %} : <i>{{ page.author_translation }}</i>{% endif %}<br/>
+            {% t post.the %} {% include date.html post=page %} &middot; {% include read_time.html content=page.content %}
           </span>
         </div>
       </div>
@@ -41,7 +37,7 @@ layout: default
 
       <div class="clearfix">
 
-        <input class="btn btn-primary float-left" action="action" onclick="window.history.go(-1); return false;" type="button" value='&larr; Retourner à la Question' />
+        <input class="btn btn-primary float-left" action="action" onclick="window.history.go(-1); return false;" type="button" value='&larr; {% t posts.back %}'</>
 
       </div>
 
