@@ -1,9 +1,7 @@
 <p align="center">
-  <a href="https://github.com/github_username/repo">
-    <img src="img/favicon.png" alt="Logo" width="80" height="80">
+  <a href="https://covprehension.org">
+    <img src="img/logo/logo-long.png" alt="Logo CoVprehension">
   </a>
-
-  <h3 align="center"><a href="https://covprehension.org" target="_blank">CoVprehension</a></h3>
 
   <p align="center">
     Informative website about the corona virus.
