@@ -84,7 +84,7 @@ layout: default
         {% endfor %}
 
         <!-- Home Post List -->
-        {% assign frontPagination=site.paginate - 1 %}
+        {% assign frontPagination=site.paginate | minus: 1 %}
         {% assign postsPublished=site.posts | where:"hidden", false | where:"publish", true %}
   
         {% for post in postsPublished limit: frontPagination %}
