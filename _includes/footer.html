@@ -59,7 +59,7 @@
           {% endif %}
           {% if site.rss_link %}
           <li class="list-inline-item">
-            <a href="{{ site.rss_link }}" title="{% translate footer.rss %}">
+            <a href="{{ site.rss_link | prepend: site.baseurl | replace: '//', '/' }}" title="{% translate footer.rss %}">
               <span class="fa-stack fa-lg">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
