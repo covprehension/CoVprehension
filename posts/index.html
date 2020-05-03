@@ -4,9 +4,29 @@ title: Posts
 background: 'img/bg-post.jpg'
 ---
 
-{% assign posts=paginator.posts | where:"publish", true %}
+      {% comment %} Select all readable posts {% endcomment %}
+{% assign posts=site.posts | where:"hidden", false | where:"publish", true %}
 
-{% for post in posts %}
+      {% comment %} Remove paginate -1 first elements (on home page) {% endcomment %}
+{% assign frontPagination=site.paginate | minus: 1 %}
+{% for i in (1..frontPagination) %}
+  {% assign posts=posts | shift %}
+{% endfor %}
+
+      {% comment %} Paginate {% endcomment %}
+{% assign pageNumber=paginator.page | minus: 1 %}
+{% if pageNumber != 0 %}
+
+  {% for i in (1..pageNumber) %}
+    {% for i in (1..site.paginate) %}
+      {% assign posts=posts | shift %}
+    {% endfor %}
+  {% endfor %}
+
+{% endif %}
+
+
+{% for post in posts limit: site.paginate %}
 
 <article class="post-preview">
   <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
@@ -29,18 +49,16 @@ background: 'img/bg-post.jpg'
 {% endfor %}
 
 <!-- Pager -->
-{% if paginator.total_pages > 1 %}
-
+{% assign postSize=posts | size %}
+{% assign pagiPlus=paginator.page | plus: 1 %}
 <div class="clearfix">
 
   {% if paginator.previous_page %}
   <a class="btn btn-primary float-left" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; {% translate posts.next %}</a>
   {% endif %}
 
-  {% if paginator.next_page %}
+  {% if postSize > pagiPlus %}
   <a class="btn btn-primary float-right" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">{% translate posts.previous %} &rarr;</a>
   {% endif %}
 
 </div>
-
-{% endif %}
