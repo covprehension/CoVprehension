@@ -13,7 +13,7 @@ layout: default
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
-            <h1>{{ site.title }}</h1>
+            <h1><img src="/img/logo/logo-long.png" class="logo-shadow" alt="{{ site.title }} logo" /></h1>
             {% if site.description %}
             <span class="subheading">{% translate global.sub-title %}<br/>{% translate global.sub-title2 %}</span>
             {% endif %}
@@ -61,8 +61,33 @@ layout: default
 
         {{ content }}
 
+        <!-- Question 0-->
+        {% for post in postsPublished limit: 1 %}
+        <article class="post-preview">
+          <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
+            <h2 class="post-title">{{ post.title }}</h2>
+            <div class="align-container">
+              {% if post.subtitle %}
+                <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+              {% else %}
+                <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
+              {% endif %}
+              <i class="fas fa-plus-circle" aria-hidden="true"></i>
+            </div>
+          </a>
+          <p class="post-meta">{% translate post.posted %} {% translate post.the %} {% include date.html post=post %} &middot; {% include read_time.html content=post.content %}
+          </p>
+        </article>
+
+        <hr style="border: #333 2px solid;">
+
+        {% endfor %}
+
         <!-- Home Post List -->
-        {% for post in postsPublished limit: site.paginate %}
+        {% assign frontPagination=site.paginate | minus: 1 %}
+        {% assign postsPublished=site.posts | where:"hidden", false | where:"publish", true %}
+  
+        {% for post in postsPublished limit: frontPagination %}
         <article class="post-preview">
           <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
             <h2 class="post-title">{{ post.title }}</h2>
@@ -86,7 +111,7 @@ layout: default
         {% if postsPublished.size > 5 %}
         <!-- Pager -->
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="{{"/posts" | prepend: site.baseurl | replace: '//', '/' }}">{% translate home.see_newest %} &rarr;</a>
+          <a class="btn btn-primary float-right" href="{{"/posts" | prepend: site.baseurl | replace: '//', '/' }}">{% translate posts.previous %} &rarr;</a>
         </div>
         {% endif %}
 

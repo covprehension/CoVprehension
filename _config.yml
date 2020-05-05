@@ -12,7 +12,7 @@ twitter_username:
 github_username:    covprehension
 facebook_username:  
 linkedin_username:  
-rss_link:           https://covprehension.org/feed.xml
+rss_link:           /feed.xml
 
 ## Add your google-analytics ID here to activate google analytics
 #google_analytics:   UA-XXXXXXXXX-X # out your google-analytics code

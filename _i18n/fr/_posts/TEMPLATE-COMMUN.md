@@ -31,6 +31,8 @@ Quelques astuces, à commencer par les listes :
 - **gras**
 - ***les deux***
 
+## sous-titre
+
 EXEMPLE IMAGE
 
 <img src="/img/posts/Q10-1.jpg" class="full-size">
