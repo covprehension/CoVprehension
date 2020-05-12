@@ -53,7 +53,7 @@ background: 'img/bg-post.jpg'
 {% assign pagiPlus=paginator.page | plus: 1 %}
 <div class="clearfix">
 
-  {% if paginator.previous_page %}
+  {% if paginator.previous_page or paginator.page == 1 %}
   <a class="btn btn-primary float-left" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; {% translate posts.next %}</a>
   {% endif %}
 
