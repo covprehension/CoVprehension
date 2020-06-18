@@ -13,6 +13,9 @@
 - [Données des urgences hospitalières et de SOS médecins relatives à l'épidémie de COVID-19](https://www.data.gouv.fr/fr/datasets/donnees-des-urgences-hospitalieres-et-de-sos-medecins-relatives-a-lepidemie-de-covid-19/)
 > Les données quotidiennes de SOS médecins et des urgences hospitalières par département, région et France entière, par sexe et tranche d’âge des patients. Par Santé publique France.
 
+- [COVIDAM : la Covid-19 dans les Amériques](https://covidam.institutdesameriques.fr/)
+> Un blog sur la situation épidémique dans les Amériques, par l'[Institut des Amériques](https://institutdesameriques.fr/fr) et l'[UMI IGlobes](https://www.cnrs-univ-arizona.net/).
+
 - [Modélisation épidémiologique de la COVID-19](http://alizon.ouvaton.org/COVID.html)
 > Un site de référence sur le sujet, avec plusieurs rapports très bien faits et un "simulateur d'épidémie (COVIDSIM) permettant de visualiser l'effet de différentes stratégies de contrôle, avec des variations de durée et d'intensité". 
 
@@ -30,6 +33,9 @@
 
 - [Sciences2](https://www.lemonde.fr/blog/huet/)
 > Le blog scientifique de Sylvestre Huet, du journal Le Monde, avec plusieurs articles sur la COVID-19.
+
+- [Adios Corona](https://www.adioscorona.org/)
+> Un blog contenant des "conseils éclairés de scientifiques pour vous protéger, comprendre et agir afin d'enrayer la propagation du coronavirus SARS-CoV-2 responsable de la COVID-19".
 
 - [Non, une épidémie mortelle ne « nettoie » pas la Terre tous les cent ans](https://www.lemonde.fr/les-decodeurs/article/2020/03/25/non-une-epidemie-mortelle-ne-nettoie-pas-la-terre-tous-les-cent-ans_6034414_4355770.html)
 > Une interview par Le Monde d'Emmanuel Eliot, membre du collectif CoVprehension.
@@ -63,7 +69,6 @@
 
 - [Le site du Conseil Scientifique COVID-19](https://solidarites-sante.gouv.fr/actualites/presse/dossiers-de-presse/article/covid-19-conseil-scientifique-covid-19)
 > Pour suivre les avis émis par le Conseil Scientifique COVID-19.
-
 
 - [Appel à l'action: des modèles qui comptent pendant une pandémie mondiale](http://jasss.soc.surrey.ac.uk/23/2/10.html)
 > Cet article recense les modèles existants de l'épidémie (au 31 Mars 2020) et appelle la communauté modélisatrice à collaborer avec les décideurs publics, à partager données et modèles dans les deux sens, mais aussi à conserver les standards de rigueur scientifique et de transparence.
