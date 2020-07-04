@@ -23,6 +23,8 @@ This repository holds the Jekyll sources of the CoVprehension website!
 
 CoVprehension is a collective of researchers trying to explain the current epidemic of COVID-19 simply yet with scientific tools.
 
+You can publicly see tracking data here : [https://covprehension.goatcounter.com/](https://covprehension.goatcounter.com/)
+
 ## How to contribute to the project
 
 ### I'm a writer / translator
