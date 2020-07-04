@@ -14,8 +14,9 @@ facebook_username:
 linkedin_username:  
 rss_link:           /feed.xml
 
-## Add your google-analytics ID here to activate google analytics
-#google_analytics:   UA-XXXXXXXXX-X # out your google-analytics code
+# Ethical tracker
+# Publicly accessible here : https://covprehension.goatcounter.com
+goatcounter-code:   covprehension # out your google-analytics code
 
 # Build settings
 markdown:           kramdown

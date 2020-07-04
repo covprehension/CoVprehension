@@ -1,12 +1,6 @@
-{% if site.google_analytics %}
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', '{{ site.google_analytics }}');
-</script>
+{% if site.goatcounter-code %}
+<!-- Ethical tracker -->
+<script data-goatcounter="https://covprehension.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 
 {% endif %}
