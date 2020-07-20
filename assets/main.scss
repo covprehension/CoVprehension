@@ -89,6 +89,14 @@ img.half-size {
   margin-right: auto;
   width: 50%;
 }
+
+img.equation {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 15%;
+} 
+
 @media only screen and (max-width: 1200px) {
   img.half-size {
     width: 75%;
