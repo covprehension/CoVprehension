@@ -3,6 +3,8 @@ layout: post
 title: "Question 666 : Trouver un chouette titre"
 subtitle: "Et un sous-titre qui déchire sa race"
 
+# Nb : le titre doit commencer par "Question n" : c'est ainsi que le site numérote automatiquement les questions
+
 # Par défaut image du masque
 #background: '/img/bg-index.jpg'
 
