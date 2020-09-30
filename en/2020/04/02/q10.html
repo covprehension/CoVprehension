@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Question 10: How can modelling tools help predict the inflections of the epidemic curve? - CoVprehension
+    
+  </title>
+
+  <!-- 
+      META-DATA  
+  -->
+
+  <!-- For Google -->
+  <meta name="description" content="Many phenomena can help flatten the epidemic curve and it is therefore very important to include them in our models. Practically, how do we do that?">
+  <meta name="keywords" content="coronavirus, covid-19, explanation, comprehension, popularizing science" />
+
+  <meta name="author" content="The CoVprehension collective" />
+  <meta name="copyright" content="CC BY-SA" />
+  <meta name="application-name" content="CoVprehension" />
+
+  <!-- For Facebook -->
+  <meta property="og:title" content="Question 10: How can modelling tools help predict the inflections of the epidemic curve? - CoVprehension" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="/img/logo/logo-short.png" />
+  <meta property="og:url" content="https://covprehension.org" />
+  <meta property="og:description" content="Many phenomena can help flatten the epidemic curve and it is therefore very important to include them in our models. Practically, how do we do that?" />
+
+  <!-- For Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Question 10: How can modelling tools help predict the inflections of the epidemic curve? - CoVprehension" />
+  <meta name="twitter:description" content="Many phenomena can help flatten the epidemic curve and it is therefore very important to include them in our models. Practically, how do we do that?" />
+  <meta name="twitter:image" content="/img/logo/logo-short.png" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/img/logo/logo-short.png" type="image/x-icon">
+  <link rel="icon" href="/img/logo/logo-short.png" type="image/x-icon">
+
+  <!-- TEMPLATE -->
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css">
+
+  <!-- PLUGIN -->
+  <link rel="stylesheet" href="/assets/particules.css">
+
+  <!-- CUSTOM -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://covprehension.org//en/2020/04/02/q10.html">
+  <link rel="alternate" type="application/rss+xml" title="CoVprehension" href="/feed.xml">
+
+</head>
+
+
+<body>
+
+  <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/en/">
+      <img src="/img/logo/logo-long.png" alt="covprehension logo" style="max-height: 25px; width: auto" />
+    </a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href=/en/simulator>Simulator</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://framaforms.org/covprehension-challenge-us-ask-your-questions-1585581105" target="_blank">Ask your questions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/en/resources">Resources</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/en/about">About us</a>
+        </li>
+
+        <li class="nav-item dropdown show">
+          <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            🇬🇧
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            
+              
+              <a class="dropdown-item" href="/2020/04/02/q10.html" >🇫🇷</a>
+            
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- Page Header -->
+
+<header class="masthead"  style="background-image: url('/img/bg-index.jpg')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Question 10: How can modelling tools help predict the inflections of the epidemic curve?</h1>
+          
+          <h2 class="subheading">A short introduction to dynamic systems</h2>
+          
+          <span class="meta">Text : <i>Arnaud B., Nathalie C., Frédéric A.</i> / Simulation : <i>Nathalie C., Frédéric A., Arnaud B.</i> / Illustration : <i>Nathalie C.</i>  / Translation : <i>Clémentine C., Kevin M.</i><br/>
+            the 
+
+	2 April 2020
+ &middot; <span class="reading-time" title="Estimated reading time">
+  
+   9 minute  read
+</span>
+
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+      <p>Many phenomena can help flatten the epidemic curve and it is therefore very important to include them in our models. Practically, how do we do that?</p>
+
+<p>We are going to answer this question using the tools and practices of <strong>mathematical epidemiology</strong>. In all simplicity of course.</p>
+
+<p>Let’s take the textbook case of a model where individuals of a given population can be either healthy (and so susceptible to being infected), infected, or recovered. We find here the main components of most models developed on this website. In the jargon of epidemic modelling, we talk of the <strong>SIR</strong> (S for Susceptible, I for Infected and R for Recovered) <strong>model</strong>. This type of model is a classic of mathematical modelling.</p>
+
+<p>In most of the questions already answered on this website, we were interested in a limited number of interacting individuals, whose individual behaviour was represented. In case we want to model <strong>entire populations</strong> (at the scale of France as a whole, or Europe or the world for example), it makes little sense to represent each individual’s behaviour, unless there are <a href="https://lejournal.cnrs.fr/articles/covid-19-comment-sont-concus-les-modeles-des-epidemies">particular reasons</a> to.</p>
+
+<p>We instead consider population clusters to be <strong>homogenous</strong> in respect to their characteristics and behaviours, and purposefully <strong>limit the number of parameters</strong>: besides the initial population in each state S, I and R, we keep the contact rate, the rate of transmission, and the recovery rate.</p>
+
+<p>Naturally, the rate of transmission and the recovery rate are parameters which depend on the disease as well as one the <a href="https://websenti.u707.jussieu.fr/sentiweb/2063.pdf">protected measures</a> deployed. They are estimated from <a href="http://alizon.ouvaton.org/COVID.html">empirical or theoretical data</a> collected from different countries since the beginning of the epidemic.</p>
+
+<p>This type of model, which assumes (the strong hypothesis) that everyone will behave, get infected and develop the disease in the same way, is mostly expressed as mathematical equations. However, it is sometimes very useful to express it graphically.</p>
+
+<p><img src="/img/posts/Q10-1_en.png" class="full-size" /></p>
+
+<p>The basic idea is very simple in theory (even though it is less so in practice): from an initial situation (for example 100,000 healthy people and 1 infected person) we compute the evolution of the number of healthy, infected and recovered people from their known quantity at the previous step in time as well as our two mechanisms of transmission and recovery.</p>
+
+<p>Once the model is built, we find the epidemic curves we are looking for by <strong>solving the model analytically</strong>: we can now follow the evolution of the number of susceptible, infected and recovered people as a function of time.</p>
+
+<p><img src="/img/posts/Q10-2_en.png" class="full-size" /></p>
+
+<p>From there and by fixing the <strong>initial conditions</strong> (i.e. the same quantities of susceptible, infected and recovered people at the start of the simulation), we can play with each parameter (the contact rate, contagiousness rate and recovery rate) to study its effect on the shape of the curves obtained.</p>
+
+<p>A <strong>lockdown</strong> scenario will lead us to define a contact rate below the one used as a benchmark, in the hypothesis that things run otherwise “normally”. This way, setting a period of lockdown during our virtual epidemic will disrupt the epidemic curve.</p>
+
+<p><em>If the simulator window appears truncated, just zoom out.</em></p>
+
+<p><a href="#" class="btn btn-primary" onclick="loadIframeSimulator(10, this); return false;">Simulate the impact of lockdow on the epidemic curve</a></p>
+<div class="iframeContainer"></div>
+
+<p>You might wonder how we estimated the contact rate before and after lockdown: come this way!</p>
+
+<p>Everything we’ve presented so far may look easy on paper… Except this: <strong>how do we actually estimate this contact rate before and during lockdown?</strong></p>
+
+<p>It is a peculiar question, isn’t it? <strong>On average, how many interactions do we have each day with other people?</strong>
+Obviously, we only consider interactions which imply a <strong>physical proximity with other people, thus allowing transmission of the virus</strong>. It seems obvious at first sight that this value has to vary enormously between a Parisian (or a New Yorker, a Shanghaian, etc.) who takes the metro/tube/subway at peak hour and someone who lives as a hermit in Lozère (or Idaho, or the Sichuan). However, we have to find an <strong>order of magnitude</strong> which can characterise our population as widely as possible (remember: we assume that all individuals behave in a similar way).</p>
+
+<p>A <a href="https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0050074">study</a> conducted in several European countries in 2007 brought an interesting statistic to light. It surveyed 7290 participants picked at random. Using logbooks of their interactions over a single day, participants reported a total of 97,904 close interactions. The main result was therefore that <strong>the average number of proximate contacts was 13.4 per person and per day</strong>. This is an interesting one for our model isn’t it?</p>
+
+<p>What about the same parameter during lockdown? If people comply strictly, they spend most of their time at home and respect social distancing when they have to go out, so the contact rate should tend to zero shouldn’t it? If you have read questions <a href="https://covprehension.org/en/2020/03/24/q2.html">2</a> and <a href="https://covprehension.org/en/2020/03/30/q6.html">6</a>, you already know that it is not that simple…</p>
+
+<p>We are not able to find a precise answer to this question in the literature. Therefore we fix a default value of one, a single contact per person and per day on average during lockdown, so ten times less than usual.</p>
+
+<p>How do we translate these two values (~10 and ~1 contact) to our model? Let’s see.</p>
+
+<p>We already know that at each step of the simulation, a certain number of people will leave the stock of susceptible people to be counted as infected. This quantity depends on four elements:</p>
+<ul>
+  <li>The number of susceptible people in the population</li>
+  <li>The number of infected people in the population</li>
+  <li>The contact rate</li>
+  <li>The rate of transmission</li>
+</ul>
+
+<p>The number of contacts an infected person will have with a susceptible individual at each step of the simulation corresponds to the multiplication of three terms: Number of Susceptible x Number of Infected x Contact rate.</p>
+
+<p>If we go back to our initial situation (100,000 Susceptible and 1 Infected), in order to arrive at 10 contacts between an infected person and susceptible others at each time step, we have to define a contact rate of 0.0001 since 100,000 x 1 x 0.0001 = 10.</p>
+
+<p>Of course, this value does not account for the interactions among susceptible people and among infected people. The interactions within groups (susceptible, infected or recovered) or with recovered people are not part of this computation.</p>
+
+<p>Besides, the number of susceptible people evolve with time, and so does the number of infected or recovered people. <strong>The number of interactions will thus naturally evolve during the epidemic</strong>. This is easy to grasp, because the less susceptible people, the less interactions there can be between infected and susceptible people (this is, by the way, one of the principles behind herd immunity, as you will see in question 8).</p>
+
+<p>If you have read our explanation carefully, another question might arise… Do you have it?</p>
+
+<p>This computation is indeed updated “at each step of the simulation”. But what does the <strong>time</strong> of the simulation represent in our case?</p>
+
+<p>This could (maybe) be the subject of another post ;)</p>
+
+<p>In the meantime, if you want to know more about mathematical modelling of epidemics, we recommend you read this <a href="http://alizon.ouvaton.org/Rapport3_Modele.html">report</a> written by one of the best research teams in the field.</p>
+
+<p>It is as simple as that.</p>
+
+<p><em>Reminder: the models developed on this website are for educational purposes only. They are a lot simpler than models built and deployed by other teams working on COVID-19. They are not substitutes for these reference models and cannot be used to make diagnoses or forecasts. Our goal instead is to raise awareness about this epidemic and its drivers.</em></p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        
+        
+ 
+        
+
+        
+        <a class="btn btn-primary float-left" href="/en/2020/04/01/q9.html" data-toggle="tooltip" data-placement="top" title="Question 9: What (de-)confinement rules should we apply to manage the epidemic development?">&larr; Previous question</a>
+        
+
+        
+        <a class="btn btn-primary float-right" href="/en/2020/04/02/q11.html" data-toggle="tooltip" data-placement="top" title="Question 11: COVID-19, a disease of the anthropocene?">Next question &rarr;</a>
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+          
+          <li class="list-inline-item">
+            <a href="mailto:covprehension@gmail.com" title="Send us an email">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="far fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/covprehension" title="Check website sources" target="_blank">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li class="list-inline-item">
+            <a href="/en/feed.xml" title="RSS link to questions">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li class="list-inline-item">
+            <a href="" title="Ask your questions" target="_blank">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-question fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+        </ul>
+        <p class="copyright text-muted">
+          <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This text content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+        </p>
+        <p class="copyright text-muted">
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />These illustrations are licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <!-- TEMPLATE -->
+<script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/template/js/clean-blog.min.js"></script>
+
+<!-- PLUGIN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
+
+	<script  src="/assets/lang/simu-en.js"></script>
+
+<script src="/assets/particles.js"></script>
+
+
+
+
+
+
+
+<!-- CUSTOM -->
+<script src="/assets/scripts.js"></script>
+
+
+  
+<!-- Ethical tracker -->
+<script data-goatcounter="https://covprehension.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+
+
+
+</body>
+
+</html>
